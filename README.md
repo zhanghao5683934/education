@@ -132,18 +132,14 @@
 
 ### 官方QQ群（加群免费获取sql脚本）
 
-<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=5hPSMiWCiKukEStUPngTpPHgt-v1JTL9&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑨" title="在线教育系统-领课⑨"> 284915592</a> 可加
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=JShAyXeoKqg2lWFEUSElxELImhjeMG4y&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="万岳在线教育讨论群" title="万岳在线教育讨论群"></a> 可加
 
 > QQ群：995910672
 
 ### 商业合作
-* 如果您想使用功能更完善的教育系统，我们有 [领课教育系统商业版](https://edu.roncoo.net/)！
+* 如果您想使用功能更完善的教育系统，我们有 万岳教育系统商业版！
 * 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
-* 如果您没有技术团队也想运营教育平台，我们提供有教育系统SaaS云服务！
 * 其他合作模式不限，欢迎来撩！
-* 商务合作联系方式1：18302045627（微信同号）
-* 商务合作联系方式2：18027263931（微信同号）
-* 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
+* 官网地址：[http://www.sdwanyue.com](http://www.sdwanyue.com)
 
-## 项目推荐
-##### 龙果支付系统(roncoo-pay)：[码云地址](https://gitee.com/roncoocom/roncoo-pay) | [Github地址](https://github.com/roncoo/roncoo-pay)
+
