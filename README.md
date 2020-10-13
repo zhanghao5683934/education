@@ -1,37 +1,54 @@
-# 万岳教育系统
+<div align=center><img src="logo.png"/></div>
 
-#### 介绍
+
+##### 万岳教育系统WEB版(wanyue_education_web)：[码云地址](https://gitee.com/WanYueKeJi/wanyue_education_web)
+
+---
+
+### 项目说明（如果对你有用，请给个star！）
+##### [项目文档](https://www.baidu.com/) |  [部署文档](https://www.baidu.com)  |  [常见问题](https://www.baidu.com)
+
+---
+
+### 项目介绍
 万岳在线教育经过对教育市场的长期调研，综合当下各大线上教培机构对于教育平台的功能需求，着重于用户体验，自主研发了一套集知识付费、直播授课、网校建设等功能为一体的万岳在线教育系统，满足用户对于公开课、大班课、小班课、职业培训等多种线上教学活动的场景需求。
+* 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
+* 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 
-#### 软件架构
-软件架构说明
+### 前台主要功能介绍
+* 首页功能，导航模块（自定义导航设置），广告模块（自定的轮播设置），课程模块（自定义课程设置）
+* 列表功能，分类模块（自定义分类设置），搜索模块（自定义搜索设置）
+* 课程详情页功能，课程介绍、目录的展示和购买、播放功能等
+* 个人中心，具有个人信息设置、密码修改、订单管理、学习记录等功能
+* 讲师中心，讲师信息管理、课程管理（课程的添加、修改）、收益管理等功能
 
+### 后台主要功能介绍
+* 权限管理功能，多角色多用户自定义配置
+* 系统配置功能，自定义进行站点配置及第三方参数配置
+* 讲师管理功能，讲师申请入驻，后台具有审核功能
+* 课程管理功能，讲师管理自有课程，后台具有审核功能
+* 订单管理功能，订单的列出，对订单进行分析统计功能
+* 用户登录功能，同一时间只允许同一个账号在同一个地方登录，防止账号共享
+* 广告管理功能，后台自定义广告设置，增加营销效果
+* 支付功能模块，无缝对接 [龙果支付系统商业版](https://pay.roncoo.net/)
 
-#### 安装教程
+### 官方QQ群（加群免费获取sql脚本）
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=5hPSMiWCiKukEStUPngTpPHgt-v1JTL9&jump_from=webapi"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="在线教育系统-领课⑨" title="在线教育系统-领课⑨"> 284915592</a> 可加
 
-#### 使用说明
+> QQ群：1028579521(已满)
+> QQ群：532451240(已满)  QQ群：903738971(已满)   QQ群：74876271 (已满)  
+> QQ群：774890501(已满)   QQ群：702189511(已满)   QQ群：826617734(已满)
+> QQ群：154407415(已满)
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+### 商业合作
+* 如果您想使用功能更完善的教育系统，我们有 [领课教育系统商业版](https://edu.roncoo.net/)！
+* 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
+* 如果您没有技术团队也想运营教育平台，我们提供有教育系统SaaS云服务！
+* 其他合作模式不限，欢迎来撩！
+* 商务合作联系方式1：18302045627（微信同号）
+* 商务合作联系方式2：18027263931（微信同号）
+* 官网地址：[https://edu.roncoo.net](https://edu.roncoo.net/index.html)
 
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 项目推荐
+##### 龙果支付系统(roncoo-pay)：[码云地址](https://gitee.com/roncoocom/roncoo-pay) | [Github地址](https://github.com/roncoo/roncoo-pay)
