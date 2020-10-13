@@ -1,10 +1,6 @@
 <div align=center><img src="logo.png"/></div>
 
 
-##### 万岳教育系统WEB版(wanyue_education_web)：[码云地址](https://gitee.com/WanYueKeJi/wanyue_education_web)
-
----
-
 ### 项目说明（如果对你有用，请给个star！）
 ##### [项目文档](https://www.baidu.com/) |  [部署文档](https://www.baidu.com)  |  [常见问题](https://www.baidu.com)
 
