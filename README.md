@@ -158,6 +158,7 @@
   #### 学生端页面  
   
   ![展示图](/readme/images/live_student.png "展示图.png")
+  ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
   
   #### 后台页面
     
