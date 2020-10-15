@@ -152,7 +152,7 @@
   #### 教师端页面
   
   ![展示图](/readme/images/teacher_login.png "展示图.png")
-  ![展示图](/readme/images/teacher_info.png "展示图.png")
+  ![展示图](/readme/images/teacher_main.png "展示图.png")
   
   
   
