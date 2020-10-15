@@ -149,9 +149,10 @@
   
   
   ### 页面展示
-  #### 教师端登陆页面
+  #### 教师端页面
   
   ![展示图](/readme/images/teacher_login.png "展示图.png")
+  ![展示图](/readme/images/teacher_info.png "展示图.png")
   
   
   
