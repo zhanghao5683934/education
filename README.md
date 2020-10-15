@@ -153,8 +153,14 @@
   
   ![展示图](/readme/images/teacher_login.png "展示图.png")
   ![展示图](/readme/images/teacher_main.png "展示图.png")
+
+
+  #### 学生端页面  
   
-  
+  #### 后台页面
+    
+  ![展示图](/readme/images/video_big_course.png "展示图.png")
+
   
   
   
