@@ -153,6 +153,7 @@
 
   #### 学生端页面  
   ![展示图](/readme/images/student_info.png "展示图.png")
+  ![展示图](/readme/images/check_teacher.png "展示图.png")
 
   
   #### 直播课页面
