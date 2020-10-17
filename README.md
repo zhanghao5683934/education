@@ -1,4 +1,6 @@
-<div align=center style="width:590px; height:212px;"><img style="width:100%;height:100%;" src="/readme/images/big_logo.png"/></div>
+<div align=center style="width:590px; height:212px;">
+    <img style="width:100%;height:100%;" src="/readme/images/big_logo.png"/>
+</div>
 
 
 ### 项目说明（如果对你有用，请给个star！）
