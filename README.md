@@ -1,4 +1,4 @@
-<div align=center><img src="logo.png"/></div>
+<div align=center><img src="/readme/images/big_logo.png"/></div>
 
 
 ### 项目说明（如果对你有用，请给个star！）
