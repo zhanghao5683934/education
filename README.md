@@ -150,7 +150,7 @@
   ![展示图](/readme/images/que_class.png "展示图.png")
   
   #### 功能对比
-  ![展示图](/readme/images/que_class.png "展示图.png")
+  ![展示图](/readme/images/table.png "展示图.png")
   
 ### 官方QQ群（加群免费获取sql脚本）
 
