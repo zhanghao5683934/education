@@ -124,13 +124,12 @@
   
   2.视频大班课 
 
-
-
+  ### 功能展示
+ ![展示图](/readme/images/function_all.png "展示图.png")
   
   
   ### 页面展示
   #### 教师端页面
-  
   ![展示图](/readme/images/teacher_login.png "展示图.png")
   ![展示图](/readme/images/teacher_main.png "展示图.png")
 
@@ -144,17 +143,14 @@
   ![展示图](/readme/images/live_student.png "展示图.png")
   ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
   
+  
   #### 后台页面
-    
   ![展示图](/readme/images/video_big_course.png "展示图.png")
   ![展示图](/readme/images/que_class.png "展示图.png")
   
 
   
   
-  
-  
-
 ### 官方QQ群（加群免费获取sql脚本）
 
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=JShAyXeoKqg2lWFEUSElxELImhjeMG4y&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="万岳在线教育讨论群" title="万岳在线教育讨论群"></a> 可加
