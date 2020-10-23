@@ -28,6 +28,8 @@
     14.支持队列降低流量高峰，解除耦合，高可用;
     15.无需安装, clone下来即可直接使用, 完全100%真开源；
 ```
+### 功能展示
+ ![展示图](/readme/images/function_all.png "展示图.png")
 
 ### 前台主要功能介绍
 #### 讲师PC端
@@ -124,8 +126,7 @@
   
   2.视频大班课 
 
-  ### 功能展示
- ![展示图](/readme/images/function_all.png "展示图.png")
+ 
   
   
   ### 页面展示
@@ -148,8 +149,8 @@
   ![展示图](/readme/images/video_big_course.png "展示图.png")
   ![展示图](/readme/images/que_class.png "展示图.png")
   
-
-  
+  #### 功能对比
+  ![展示图](/readme/images/que_class.png "展示图.png")
   
 ### 官方QQ群（加群免费获取sql脚本）
 
