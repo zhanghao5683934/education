@@ -134,25 +134,10 @@
   ![展示图](/readme/images/function_1.png "展示图.png")
   ![展示图](/readme/images/function_2.png "展示图.png")
   ![展示图](/readme/images/function_3.png "展示图.png")
-  
-  #### 教师端页面
-  ![展示图](/readme/images/teacher_login.png "展示图.png")
-  ![展示图](/readme/images/teacher_main.png "展示图.png")
-
-
-  #### 学生端页面  
-  ![展示图](/readme/images/student_info.png "展示图.png")
-  ![展示图](/readme/images/check_teacher.png "展示图.png")
-
-  
+    
   #### 直播课页面
   ![展示图](/readme/images/live_student.png "展示图.png")
   ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
-  
-  
-  #### 后台页面
-  ![展示图](/readme/images/video_big_course.png "展示图.png")
-  ![展示图](/readme/images/que_class.png "展示图.png")
   
   #### 功能对比
   ![展示图](/readme/images/table.png "展示图.png")
