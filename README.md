@@ -130,6 +130,8 @@
   
   
   ### 页面展示
+  ![展示图](/readme/images/function_main.png "展示图.png")
+  
   #### 教师端页面
   ![展示图](/readme/images/teacher_login.png "展示图.png")
   ![展示图](/readme/images/teacher_main.png "展示图.png")
