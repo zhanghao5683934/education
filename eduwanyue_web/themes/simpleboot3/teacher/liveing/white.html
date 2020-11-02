@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>{$info['name']} {$site_info.site_name|default=''}</title>
+    <include file="public@head"/>
+    <include file="teacher/public@head"/>
+    <link rel="stylesheet" href="__STATIC__/white/2.8.0.css">
+    <link rel="stylesheet" href="__STATIC__/teacher/css/white.css?t=1598854722">
+    <style  type="text/css">
+        .layui-layer-tips .layui-layer-content{
+            padding: 3px 9px;
+        }
+        .layui-layer-tips i.layui-layer-TipsG{
+            border-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="body_left">
+            
+            <div class="body_left_top">
+                <if condition=" $info['user_type'] eq 1">
+                <div class="body_left_top_fps">网络延迟：<span id="RTT">--</span>ms</div>
+                </if>
+                <div class="body_left_top_status">
+                    <if condition="$info['islive'] eq 0">
+                        未开课
+                    <elseif condition="$info['islive'] eq 1">
+                        已上课
+                    <else/>
+                        已下课
+                    </if>
+                </div>
+            </div>
+            
+            <!--连麦用户展示列表-->
+            <div class="linkmic_list">
+            </div>
+            <!--连麦用户展示列表-->
+            <div class="body_left_bottom">
+                <div class="body_left_bottom_top">
+                    
+                    <div class="body_left_bottom_top_top">
+                        <if condition=" $info['user_type'] eq 1">
+                        <div class="body_left_bottom_top_button">白板</div>
+                        <div class="body_left_bottom_top_c" id="caozuo">
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" style="width: 25px;height: 25px;" data-type="selector" src="__STATIC__/teacher/images/white/selector.png"></a>
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="pencil" src="__STATIC__/teacher/images/white/pencil.png"></a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="rectangle" src="__STATIC__/teacher/images/white/ju.png"> </a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="ellipse" src="__STATIC__/teacher/images/white/yuan.png"> </a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="text" src="__STATIC__/teacher/images/white/t.png"> </a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="eraser" src="__STATIC__/teacher/images/white/er.png"> </a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="choosecolor" src="__STATIC__/teacher/images/white/xi.png"> </a>  
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="fontsize" src="__STATIC__/teacher/images/white/b.png"> </a>  
+
+
+                            <a href="javascript:void(0)">
+                                <img class="body_left_bottom_top_c_img_file" onclick="selectFileFile()" src="__STATIC__/teacher/images/white/file.png">
+                                <input type="file" id="file_file" value="" onchange="getFilePathFile()" accept=".pptx,.ppt,.pdf,.docx,.doc" style="display: none;" />   
+                            </a>  
+                            <a href="javascript:void(0)">
+                                <img class="body_left_bottom_top_c_img_file" onclick="selectFilePhoto()" src="__STATIC__/teacher/images/white/photo.png">
+                                <input type="file" id="file_photo" value="" onchange="getFilePathPhoto()" style="display: none;" />   
+                            </a>  
+
+
+                            <a href="javascript:void(0)"><img class="body_left_bottom_top_c_img" data-type="del" src="__STATIC__/teacher/images/white/del.png">  </a>   
+                        </div>
+
+                        <div class="white_choosecolor" style="display: none;">
+                            <a href="javascript:void(0)" class="white_choosecolor_color" style="background: #169c8e;text-decoration: none;font-size: 13px;" data-color="[22, 156, 142]"></a>
+                            <a href="javascript:void(0)" class="white_choosecolor_color" style="background: #34445a;margin-left: 3px;text-decoration: none;font-size: 13px;" data-color="[52, 68, 90]"></a>  
+                            <a href="javascript:void(0)" class="white_choosecolor_color" style="background: #f65932;margin-left: 3px;text-decoration: none;font-size: 13px;" data-color="[246, 89, 50]"></a>  
+                            <a href="javascript:void(0)" class="white_choosecolor_color" style="background: #33a1f5;margin-left: 3px;text-decoration: none;font-size: 13px;" data-color="[51, 161, 245]"></a>     
+                        </div>
+                        <div class="white_fontsize" style="display: none;">
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="text-decoration: none;font-size: 13px;" data-size="4">4</a>
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="5">5</a>
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="6">6</a>
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="7">7</a>
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="8">8</a>
+                            <a href="javascript:void(0)" class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="9">9</a>
+                            <a href="javascript:void(0)"  class="white_fontsize_size" style="margin-left: 3px;text-decoration: none;font-size: 13px;" data-size="10">10</a>  
+                        </div>
+                        <div class="body_left_bottom_top_ke" >课件</div>
+                        <a href="javascript:void(0)"><img class="body_left_bottom_top_file" src="__STATIC__/teacher/images/white/ke.png" id="js_ware"></a>
+                        </if>
+                    </div>
+                    <!--白板-->
+                    <div id="whiteboard"></div>
+                    <!--白板-->
+                    <!--共享屏幕画面-->
+                    <div id="screen"></div>
+                    <!--学生列表-->
+                    <div class="student_list">
+                        <!--老师端的小班学生列表-->
+                        <div class="studentlist">
+                            <div class="studentlist_top">
+                                学生列表(<span class="studentlist_top_nums"></span>)
+                                <img class="studentlist_top_close" src="__STATIC__/teacher/images/white/list_x.png">
+                            </div>
+                            <div class="studentlist_bottom">
+                                <div class="studentlist_bottom_top">
+                                    <div class="studentlist_bottom_top_avatar">头像</div>
+                                    <div class="studentlist_bottom_top_name">昵称</div>
+                                    <div class="studentlist_bottom_top_status">状态</div>
+                                    <div class="studentlist_bottom_top_status">授权</div>
+                                    <div class="studentlist_bottom_top_edit">操作</div>
+                                </div>
+                                <div class="studentlist_bottom_list hidescroll"></div>
+                            </div>
+                        </div>
+                        <!--老师端的小班学生列表-->
+                        
+                    </div>
+                    <!--学生列表-->
+                    <!--课件列表-->
+                    <div class="classfile">
+                        <div class="classfilen">
+                            <div class="classfilen_top">
+                                课件
+                                <img class="classfilen_top_close" src="__STATIC__/teacher/images/white/list_x.png">
+                            </div>
+                            <div class="classfilen_two">
+                                全部文件
+                                    <button id="js_ware_add"><a style="color: #fff;" href="javascript:void(0)">上传课件</a></button>
+                                    <div id="upload" style="display:none;"></div>
+                            </div>
+                            <div class="classfilen_bottom">
+                                <div class="classfilen_bottom_top">
+                                    <div class="classfilen_bottom_top_avatar">文件名称</div>
+                                    <div class="classfilen_bottom_top_name">大小</div>
+                                    <div class="classfilen_bottom_top_edit">操作</div>
+                                </div>
+
+                                <div class="classfilen_bottom_list hidescroll">
+                                    <!-- <div class="classfilen_bottom_list_li">
+                                        <div class="classfilen_bottom_list_li_avatar">名称</div>
+                                        <div class="classfilen_bottom_list_li_name">大小</div>
+                                        <div class="classfilen_bottom_list_li_edit">
+                                            <a style="color:#38DAA6" href="1" target="_blank"><span data-url="1" data-name="1" class="classfilen_bottom_list_li_edit_forwords">打开</span></a>
+                                            
+                                            <a style="color:#38DAA6" href="javascript:void(0)"><span data-id="1" class="classfilen_bottom_list_li_edit_ticket">删除</span></a>
+                                        </div>
+                                    </div> -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--课件列表-->
+                </div>
+                 
+                <div class="body_left_bottom_bottom">
+                    
+                    <if condition=" $info['user_type'] eq 1">
+                    <div class="live_btn live_start <if condition="$info['islive'] neq 0">hide</if>">
+                        <img src="__STATIC__/teacher/images/white/startroom.png">
+                        <text>开始上课</text>
+                    </div>
+                    <div class="live_btn live_resume <if condition="$info['islive'] neq 1">hide</if>">
+                        <img src="__STATIC__/teacher/images/white/startroom.png">
+                        <text>继续上课</text>
+                    </div>
+                    
+                    <div class="live_btn live_end hide">
+                        <img src="__STATIC__/teacher/images/white/stoproom.png">
+                        <text>结束下课</text>
+                    </div>
+                    
+                    <div class="live_btn live_later <if condition="$info['islive'] neq 2">hide</if>">
+                        <img src="__STATIC__/teacher/images/white/stoproom.png">
+                        <text>本课已结束</text>
+                    </div>
+                    </if>
+                    <div class="body_left_bottom_bottom_cao">                        
+                        <div class="btn_img">
+                            <img class="body_left_bottom_bottom_list1 js_student_btn" src="__STATIC__/teacher/images/white/studentlist1.png">
+                        
+                            <img class="body_left_bottom_bottom_list2 hide" src="__STATIC__/teacher/images/white/studentlist2.png">
+                            
+                            <div class="student_hand hide js_student_hand">
+                                举手
+                            </div>
+                        </div>
+                        
+                        <if condition=" $info['user_type'] eq 1">
+                        <div class="btn_img">
+                            <img class="body_left_bottom_bottom_gongxiang1" src="__STATIC__/teacher/images/white/gongxiang1.png">
+
+                            <img class="body_left_bottom_bottom_gongxiang2 hide" src="__STATIC__/teacher/images/white/gongxiang2.png">
+                        </div>
+
+
+                        <div class="control_list">
+                            <ul>
+                                <li class="js_exam">测</li>
+                                <li class="js_practice">练</li>
+                                <li class="js_rob">抢</li>
+                                <li class="js_know">懂</li>
+                            </ul>
+                        </div>
+                        </if>
+                    </div>
+                    <div class="exam_bd exam_send hide">
+                        <div class="exam_l">
+                            <div class="exam_type" data-type="0">判断题</div>
+                            <div class="exam_type on" data-type="1">单选题</div>
+                            <div class="exam_type" data-type="2">多选题</div>
+                        </div>
+                        <div class="exam_c">
+                            <div class="exam_select"></div>
+                        </div>
+                        <div class="exam_r">
+                            <div class="exam_btn exam_send_ok">发布测试</div>
+                            <div class="exam_btn exam_send_no">放弃发布</div>
+                        </div>
+                    </div>
+                    <div class="exam_bd exam_result hide">
+                        <div class="exam_l">
+                            <div class="exam_type"></div>
+                        </div>
+                        <div class="exam_c">
+                            <div class="exam_rs_t">当前有<span>0</span>人参加</div>
+                            <div class="exam_rs"></div>
+                        </div>
+                        <div class="exam_r">
+                            <div class="exam_btn exam_rs_no">结束测验</div>
+                            <div class="exam_btn exam_rs_ok">查看详情</div>
+                        </div>
+                    </div>
+
+                    <div class="exam_user hide">
+                        <div class="exam_user_t">
+                            测验详情
+                            <div class="exam_user_close">X</div>
+                        </div>
+                        <div class="exam_user_list">
+                            <div class="exam_user_list_t">
+                                <div class="exam_user_list_t1">编号</div>
+                                <div class="exam_user_list_t2">学生</div>
+                                <div class="exam_user_list_t3">答案</div>
+                                <div class="exam_user_list_t4">操作</div>
+                            </div>
+                            <ul class="hidescroll">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="body_right">
+            <div class="body_right_video" id="local_stream">
+                <div class="body_right_video_bg"></div>
+                <div class="body_right_video_tips">讲师</div>
+                <div class="body_right_video_wait">
+                    等待上课...
+                </div>
+                <div class="body_right_video_caozuo" style="display: none;">
+                    <img class="body_right_video_mai_open" src="__STATIC__/teacher/images/white/maiopen.png">
+                    <img class="body_right_video_mai_close" src="__STATIC__/teacher/images/white/maiclose.png">
+                    <img class="body_right_video_video_open" src="__STATIC__/teacher/images/white/videoopen.png">
+                    <img class="body_right_video_video_close" src="__STATIC__/teacher/images/white/videoclose.png">
+                </div>
+            </div>
+            <div class="body_right_speak_tips">
+                <span class="on">交流</span>
+                <span>提问</span>
+            </div>
+            <!--聊天区域-->
+            <div class="msg_area">
+                <div class="msg_area_bd body_right_speak hidescroll"></div>
+                <div class="msg_area_bd body_right_ask hidescroll hide"></div>
+            </div>
+
+             <!--聊天区域-->
+            <div class="body_right_send">
+                <div class="chat_control">
+                    <div class="chat_control_c">
+                        <input type="checkbox" id="stopspeak" class="test">
+                        <label for="stopspeak"></label>
+                        <text class="body_right_send_stop">禁言</text>
+                    </div>
+                    <div class="chat_control_c">
+                        <input type="checkbox" id="openchat" class="test">
+                        <label for="openchat"></label>
+                        <text class="body_right_send_stop">开放交流区</text>
+                    </div>
+                </div>
+
+                <div class="body_right_send_b">
+                    <input class="body_right_send_msg" name="msg" type="text" placeholder="请输入内容" />
+                    <button class="body_right_send_button"><a style="color: #fff;"  href="javascript:void(0)">发送</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="ppt_preview">
+        <div class="ppt_preview_t">
+            <div class="ppt_preview_t_t">预览</div>
+            <div class="ppt_preview_t_c">X</div>
+        </div>
+        <div class="ppt_preview_m">
+            <ul>
+            </ul>
+        </div>
+        <div class="ppt_preview_b"></div>
+    </div>
+
+
+    <div class="q_bd">
+
+    </div>
+
+    <div class="practice_send hide">
+        <div class="practice_bd">
+            <div class="practice_bd_t">
+                <span class="on">答题卡</span>
+                <span>草稿箱</span>
+                <div class="practice_close practice_send_close"></div>
+            </div>
+            <div class="tab_bd">
+                <div class="practice_bd_t3">
+                    <div class="t3_l">
+                        简介：
+                    </div>
+                    <div class="t3_r">
+                        <textarea placeholder="最多输入15个字" maxlength="15" id="draft_title"></textarea>
+                    </div>
+                </div>
+                <div class="practice_bd_t2">
+                    <div class="t2_l">
+                        时间：<input type="text" id="practice_time" value="10">分钟
+                    </div>
+                    <div class="t2_r">
+                        <span class="question_add hide">题库选题</span>
+                        <span class="practice_add">添加习题</span>
+                        <div class="practice_add_bd">
+                            <div class="add_item">
+                                <div class="add_item_l">题型：</div>
+                                <div class="add_item_r">
+                                    <select id="add_type" class="add_item_input">
+                                        <option value="0">判断</option>
+                                        <option value="1" selected>单选</option>
+                                        <option value="2">定项多选</option>
+                                        <option value="5">不定项多选</option>
+                                        <option value="4">填空</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="add_item">
+                                <div class="add_item_l">题数：</div>
+                                <div class="add_item_r">
+                                    <input type="text" id="add_count" class="add_item_input" value="1">
+                                </div>
+                            </div>
+                            <div id="add_select">
+                                <div class="add_item">
+                                    <div class="add_item_l">选项数：</div>
+                                    <div class="add_item_r">
+                                        <input type="text" id="add_nums" class="add_item_input" value="4">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_score_1">
+                                <div class="add_item">
+                                    <div class="add_item_l">每题分数：</div>
+                                    <div class="add_item_r">
+                                        <input type="text" id="add_score" class="add_item_input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_score_2 hide">
+                                <div class="add_item">
+                                    <div class="add_item_l">每空分数：</div>
+                                    <div class="add_item_r">
+                                        <input type="text" id="add_score2" class="add_item_input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_score_3 hide">
+                                <div class="add_item">
+                                    <div class="add_item_l">漏选分数：</div>
+                                    <div class="add_item_r">
+                                        <input type="text" id="add_score3" class="add_item_input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add_btn">
+                                <span class="on js_practice_add">添加</span>
+                                <span class="js_practice_no">取消</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="practice_bd_m">
+                    <div class="practice_list_count">
+                        <div>题目：<span id="practice_nums">0</span></div>
+                        <div>总分：<span id="practice_score">0</span></div>
+                    </div>
+                    <div class="practice_list">
+                        <div class="practice_list_t practice_li">
+                            <div>编号</div>
+                            <div>标准答案</div>
+                            <div>分数</div>
+                        </div>
+                        <div class="practice_list_bd hidescroll">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="practice_bd_b">
+                    <span class="on practice_send_ok">确认发布</span>
+                    <span class="practice_save">保存至草稿</span>
+                    <span class="no practice_send_no">关闭</span>
+                </div>
+            </div>
+
+            <div class="tab_bd hide">
+                <div class="draft_list hidescroll">
+                    <ul>
+                    </ul>
+                </div>
+                <div class="practice_bd_b">
+                    <span class="on draft_send">立即发布</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="practice_result hide">
+        <div class="practice_bd">
+            <div class="practice_bd_t">
+                <span>查看结果</span>
+            </div>
+            <div class="practice_bd_t2">
+                <div id="practice_ing" class="practice_bd_t2_bd">
+                    <div class="t2_l">
+                        剩余作答时间 <span id="practice_timeing">00:00</span>
+                    </div>
+                    <div class="t2_r">
+                        <span class="on practice_stop">停止答题</span>
+                    </div>
+                </div>
+
+                <div id="practice_end" class="practice_bd_t2_bd" style="display: none">
+                    <div class="t2_l">
+                        平均分： <span id="practice_ave_score"></span>
+                    </div>
+                    <div class="t2_r">
+                        <span class="no">已结束</span>
+                    </div>
+                </div>
+            </div>
+            <div class="practice_bd_m">
+                <div class="practice_list_count">
+                    <div>整体作答统计</div>
+                </div>
+                <div class="practice_echart">
+                    <div id="practice_echart"></div>
+                    <div id="practice_rs_nums">
+                        <span>0</span><br>
+                        人作答
+                    </div>
+                    <div class="practice_echart_legend">
+                        <ul>
+                            <li><span class="legend_c c1"></span> 优秀 <span class="legend_t">（得分为总分 90% - 100%）</span></li>
+                            <li><span class="legend_c c2"></span> 良好 <span class="legend_t">（得分为总分 80% - 89%）</span></li>
+                            <li><span class="legend_c c3"></span> 一般 <span class="legend_t">（得分为总分 70% - 79%）</span></li>
+                            <li><span class="legend_c c4"></span> 及格 <span class="legend_t">（得分为总分 60% - 69%）</span></li>
+                            <li><span class="legend_c c5"></span> 不及格 <span class="legend_t">（得分为总分 0% - 59%）</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="practice_list">
+                    <div class="practice_list_t ">
+                        各题正确率统计
+                    </div>
+                    <div class="practice_rs_bd hidescroll">
+                        <ul>
+                            <li class="practice_rs_li">
+                                <div class="li_t">1 <span>(A)</span></div>
+                                <div class="li_p">
+                                    <div class="li_p_s"></div>
+                                    <div class="li_p_n">0.0%</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="practice_bd_b">
+                <span class="on result_ok">关闭</span>
+                <span class="no result_no">查看详情</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="practice_user hide">
+        <div class="exam_user_t">
+            练习详情
+            <div class="exam_user_close">X</div>
+        </div>
+        <div class="exam_user_list">
+            <div class="exam_user_list_t">
+                <div class="exam_user_list_t1">编号</div>
+                <div class="exam_user_list_t2">学生</div>
+                <div class="exam_user_list_t3">分数</div>
+                <div class="exam_user_list_t4">操作</div>
+            </div>
+            <ul class="hidescroll">
+            </ul>
+        </div>
+    </div>
+
+    <div class="know_result">
+        <div class="know_result_t">
+            统计
+        </div>
+        <div class="know_result_bd">
+            <ul>
+                <li class="know_rs_li">
+                    <div class="li_t">懂了 <span>(0人)</span></div>
+                    <div class="li_p">
+                        <div class="li_p_s"></div>
+                        <div class="li_p_n">0.0%</div>
+                    </div>
+                </li>
+                <li class="know_rs_li">
+                    <div class="li_t">没懂 <span>(0人)</span></div>
+                    <div class="li_p">
+                        <div class="li_p_s"></div>
+                        <div class="li_p_n">0.0%</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="know_result_b">
+            <span class="on know_ok">关闭</span>
+        </div>
+    </div>
+
+    <div class="rob">
+        <div class="rob_t"></div>
+        <div class="rob_m clearfix">
+            <ul>
+
+            </ul>
+        </div>
+        <div class="rob_b">
+            <div class="btn">结束抢答</div>
+        </div>
+    </div>
+
+    <include file="teacher/public@equipment"/>
+    <include file="teacher/public@question"/>
+</body>
+
+<script type="text/javascript" src="__STATIC__/js/echarts/echarts.min.js?t=1599267573"></script>
+<script type="text/javascript" src="__STATIC__/white/2.8.0.js"></script>
+<script type="text/javascript" src="__STATIC__/agora/AgoraRTCSDK-3.0.1.js"></script>
+<script src="__STATIC__/emoji/emoji.js?t=1587286398"></script>
+<script type="text/javascript" src="__STATIC__/js/socket.io.js"></script>
+<script>
+    var rtc = {
+        client: null, //上课房间初始化
+        client_screen: null, //共享屏幕房间初始化
+        joined: false, //是否进入上课房间
+        joined_screen: false, //是否进入共享屏幕房间
+        published: false, //是否推上课流
+        published_screen: false, //是否推共享流
+        localStream: null, //本地流
+        localStream_screen: null, //共享流
+        remoteStreams: [], //所有的上课异地流
+        remoteStreams_screen: [], //所有的共享异地流
+        params: {}, //上课用户信息
+        params_screen: {}, //共享用户信息
+    };
+
+    //声网的一些信息
+    var option = {
+        appID: "{$info['sound_appid']}", //声网appid
+        channel: "{$info['stream']}", //上课房间id，区分房间的唯一id
+        channel_screen: 999999999, //共享房间id，区分房间的唯一id
+        uid: "{$userinfo['id']}", //上课房间uid，用于推流的streamID
+        uid_screen: 0, //共享房间uid，用于推流的streamID
+        token: null
+    }
+    
+    var _DATA = {};
+    _DATA.userinfo={$userinfoj};//用户信息
+    _DATA.roominfo={$infoj};//房间信息
+    _DATA.teacherinfo={$teacherinfoj};//老师信息
+	
+    var whiteroom={}; //进入的白板房间
+    var whiteinfo={}; //白板教具信息
+
+    var RTTyan=''; //网络延迟定时器
+    var classIntavl=''; //课堂定时器
+    
+    var ismuteAudio=false; //是否关麦
+    var ismuteVideo=false; //是否关摄像头
+
+    var laytips='';
+    var laytipsfile='';
+    
+    var whiteWebSdk=''; //白板实例化
+    
+    var courseid='{$info["courseid"]}';
+    var lessonid='{$info["lessonid"]}';
+    var stream='{$info["stream"]}';
+    var socket = new io("{$info['chatserver']}");
+</script>
+<script src="__STATIC__/teacher/js/event_white.js?t=1596867798"></script>
+<script src="__STATIC__/teacher/js/eventListen.js"></script>
+<script type="text/javascript" src="__STATIC__/teacher/js/white.js?t=1598854722"></script>
+
+</html> 
+
