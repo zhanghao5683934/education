@@ -137,6 +137,7 @@
   
   #### 统计页面
   ![展示图](/readme/images/user_anal.png "展示图.png")
+  ![展示图](/readme/images/商品分析.png "展示图.png")
   
     
   #### 直播课页面
