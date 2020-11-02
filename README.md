@@ -134,6 +134,10 @@
   ![展示图](/readme/images/function_1.png "展示图.png")
   ![展示图](/readme/images/function_2.png "展示图.png")
   ![展示图](/readme/images/function_3.png "展示图.png")
+  
+  #### 统计页面
+  ![展示图](/readme/images/user_anal.png "展示图.png")
+  
     
   #### 直播课页面
   ![展示图](/readme/images/live_student.png "展示图.png")
