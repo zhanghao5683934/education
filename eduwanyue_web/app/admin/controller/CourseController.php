@@ -22,7 +22,11 @@ use think\Db;
  */
 class CourseController extends AdminBaseController
 {
-    /* 状态 */
+    /**
+     * 获取课程状态
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getStatus($k = '')
     {
         $status = [
@@ -39,7 +43,11 @@ class CourseController extends AdminBaseController
         return isset($status[$k]) ? $status[$k] : '';
     }
 
-    /* 类别 */
+    /**
+     * 类别
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getSort($k = '')
     {
         $sort = [
@@ -53,7 +61,11 @@ class CourseController extends AdminBaseController
         return isset($sort[$k]) ? $sort[$k] : '';
     }
 
-    /* 内容形式 */
+    /**
+     * 内容形式
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getTypes($k = '')
     {
         $type = [
@@ -65,7 +77,11 @@ class CourseController extends AdminBaseController
         return isset($type[$k]) ? $type[$k] : '';
     }
 
-    /* 直播形式 */
+    /**
+     * 直播形式
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getLiveTypes($k = '')
     {
         $type = [
@@ -79,7 +95,11 @@ class CourseController extends AdminBaseController
         return isset($type[$k]) ? $type[$k] : '';
     }
 
-    /* 获取方式 */
+    /**
+     * 获取方式
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getPayTypes($k = '')
     {
         $paytype = [
@@ -93,12 +113,15 @@ class CourseController extends AdminBaseController
         return isset($paytype[$k]) ? $paytype[$k] : '';
     }
 
-    /* 试学 */
+    /**
+     * 试学
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getTrialTypes($k = '')
     {
         $trialtype = [
             '0' => '否',
-            /* '1'=>'链接', */
             '2' => '进度',
         ];
         if ($k === '') {
@@ -107,7 +130,11 @@ class CourseController extends AdminBaseController
         return isset($trialtype[$k]) ? $trialtype[$k] : '';
     }
 
-    /* 课程模式 */
+    /**
+     * 课程模式
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getModes($k = '')
     {
         $mode = [
@@ -120,7 +147,10 @@ class CourseController extends AdminBaseController
         return isset($mode[$k]) ? $mode[$k] : '';
     }
 
-    /* 学级分类 */
+    /**
+     * 学级分类
+     * @return array
+     */
     protected function getGrade()
     {
         $list  = Db::name('course_grade')
@@ -138,8 +168,11 @@ class CourseController extends AdminBaseController
         return $list2;
     }
 
-    /* 学级分类2 排序 */
-    protected function getGrade2()
+    /**
+     * 学级分类2 排序
+     * @return array
+     */
+    protected function getGradeTwo()
     {
         $list  = Db::name('course_grade')
             ->order("pid asc,list_order asc")
@@ -164,6 +197,10 @@ class CourseController extends AdminBaseController
         return $list2;
     }
 
+    /*
+     * 课程列表
+     * @return mixed
+     */
     public function index()
     {
         $data = $this->request->param();
@@ -171,7 +208,6 @@ class CourseController extends AdminBaseController
 
         $sort  = $data['sort'] ?? '1';
         $map[] = ['sort', '=', $sort];
-
 
         $start_time = $data['start_time'] ?? '';
         $end_time   = $data['end_time'] ?? '';
@@ -183,7 +219,6 @@ class CourseController extends AdminBaseController
         if ($end_time != "") {
             $map[] = ['addtime', '<=', strtotime($end_time) + 60 * 60 * 24];
         }
-
 
         $status = $data['status'] ?? '';
         if ($status != '') {
@@ -199,7 +234,6 @@ class CourseController extends AdminBaseController
         if ($paytype != '') {
             $map[] = ['paytype', '=', $paytype];
         }
-
 
         $type = $data['type'] ?? '';
         if ($type != '') {
@@ -258,25 +292,36 @@ class CourseController extends AdminBaseController
         return $this->fetch('index');
     }
 
-
+    /*
+     * 内容
+     * @return mixed
+     */
     function contents()
     {
         return $this->index();
     }
 
-    /*大班课*/
+    /**
+     * 视频大班课
+     * @return mixed
+     */
     function live()
     {
         return $this->index();
     }
 
-    /*语音大班课*/
+    /**
+     * 语音大班课
+     * @return mixed
+     */
     function live_video()
     {
         return $this->index();
     }
 
-    /* 更新 */
+    /*
+     * 更新status
+     */
     function setstatus()
     {
         $id     = $this->request->param('id', 0, 'intval');
@@ -302,6 +347,11 @@ class CourseController extends AdminBaseController
 
     }
 
+    /*
+     * 获取用户详情
+     * @param int $uid
+     * @return array
+     */
     protected function getUser($uid = 0)
     {
         $map   = [];
@@ -315,6 +365,9 @@ class CourseController extends AdminBaseController
         return $list;
     }
 
+    /**
+     * 获取用户列表
+     */
     public function getUserList()
     {
         $data = $this->request->param();
@@ -323,6 +376,10 @@ class CourseController extends AdminBaseController
         $this->success('', '', $list);
     }
 
+    /**
+     * 课程添加
+     * @return mixed
+     */
     public function add()
     {
         $data = $this->request->param();
@@ -337,7 +394,7 @@ class CourseController extends AdminBaseController
         }
 
         $this->assign([
-            'grade'      => $this->getGrade2(),
+            'grade'      => $this->getGradeTwo(),
             'paytypes'   => $this->getPayTypes(),
             'trialtypes' => $this->getTrialTypes(),
             'modes'      => $this->getModes()
@@ -346,6 +403,10 @@ class CourseController extends AdminBaseController
         return $this->fetch();
     }
 
+
+    /*
+     * 课程添加提交
+     */
     public function addPost()
     {
         if ($this->request->isPost()) {
@@ -356,7 +417,7 @@ class CourseController extends AdminBaseController
             if ($uid == '') {
                 $this->error('请填写主讲老师ID');
             }
-            $isexist = DB::name('users')->field('type')->where('id', '=', $uid)->find();
+            $isexist = UsersModel::field('type')->where('id', '=', $uid)->find();
             if (!$isexist) {
                 $this->error('该主讲老师不存在');
             }
@@ -371,7 +432,7 @@ class CourseController extends AdminBaseController
                         $this->error('主讲老师和辅导老师不能是同一个人');
                     }
 
-                    $isexist = DB::name('users')->field('type')->where('id', '=', $tutoruid)->find();
+                    $isexist = UsersModel::field('type')->where('id', '=', $tutoruid)->find();
                     if (!$isexist) {
                         $this->error('该辅导老师不存在');
                     }
@@ -514,7 +575,6 @@ class CourseController extends AdminBaseController
                 }
             }
 
-
             $info = isset($data['info']) ? $data['info'] : '';
             if ($info == '') {
                 $this->error('请编辑介绍');
@@ -543,6 +603,10 @@ class CourseController extends AdminBaseController
         }
     }
 
+    /*
+     * 课程编辑
+     * @return mixed
+     */
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -556,7 +620,6 @@ class CourseController extends AdminBaseController
 
         $sort = $data['sort'];
 
-        $this->assign('sort', $sort);
         if ($sort == 2) {
             $this->assign('types', $this->getLiveTypes());
         } else {
@@ -564,7 +627,8 @@ class CourseController extends AdminBaseController
         }
 
         $this->assign([
-            'grade'      => $this->getGrade2(),
+            'sort'       => $sort,
+            'grade'      => $this->getGradeTwo(),
             'paytypes'   => $this->getPayTypes(),
             'trialtypes' => $this->getTrialTypes(),
             'modes'      => $this->getModes()
@@ -573,6 +637,9 @@ class CourseController extends AdminBaseController
         return $this->fetch();
     }
 
+    /*
+     * 课程编辑提交
+     */
     public function editPost()
     {
         if ($this->request->isPost()) {
@@ -771,6 +838,9 @@ class CourseController extends AdminBaseController
         }
     }
 
+    /**
+     * 排序
+     */
     public function listOrder()
     {
         $model = DB::name('course');
@@ -778,6 +848,9 @@ class CourseController extends AdminBaseController
         $this->success("排序更新成功！");
     }
 
+    /*
+     * 课程删除
+     */
     public function del()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -789,4 +862,6 @@ class CourseController extends AdminBaseController
 
         $this->success("删除成功！");
     }
+
+
 }
