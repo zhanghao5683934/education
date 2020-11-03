@@ -1,22 +1,30 @@
 <?php
 
-/* 内容管理 */
+
+// +----------------------------------------------------------------------
+// | Created by Wanyue
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017~2019 http://www.sdwanyue.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: https://gitee.com/WanYueKeJi
+// +----------------------------------------------------------------------
+// | Date: 2020/09/13 11:18
+// +----------------------------------------------------------------------
 namespace app\appapi\controller;
 
 use cmf\controller\HomeBaseController;
 use app\portal\service\PostService;
 use think\Db;
 
+/**
+ * 内容管理
+ * Class PageController
+ * @package app\appapi\controller
+ */
 class PageController extends HomebaseController{
 
 	public function lists() {
 
-		// $list=Db::name("portal_post")->field("id,post_title")->where("type='1'")->order("id desc")->select();
-
-		// $this->assign("list",$list);
-		 
-		// return $this->fetch();
-        
         $postService = new PostService();
         $pageId      = 4;
         $page        = $postService->publishedPage($pageId);

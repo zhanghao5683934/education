@@ -1,11 +1,24 @@
 <?php
 
-/* 课程 */
+// +----------------------------------------------------------------------
+// | Created by Wanyue
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017~2019 http://www.sdwanyue.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: https://gitee.com/WanYueKeJi
+// +----------------------------------------------------------------------
+// | Date: 2020/09/12 17:08
+// +----------------------------------------------------------------------
 namespace app\appapi\controller;
 
 use cmf\controller\HomeBaseController;
 use think\Db;
 
+/*
+ * 课程
+ * Class CourseController
+ * @package app\appapi\controller
+ */
 class CourseController extends HomebaseController{
 
 	function info(){       

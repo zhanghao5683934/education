@@ -1,12 +1,21 @@
 <?php
-/**
- * 课程支付回调
- */
 
+// +----------------------------------------------------------------------
+// | Created by Wanyue
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017~2019 http://www.sdwanyue.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: https://gitee.com/WanYueKeJi
+// +----------------------------------------------------------------------
+// | Date: 2020/09/12 17:08
+// +----------------------------------------------------------------------
 namespace app\appapi\controller;
 use cmf\controller\HomeBaseController;
 use think\Db;
 
+/**
+ * 课程支付回调
+ */
 class CoursepayController extends HomebaseController {
 	//支付宝 回调
 	public function notify_ali() {

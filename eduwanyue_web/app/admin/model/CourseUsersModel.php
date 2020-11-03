@@ -10,7 +10,7 @@ use think\Model;
  */
 class CourseUsersModel extends Model
 {
-    //
+
     protected $table = 'cmf_course_users';
 
 }

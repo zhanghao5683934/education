@@ -4,7 +4,7 @@ namespace app\admin\model;
 
 use think\Model;
 
-/**
+/*
  * 前台用户表
  * @package app\admin\model
  */
