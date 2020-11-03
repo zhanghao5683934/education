@@ -23,7 +23,10 @@ use tree\Tree;
 class CoursegradeController extends AdminBaseController
 {
 
-    /* 一级 */
+    /*
+     * 获取分类
+     * @return array
+     */
     protected function getClass()
     {
         $list = Db::name('course_grade')
@@ -33,6 +36,10 @@ class CoursegradeController extends AdminBaseController
         return $list;
     }
 
+    /*
+     * 学级分类列表
+     * @return mixed
+     */
     public function index()
     {
 
@@ -63,7 +70,10 @@ class CoursegradeController extends AdminBaseController
         return $this->fetch();
     }
 
-
+    /*
+     * 学级分类添加
+     * @return mixed
+     */
     public function add()
     {
         $this->assign('classs', $this->getClass());
@@ -71,6 +81,9 @@ class CoursegradeController extends AdminBaseController
         return $this->fetch();
     }
 
+    /*
+     * 学级分类添加提交
+     */
     public function addPost()
     {
         if ($this->request->isPost()) {
@@ -88,7 +101,6 @@ class CoursegradeController extends AdminBaseController
                 $this->error('同名分类已存在');
             }
 
-
             $id = DB::name('course_grade')->insertGetId($data);
             if (!$id) {
                 $this->error("添加失败！");
@@ -98,6 +110,10 @@ class CoursegradeController extends AdminBaseController
         }
     }
 
+    /*
+     * 学级分类编辑
+     * @return mixed
+     */
     public function edit()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -110,12 +126,14 @@ class CoursegradeController extends AdminBaseController
         }
 
         $this->assign('data', $data);
-
         $this->assign('classs', $this->getClass());
 
         return $this->fetch();
     }
 
+    /*
+     * 学级分类编辑提交
+     */
     public function editPost()
     {
         if ($this->request->isPost()) {
@@ -135,7 +153,6 @@ class CoursegradeController extends AdminBaseController
                 $this->error('同名分类已存在');
             }
 
-
             $rs = DB::name('course_grade')->update($data);
 
             if ($rs === false) {
@@ -146,6 +163,9 @@ class CoursegradeController extends AdminBaseController
         }
     }
 
+    /**
+     * 学级分类排序
+     */
     public function listOrder()
     {
         $model = DB::name('course_grade');
@@ -154,6 +174,9 @@ class CoursegradeController extends AdminBaseController
         $this->success("排序更新成功！");
     }
 
+    /*
+     * 学级分类删除
+     */
     public function del()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -176,7 +199,9 @@ class CoursegradeController extends AdminBaseController
         $this->success("删除成功！");
     }
 
-
+    /*
+     * 清除缓存
+     */
     protected function resetcache()
     {
         $key = 'getcoursegrade';
@@ -188,4 +213,5 @@ class CoursegradeController extends AdminBaseController
             delcache($key);
         }
     }
+
 }
