@@ -1,12 +1,19 @@
 <?php
 
+// +----------------------------------------------------------------------
+// | Created by Wanyue
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017~2019 http://www.sdwanyue.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: https://gitee.com/WanYueKeJi
+// +----------------------------------------------------------------------
+// | Date: 2020/09/08 13:43
+// +----------------------------------------------------------------------
 use think\Db;
 use cmf\lib\Storage;
 use cmf\lib\Upload;
 
 // 应用公共文件
-//error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
 require_once dirname(__FILE__) . '/redis.php';
 
 /* 去除NULL 判断空处理 主要针对字符串类型*/
@@ -122,12 +129,7 @@ function sendCode($account, $code)
         return $rs;
     }
 
-    // $res=sendCodeByCCP($account,$code);
-
     $res = sendCodeByTx($account, $code);
-
-    //$res=sendEmailCode($account,$code);
-
     return $res;
 }
 
@@ -173,12 +175,9 @@ function sendCodeByCCP($mobile, $code)
         return $rs;
     }
     if ($result->statusCode != 0) {
-        //echo "error code :" . $result->statusCode . "<br>";
-        //echo "error msg :" . $result->statusMsg . "<br>";
         //TODO 添加错误处理逻辑
         $rs['code'] = 1002;
-        //$rs['msg']=$gets['SubmitResult']['msg'];
-        $rs['msg'] = "发送失败";
+        $rs['msg']  = "发送失败";
         return $rs;
     }
 
@@ -259,7 +258,6 @@ function getConfigPri()
         }
     }
 
-
     return $config;
 }
 
@@ -338,8 +336,6 @@ function handleUser($info)
     if (isset($info['identity'])) {
         $info['identitys'] = getSignory($info['identity']);
     }
-
-    //unset($info['birthday']);
 
     return $info;
 }
