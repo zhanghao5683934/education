@@ -11,6 +11,10 @@ use think\Db;
 
 class PushController extends AdminbaseController {
 
+    /*
+     * 推送列表
+     * @return mixed
+     */
     function index(){
         $data = $this->request->param();
         $map=[];
@@ -35,7 +39,7 @@ class PushController extends AdminbaseController {
     	$lists = DB::name("message")
             ->where($map)
             ->order('id desc')
-            ->paginate(20);
+            ->paginate(20, false, ['query' => input()]);
         
         $lists->each(function($v,$k){
             if($v['ip']>0){
@@ -51,11 +55,15 @@ class PushController extends AdminbaseController {
         $page = $lists->render();
         
         $this->assign('lists', $lists);
-        
     	$this->assign("page", $page);
     	
     	return $this->fetch();
     }
+
+
+    /*
+     * 删除
+     */
     function del(){
         $id = $this->request->param('id', 0, 'intval');
         if($id){
@@ -69,11 +77,19 @@ class PushController extends AdminbaseController {
         }else{				
             $this->error('数据传入失败！');
         }				
-    }	
-    
+    }
+
+    /*
+     * 推送添加
+     * @return mixed
+     */
 	function add(){
         return $this->fetch();			
-	}	
+	}
+
+    /*
+     * 推送添加提交
+     */
 	function addPost(){
         if ($this->request->isPost()) {
             
@@ -106,8 +122,7 @@ class PushController extends AdminbaseController {
             if($rs!=1){
                 $this->error("推送配置错误，请检查设置");
             }
-            
-            
+
             $this->success("推送成功！");
 		}
         

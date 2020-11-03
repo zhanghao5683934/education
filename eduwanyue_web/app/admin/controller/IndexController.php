@@ -49,7 +49,7 @@ class IndexController extends AdminBaseController
             cache('admin_menus_' . cmf_get_current_admin_id(), $menus, null, 'admin_menus');
         }
 
-        $this->assign("menus", $menus);
+
 
 
         $result = Db::name('AdminMenu')->order(["app" => "ASC", "controller" => "ASC", "action" => "ASC"])->select();
@@ -61,10 +61,10 @@ class IndexController extends AdminBaseController
             $indexTmp = strtolower($indexTmp);
             $menusTmp[$indexTmp] = $item;
         }
+
+        $this->assign("menus", $menus);
         $this->assign("menus_js_var",json_encode($menusTmp));
 
-        //$admin = Db::name("user")->where('id', cmf_get_current_admin_id())->find();
-        //$this->assign('admin', $admin);
         return $this->fetch();
     }
 }

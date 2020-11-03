@@ -1,6 +1,15 @@
 <?php
-/* 用户管理 */
 
+
+// +----------------------------------------------------------------------
+// | Created by Wanyue
+// +----------------------------------------------------------------------
+// | Copyright (c) 2017~2019 http://www.sdwanyue.com All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: https://gitee.com/WanYueKeJi
+// +----------------------------------------------------------------------
+// | Date: 2020/09/12 11:01
+// +----------------------------------------------------------------------
 namespace app\admin\controller;
 
 use app\admin\model\UsersModel;
@@ -8,9 +17,19 @@ use cmf\controller\AdminBaseController;
 use think\Db;
 use think\db\Query;
 
+/*
+ * 用户管理
+ * Class UsersController
+ * @package app\admin\controller
+ */
+
 class UsersController extends AdminBaseController
 {
 
+    /*
+     * 用户列表
+     * @return mixed
+     */
     public function index()
     {
 
@@ -54,15 +73,14 @@ class UsersController extends AdminBaseController
         }
 
         $nums = UsersModel::where($map)->count();
-
         $list = UsersModel::where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
 
         $list->each(function ($v, $k) {
 
             $v['user_login'] = m_s($v['user_login']);
             $v['mobile']     = m_s($v['mobile']);
-            $v['avatar'] = get_upload_path($v['avatar']);
-            $v['signory']   = getSignory($v['signoryid']);
+            $v['avatar']     = get_upload_path($v['avatar']);
+            $v['signory']    = getSignory($v['signoryid']);
 
             return $v;
         });
@@ -82,16 +100,23 @@ class UsersController extends AdminBaseController
         return $this->fetch('index');
     }
 
+    /*
+     * 教师列表
+     * @return mixed
+     */
     function teacher()
     {
         return $this->index();
     }
 
+    /*
+     * 删除
+     */
     function del()
     {
-        $id = $this->request->param('id', 0, 'intval');
+        $id    = $this->request->param('id', 0, 'intval');
         $Users = UsersModel::get($id);
-        $rs         = $Users->delete();
+        $rs    = $Users->delete();
         if ($rs === false) {
             $this->error("删除失败！");
         }
@@ -103,7 +128,9 @@ class UsersController extends AdminBaseController
 
     }
 
-
+    /**
+     * 排序
+     */
     public function listOrder()
     {
         $model = DB::name('users');
@@ -147,11 +174,18 @@ class UsersController extends AdminBaseController
         }
     }
 
+    /*
+     * 用户添加
+     * @return mixed
+     */
     public function add()
     {
         return $this->fetch();
     }
 
+    /*
+     * 用户添加提交
+     */
     public function addPost()
     {
         if ($this->request->isPost()) {
@@ -218,9 +252,12 @@ class UsersController extends AdminBaseController
         }
     }
 
+    /*
+     * 用户编辑
+     * @return mixed
+     */
     function edit()
     {
-
         $id = $this->request->param('id', 0, 'intval');
 
         $data = UsersModel::where("id={$id}")->find();
@@ -228,12 +265,14 @@ class UsersController extends AdminBaseController
             $this->error("信息错误");
         }
 
-
         $data['user_login'] = m_s($data['user_login']);
         $this->assign('data', $data);
         return $this->fetch();
     }
 
+    /*
+     * 用户编辑提交
+     */
     function editPost()
     {
         if ($this->request->isPost()) {
@@ -306,37 +345,13 @@ class UsersController extends AdminBaseController
         }
     }
 
-    /**
-     * 获取专长领域
-     * @return mixed
-     */
-    function signory()
-    {
-
-        $id = $this->request->param('id', 0, 'intval');
-
-        $data = UsersModel::field('id,signoryid')->where("id={$id}")->find();
-        if (!$data) {
-            $this->error("信息错误");
-        }
-
-        $list = getSignoryList();
-
-        $this->assign([
-            'data' => $data,
-            'list' => $list
-        ]);
-
-        return $this->fetch();
-
-    }
 
     /*
      * 设置为讲师
      */
     function setSignory()
     {
-        $id        = $this->request->param('id', 0, 'intval');
+        $id = $this->request->param('id', 0, 'intval');
 
         if ($id) {
             $result = UsersModel::where(['id' => $id])->update(['type' => 1]);

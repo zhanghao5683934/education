@@ -11,11 +11,10 @@
 namespace app\admin\controller;
 
 use app\admin\logic\HookLogic;
-use cmf\controller\AdminBaseController;
 use app\admin\model\HookModel;
-use app\admin\model\PluginModel;
 use app\admin\model\HookPluginModel;
-use think\Db;
+use app\admin\model\PluginModel;
+use cmf\controller\AdminBaseController;
 
 /**
  * Class HookController 钩子管理控制器
@@ -108,11 +107,8 @@ class HookController extends AdminBaseController
      */
     public function sync()
     {
-
         $apps = cmf_scan_dir(APP_PATH . '*', GLOB_ONLYDIR);
-
         array_push($apps, 'cmf', 'admin', 'user', 'swoole');
-
         foreach ($apps as $app) {
             HookLogic::importHooks($app);
         }

@@ -12,11 +12,9 @@ namespace app\admin\controller;
 
 use app\admin\model\CourseModel;
 use app\admin\model\CourseUsersModel;
+use app\admin\model\Menu;
 use app\admin\model\UsersModel;
 use cmf\controller\AdminBaseController;
-use think\Db;
-use app\admin\model\Menu;
-use think\db\Query;
 
 
 class MainController extends AdminBaseController
@@ -403,7 +401,7 @@ class MainController extends AdminBaseController
     }
 
 
-    /**
+    /*
      * 获取付费用户数据(用户分析)
      * @return json
      */

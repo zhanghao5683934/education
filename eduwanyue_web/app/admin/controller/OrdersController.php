@@ -13,7 +13,11 @@ use think\Db;
 class OrdersController extends AdminbaseController
 {
 
-    /* 支付状态 */
+    /*
+     * 支付状态
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getStatus($k = '')
     {
         $status = array(
@@ -27,7 +31,11 @@ class OrdersController extends AdminbaseController
         return isset($status[$k]) ? $status[$k] : '';
     }
 
-    /* 支付方式 */
+    /*
+     * 支付方式
+     * @param string $k 键
+     * @return array|mixed|string
+     */
     protected function getTypes($k = '')
     {
         $type = array(
@@ -41,6 +49,10 @@ class OrdersController extends AdminbaseController
         return isset($type[$k]) ? $type[$k] : '';
     }
 
+    /*
+     * 订单列表
+     * @return mixed
+     */
     function index()
     {
         $data = $this->request->param();
@@ -100,7 +112,7 @@ class OrdersController extends AdminbaseController
 
     /**
      * 商品类型
-     * @param string $k
+     * @param string $k 键
      * @return array|mixed|string
      */
     protected function getGoodsTypes($k = '')
@@ -115,7 +127,7 @@ class OrdersController extends AdminbaseController
         return isset($type[$k]) ? $type[$k] : '';
     }
 
-    /**
+    /*
      * 商品
      * @return mixed
      */
@@ -157,7 +169,9 @@ class OrdersController extends AdminbaseController
         return $this->fetch();
     }
 
-    /* 确认支付 */
+    /*
+     * 确认支付
+     */
     function setPay()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -167,12 +181,13 @@ class OrdersController extends AdminbaseController
             $this->error("标记失败！");
         }
 
-
         $this->success("标记成功！");
 
     }
 
-    /* 标记发货 */
+    /*
+     * 标记发货
+     */
     function setSend()
     {
         $id = $this->request->param('id', 0, 'intval');
@@ -182,11 +197,13 @@ class OrdersController extends AdminbaseController
             $this->error("标记失败！");
         }
 
-
         $this->success("标记成功！");
 
     }
 
+    /*
+     * 删除
+     */
     function del()
     {
         $id = $this->request->param('id', 0, 'intval');
