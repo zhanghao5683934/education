@@ -215,7 +215,6 @@ class LinkController extends AdminBaseController
             $this->success("更新成功！");
         }
 
-
     }
 
 }

@@ -49,9 +49,6 @@ class IndexController extends AdminBaseController
             cache('admin_menus_' . cmf_get_current_admin_id(), $menus, null, 'admin_menus');
         }
 
-
-
-
         $result = Db::name('AdminMenu')->order(["app" => "ASC", "controller" => "ASC", "action" => "ASC"])->select();
         $menusTmp = array();
         foreach ($result as $item){

@@ -412,9 +412,6 @@ class MainController extends AdminBaseController
         $range = strtotime(input('range')) ?? time();
 
         //客户类型	用户数 	用户数占比 	客单价 	结算金额(元) 结算转化率
-        /* 全部成交用户	0	100%	     0	     2.00	      20%
-         新付费用户	  0	    100%	     0	      2.00	      20%
-         老付费用户	  0	    100%	     0	      2.00	      20%*/
 
         //全部已成交用户 去重uid
         $payUsersData = CourseUsersModel::where('paytype', 1)->where('paytime', '>', 0)->group('uid')->select();
@@ -508,7 +505,7 @@ class MainController extends AdminBaseController
 
     /****************************数据概况区域******************************/
 
-    /**
+    /*
      * 用户概况
      * @return mixed 数据概况数据
      */
