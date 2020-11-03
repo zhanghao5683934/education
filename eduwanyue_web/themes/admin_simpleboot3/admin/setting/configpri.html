@@ -6,7 +6,6 @@
         <li class="active"><a href="#A" data-toggle="tab">登录配置</a></li>
         <li><a href="#B" data-toggle="tab">支付配置</a></li>
         <li><a href="#C" data-toggle="tab">直播配置</a></li>
-        <li><a href="#D" data-toggle="tab">极光配置</a></li>
     </ul>
     <form class="form-horizontal js-ajax-form margin-top-20" role="form" action="{:url('setting/configpriPost')}" method="post">
         <fieldset>
@@ -292,39 +291,7 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="tab-pane" id="D">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">极光推送模式</label>
-                            <div class="col-md-6 col-sm-10">
-								<select class="form-control" name="options[jpush_sandbox]">
-                                    <option value="0">开发</option>
-                                    <option value="1" <eq name="config['jpush_sandbox']" value="1">selected</eq>>生产</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="input-jpush_key" class="col-sm-2 control-label">极光推送APP_KEY</label>
-                            <div class="col-md-6 col-sm-10">
-                                <input type="text" class="form-control" id="input-jpush_key" name="options[jpush_key]" value="{$config['jpush_key']|default=''}">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="input-jpush_secret" class="col-sm-2 control-label">极光推送master_secret</label>
-                            <div class="col-md-6 col-sm-10">
-                                <input type="text" class="form-control" id="input-jpush_secret" name="options[jpush_secret]" value="{$config['jpush_secret']|default=''}">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary js-ajax-submit" data-refresh="0">
-                                    {:lang('SAVE')}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-    
+
                 </div>
             </div>
         </fieldset>
