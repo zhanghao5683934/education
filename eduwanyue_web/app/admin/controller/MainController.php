@@ -17,6 +17,11 @@ use app\admin\model\UsersModel;
 use cmf\controller\AdminBaseController;
 
 
+/*
+ * 后台欢迎页
+ * Class MainController
+ * @package app\admin\controller
+ */
 class MainController extends AdminBaseController
 {
 
@@ -1134,8 +1139,10 @@ class MainController extends AdminBaseController
     }
 
 
-    /** 商品分析区域 **/
-
+    /*
+     * 商品分析区域
+     * @return mixed
+     */
     public function goodsanalysis()
     {
 
@@ -1185,7 +1192,6 @@ class MainController extends AdminBaseController
             }
 
         }
-
 
         $this->assign([
             'on_sale_count' => $onSaleCount,

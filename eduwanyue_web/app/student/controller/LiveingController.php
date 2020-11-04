@@ -201,7 +201,10 @@ class LiveingController extends StudentBaseController
         return $this->fetch();
     }
 
-    //回放
+    /*
+     * 直播回放
+     * @return mixed
+     */
     public function liveback()
     {
 
@@ -252,8 +255,8 @@ class LiveingController extends StudentBaseController
     }
 
     /* 用户进入 写缓存
-		50本房间主播 60超管 40管理员 30观众 10为游客(判断当前用户身份) 
-    */
+	 *	50本房间主播 60超管 40管理员 30观众 10为游客(判断当前用户身份)
+     */
     public function setNodeInfo()
     {
 
@@ -281,7 +284,6 @@ class LiveingController extends StudentBaseController
         $info['usertype']  = $user_type;
         $info['user_type'] = $user_type;
         $info['sign']      = '0';
-
 
         setcaches($token, $info);
 
@@ -439,7 +441,9 @@ class LiveingController extends StudentBaseController
         $this->success('', '', $list);
     }
 
-    /* 语音 */
+    /**
+     * 添加语音
+     */
     public function addAudio()
     {
         $rs   = ['code' => 0, 'data' => [], 'msg' => '', 'url' => ''];
@@ -528,474 +532,7 @@ class LiveingController extends StudentBaseController
         $this->success('', '', $list['data']);
     }
 
-    /**提交答案获取sign */
-    public function getExamSign()
-    {
-        $data = $this->request->param();
 
-        $uid      = $data['uid'];
-        $token    = $data['token'];
-        $liveuid  = $data['liveuid'];
-        $courseid = $data['courseid'];
-        $lessonid = $data['lessonid'];
-        $examid   = $data['examid'];
-        $answer   = $data['answer'];
-
-        $checkdata = array(
-            'uid'      => $uid,
-            'token'    => $token,
-            'liveuid'  => $liveuid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'examid'   => $examid,
-            'answer'   => $answer,
-        );
-
-
-        $str = '';
-        ksort($checkdata);
-        foreach ($checkdata as $k => $v) {
-            $str .= $k . '=' . $v . '&';
-        }
-        $str     .= '400d069a791d51ada8af3e6c2979bcd7';
-        $newsign = md5($str);
-
-        $this->success('', '', $newsign);
-
-    }
-
-    /**抢题获取sign */
-    public function getRobSign()
-    {
-        $data = $this->request->param();
-
-        $uid      = $data['uid'];
-        $token    = $data['token'];
-        $liveuid  = $data['liveuid'];
-        $courseid = $data['courseid'];
-        $lessonid = $data['lessonid'];
-        $examid   = $data['examid'];
-
-        $checkdata = array(
-            'uid'      => $uid,
-            'token'    => $token,
-            'liveuid'  => $liveuid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'examid'   => $examid
-        );
-
-
-        $str = '';
-        ksort($checkdata);
-        foreach ($checkdata as $k => $v) {
-            $str .= $k . '=' . $v . '&';
-        }
-        $str     .= '400d069a791d51ada8af3e6c2979bcd7';
-        $newsign = md5($str);
-
-        $this->success('', '', $newsign);
-
-    }
-
-    /* 获取题目 */
-    public function getQuestion()
-    {
-        $data = $this->request->param();
-
-        $uid = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $examid   = isset($data['examid']) ? checkNull($data['examid']) : '0';
-        $touid    = isset($data['touid']) ? checkNull($data['touid']) : '0';
-
-        if ($courseid < 1 || $lessonid < 1 || $examid < 1) {
-            $this->error('信息错误');
-        }
-
-        $rs = [
-            'choice' => [],
-            'judge'  => [],
-            'write'  => [],
-        ];
-
-        $where = [
-            'uid'      => $uid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'id'       => $examid,
-            'type'     => 0,
-        ];
-
-        $info = Db::name('course_exam')->where($where)->find();
-        if (!$info) {
-            $this->success('', '', $rs);
-        }
-
-        $answers = [];
-        if ($touid > 0) {
-            $where3 = [
-                'uid'      => $touid,
-                'liveuid'  => $uid,
-                'courseid' => $courseid,
-                'lessonid' => $lessonid,
-                'examid'   => $examid,
-            ];
-
-            $isanswer = Db::name('course_exam_a')->where($where3)->find();
-            if ($isanswer) {
-                $answers = json_decode($isanswer['answer'], true);
-            }
-        }
-        $where2 = [
-            'uid'      => $uid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'pid'      => $examid,
-        ];
-        $list   = Db::name('course_exam')->where($where2)->order("id asc")->select()->toArray();
-
-        foreach ($list as $k => $v) {
-            $ans  = [];
-            $type = $v['type'];
-            if ($type == 1) {
-                $ans = json_decode($v['answer'], true);
-                foreach ($ans as $k1 => $v1) {
-                    $v1['ischoice'] = '0';
-                    if (isset($answers[$v['id']]) && $answers[$v['id']] == $k1) {
-                        $v1['ischoice'] = '1';
-                    }
-                    $ans[$k1] = $v1;
-                }
-            }
-
-            if ($type == 2) {
-                $data = [
-                    'isok'     => $v['answer'],
-                    'ischoice' => '2',
-                ];
-                if (isset($answers[$v['id']])) {
-                    $data['ischoice'] = (string)$answers[$v['id']];
-                }
-                $ans[] = $data;
-            }
-
-            if ($type == 3) {
-                $data = [
-                    'isok'     => '',
-                    'ischoice' => '',
-                ];
-                if (isset($answers[$v['id']])) {
-                    $data['ischoice'] = (string)$answers[$v['id']];
-                }
-                $ans[] = $data;
-            }
-
-            $v['answer'] = $ans;
-
-            unset($v['addtime']);
-            unset($v['status']);
-            unset($v['endtime']);
-            unset($v['choicenums']);
-            unset($v['judgenums']);
-            unset($v['writenums']);
-
-            if ($type == 1) {
-                $rs['choice'][] = $v;
-            }
-
-            if ($type == 2) {
-                $rs['judge'][] = $v;
-            }
-
-            if ($type == 3) {
-                $rs['write'][] = $v;
-            }
-        }
-
-        $this->success('', '', $rs);
-    }
-
-    /* 答题列表 */
-    public function getExamScore()
-    {
-        $data = $this->request->param();
-
-        $uid = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $examid   = isset($data['examid']) ? checkNull($data['examid']) : '0';
-
-        if ($courseid < 1 || $lessonid < 1 || $examid < 1) {
-            $this->error('信息错误');
-        }
-
-        $where = [
-            'liveuid'  => $uid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'examid'   => $examid,
-        ];
-
-        $list = Db::name('course_exam_a')->field('uid')->where($where)->order("id asc")->select()->toArray();
-        foreach ($list as $k => $v) {
-            $userinfo      = getUserInfo($v['uid']);
-            $v['userinfo'] = $userinfo;
-            $list[$k]      = $v;
-        }
-
-
-        $this->success('', '', $list);
-    }
-
-    /* 添加试题 */
-    public function addExam()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $field    = isset($data['field']) ? checkNull($data['field']) : '';
-        $title    = isset($data['title']) ? checkNull($data['title']) : '';
-
-        if ($courseid < 1 || $lessonid < 1 || $title == '' || $field == '') {
-            $this->error('信息错误');
-        }
-
-
-        $info = Db::name('course_lesson')->where(['id' => $lessonid, 'uid' => $uid, 'courseid' => $courseid])->find();
-        if (!$info) {
-            $this->error('信息错误');
-        }
-
-        if ($info['islive'] == 2) {
-            $this->error('已下课，不能添加课堂测试');
-        }
-
-        if ($title == '') {
-            $this->error('请填写测试标题');
-        }
-
-        $nowtime     = time();
-        $data_insert = [];
-
-        $field_a = json_decode($field, true);
-
-        $choices_l = $field_a['choices'];
-        $judges_l  = $field_a['judges'];
-        $writes_l  = $field_a['writes'];
-
-        if (count($choices_l) == 0 && count($judges_l) == 0 && count($writes_l) == 0) {
-            $this->error('至少添加一个题目');
-        }
-
-
-        foreach ($choices_l as $k => $v) {
-            $choice_data = [
-                'uid'      => $uid,
-                'courseid' => $courseid,
-                'lessonid' => $lessonid,
-                'type'     => 1,
-            ];
-            if ($v['name'] == '') {
-                $this->error('请填写完整信息');
-                break;
-            }
-            $choice_data['name'] = $v['name'];
-
-            if ($v['isok'] == '') {
-                $this->error('请填写完整信息');
-                break;
-            }
-
-            $answers = [];
-            foreach ($v['answers'] as $k1 => $v1) {
-                if ($v1 == '') {
-                    $this->error('请填写完整信息');
-                    break;
-                }
-                $isok = '0';
-                if ($k1 == $v['isok']) {
-                    $isok = '1';
-                }
-
-                $answers_a = [
-                    'name' => $v1,
-                    'isok' => $isok,
-                ];
-
-                $answers[] = $answers_a;
-            }
-
-            $choice_data['answer']  = json_encode($answers);
-            $choice_data['addtime'] = $nowtime;
-
-            $data_insert[] = $choice_data;
-        }
-
-
-        foreach ($judges_l as $k => $v) {
-            $choice_data = [
-                'uid'      => $uid,
-                'courseid' => $courseid,
-                'lessonid' => $lessonid,
-                'type'     => 2,
-            ];
-            if ($v['name'] == '') {
-                $this->error('请填写完整信息');
-                break;
-            }
-            $choice_data['name'] = $v['name'];
-
-            if ($v['isok'] == '' && $v['isok'] != 0) {
-                $this->error('请填写完整信息');
-                break;
-            }
-
-
-            $choice_data['answer']  = $v['isok'];
-            $choice_data['addtime'] = $nowtime;
-
-            $data_insert[] = $choice_data;
-        }
-
-        $writes_l = $field_a['writes'];
-        foreach ($writes_l as $k => $v) {
-            $choice_data = [
-                'uid'      => $uid,
-                'courseid' => $courseid,
-                'lessonid' => $lessonid,
-                'type'     => 3,
-            ];
-            if ($v['name'] == '') {
-                $this->error('请填写完整信息');
-                break;
-            }
-            $choice_data['name']    = $v['name'];
-            $choice_data['answer']  = '';
-            $choice_data['addtime'] = $nowtime;
-
-            $data_insert[] = $choice_data;
-        }
-
-        $choicenums = count($choices_l);
-        $judgenums  = count($judges_l);
-        $writenums  = count($writes_l);
-
-        $data_insert1 = [
-            'uid'        => $uid,
-            'courseid'   => $courseid,
-            'lessonid'   => $lessonid,
-            'pid'        => 0,
-            'type'       => 0,
-            'name'       => $title,
-            'answer'     => '',
-            'addtime'    => $nowtime,
-            'status'     => 0,
-            'choicenums' => $choicenums,
-            'judgenums'  => $judgenums,
-            'writenums'  => $writenums,
-        ];
-        $pid          = Db::name('course_exam')->insertGetId($data_insert1);
-        if (!$pid) {
-            $this->error('操作失败，请重试');
-        }
-
-        foreach ($data_insert as $k => $v) {
-            $v['pid']        = $pid;
-            $data_insert[$k] = $v;
-        }
-
-        $isok = Db::name('course_exam')->insertAll($data_insert);
-        if ($isok === false) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-    }
-
-    /* 发布试题 */
-    public function releaseExam()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $examid   = isset($data['examid']) ? checkNull($data['examid']) : '0';
-        $endtime  = isset($data['endtime']) ? checkNull($data['endtime']) : '';
-
-        if ($courseid < 1 || $lessonid < 1 || $examid < 1 || $endtime == '') {
-            $this->error('信息错误');
-        }
-
-
-        $info = Db::name('course_lesson')->where(['id' => $lessonid, 'uid' => $uid, 'courseid' => $courseid])->find();
-        if (!$info) {
-            $this->error('信息错误');
-        }
-
-        if ($info['islive'] == 0) {
-            $this->error('还未上课，不能发布');
-        }
-        if ($info['islive'] == 2) {
-            $this->error('已下课，不能发布');
-        }
-
-        $nowtime = time();
-        $endtime = strtotime($endtime);
-        if ($endtime < $nowtime) {
-            $this->error('结束时间设置错误');
-        }
-
-        $where = [
-            'uid'      => $uid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'id'       => $examid,
-        ];
-
-        $isexist = Db::name('course_exam')->where($where)->find();
-        if (!$isexist) {
-            $this->error('无权操作');
-        }
-
-        if ($isexist['status'] == 1) {
-            $this->error('已发布');
-        }
-
-
-        $data_up = [
-            'status'  => 1,
-            'endtime' => $endtime,
-        ];
-
-        $isok = Db::name('course_exam')->where($where)->update($data_up);
-        if ($isok === false) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-    }
 
     /* 添加ppt图片 */
     public function addPPT()
@@ -1006,7 +543,6 @@ class LiveingController extends StudentBaseController
         $uid = session('student.id');
 
         if ($uid < 1) {
-            // $this->error('您的登陆状态失效，请重新登陆！');
             $rs['msg'] = '您的登陆状态失效，请重新登陆！';
             echo json_encode($rs);
             exit;
@@ -1023,7 +559,6 @@ class LiveingController extends StudentBaseController
         $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
 
         if ($courseid < 1) {
-            // $this->error('信息错误');
             $rs['msg'] = '信息错误';
             echo json_encode($rs);
             exit;
@@ -1032,7 +567,6 @@ class LiveingController extends StudentBaseController
         if ($lessonid > 0) {
             $isexist = Db::name('course_lesson')->where(['id' => $lessonid, 'uid' => $uid, 'courseid' => $courseid])->find();
             if (!$isexist) {
-                // $this->error('无权操作');
                 $rs['msg'] = '无权操作';
                 echo json_encode($rs);
                 exit;
@@ -1040,7 +574,6 @@ class LiveingController extends StudentBaseController
         } else {
             $isexist = Db::name('course')->where(['id' => $courseid, 'uid' => $uid])->find();
             if (!$isexist) {
-                // $this->error('无权操作');
                 $rs['msg'] = '无权操作';
                 echo json_encode($rs);
                 exit;
@@ -1064,7 +597,6 @@ class LiveingController extends StudentBaseController
 
         $id = Db::name('course_ppt')->insertGetId($insert);
         if (!$id) {
-            // $this->error('添加失败，请重试');
             $rs['msg'] = '添加失败，请重试';
             echo json_encode($rs);
             exit;
@@ -1075,48 +607,16 @@ class LiveingController extends StudentBaseController
             'thumb' => get_upload_path($thumb),
         ];
 
-        // $this->success('操作成功','',$res);
-
         $rs['code'] = 1;
         $rs['data'] = $res;
         echo json_encode($rs);
         exit;
     }
 
-    /* 删除ppt图片 */
-    public function delPPT()
-    {
-        $data = $this->request->param();
 
-        $uid = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $pptid    = isset($data['pptid']) ? checkNull($data['pptid']) : '0';
-
-        if ($pptid < 1) {
-            $this->error('信息错误');
-        }
-
-        $where = [
-            'uid' => $uid,
-            'id'  => $pptid,
-        ];
-
-        $isok = Db::name('course_ppt')->where($where)->delete();
-        if ($isok === false) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-    }
-
-
-    /* 获取课件 */
+    /*
+     * 获取课件
+     */
     public function getWare()
     {
         $data = $this->request->param();
@@ -1127,9 +627,9 @@ class LiveingController extends StudentBaseController
             $this->error('您的登陆状态失效，请重新登陆！');
         }
 
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $liveuid  = isset($data['liveuid']) ? checkNull($data['liveuid']) : '0';
+        $courseid = $data['courseid'] ?? '0';
+        $lessonid = $data['lessonid'] ?? '0';
+        $liveuid  = $data['liveuid'] ?? '0';
 
         if ($courseid < 1 || $lessonid < 1) {
             $this->error('信息错误');
@@ -1152,108 +652,12 @@ class LiveingController extends StudentBaseController
         $this->success('', '', $list);
     }
 
-    /* 添加课件 */
-    public function addWare()
-    {
-        $rs   = ['code' => 0, 'data' => [], 'msg' => '', 'url' => ''];
-        $data = $this->request->param();
 
-        $uid = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $file = isset($_FILES['file']) ? $_FILES['file'] : '';
-        if (!$file) {
-            $this->error('请选择课件');
-        }
-
-        if ($file['size'] == 0) {
-            $this->error('不能上传空文件');
-        }
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-
-        if ($courseid < 1) {
-            $this->error('信息错误');
-        }
-
-        if ($lessonid > 0) {
-            $isexist = Db::name('course_lesson')->where(['id' => $lessonid, 'uid' => $uid, 'courseid' => $courseid])->find();
-        } else {
-            $isexist = Db::name('course')->where(['id' => $courseid, 'uid' => $uid])->find();
-        }
-
-        if (!$isexist) {
-            $this->error('无权操作');
-        }
-
-        $res = upload($file, 'file');
-        if ($res['code'] != 0) {
-            $this->error($res['msg']);
-        }
-        $name   = $file['name'];
-        $url    = $res['url'];
-        $size   = handelSize($file['size']);
-        $insert = [
-            'uid'      => $uid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'name'     => $name,
-            'url'      => $url,
-            'size'     => $size,
-            'addtime'  => time(),
-        ];
-
-        $id = Db::name('course_ware')->insertGetId($insert);
-        if (!$id) {
-            $this->error('添加失败，请重试');
-        }
-
-        $res = [
-            'id'   => $id,
-            'name' => $name,
-            'size' => $size,
-            'url'  => get_upload_path($url),
-        ];
-
-        $this->success('操作成功', '', $res);
-
-    }
-
-    /* 删除课件 */
-    public function delWare()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $id       = isset($data['id']) ? checkNull($data['id']) : '0';
-
-        if ($id < 1) {
-            $this->error('信息错误');
-        }
-
-        $where = [
-            'uid' => $uid,
-            'id'  => $id,
-        ];
-
-        $isok = Db::name('course_ware')->where($where)->delete();
-        if ($isok === false) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-    }
-
-    /* 获取用户列表数量 */
+    /*
+     * 获取用户数量
+     * @param $stream
+     * @return int
+     */
     protected function getUserNums($stream)
     {
 
@@ -1265,12 +669,14 @@ class LiveingController extends StudentBaseController
         return $nums;
     }
 
-    /* 获取用户列表数量 */
+    /**
+     * 获取用户列表数量
+     */
     public function getUserListNum()
     {
         $data = $this->request->param();
 
-        $stream = isset($data['stream']) ? checkNull($data['stream']) : '';
+        $stream = $data['stream'] ?? '';
 
         if ($stream == '') {
             $this->error('信息错误');
@@ -1288,7 +694,9 @@ class LiveingController extends StudentBaseController
         $this->success('操作成功', '', $rs);
     }
 
-    /* 获取用户列表 */
+    /**
+     * 获取用户列表
+     */
     public function getUserLists()
     {
         $data = $this->request->param();
@@ -1298,9 +706,9 @@ class LiveingController extends StudentBaseController
             $this->error('您的登陆状态失效，请重新登陆！');
         }
 
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $stream   = isset($data['stream']) ? checkNull($data['stream']) : '';
+        $courseid = $data['courseid'] ?? '0';
+        $lessonid = $data['lessonid'] ?? '0';
+        $stream   = $data['stream'] ?? '';
 
 
         if ($courseid < 1 || $lessonid < 1 || $stream == '') {
@@ -1383,122 +791,11 @@ class LiveingController extends StudentBaseController
         $this->success('操作成功', '', $rs);
     }
 
-
-    /* 上下麦 */
-    public function setLinkmic()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $stream   = isset($data['stream']) ? checkNull($data['stream']) : '';
-        $touid    = isset($data['touid']) ? checkNull($data['touid']) : '0';
-        $type     = isset($data['type']) ? checkNull($data['type']) : '0';
-
-        if ($courseid < 0 || $touid < 1) {
-            $this->error('信息错误');
-        }
-
-        $where1     = ['id' => $courseid];
-        $courseinfo = Db::name('course')->where($where1)->find();
-        if (!$courseinfo) {
-            $this->error('信息错误');
-        }
-
-        if ($courseinfo['uid'] != $uid && $courseinfo['tutoruid'] != $uid) {
-            $this->error('无权操作');
-        }
-
-        $liveuid = $courseinfo['uid'];
-
-        if ($type == 1) {
-            /* 上麦 */
-            $key     = 'linkmic_apply_' . $stream;
-            $isapply = zScore($key, $touid);
-            if (!$isapply) {
-                $this->error('对方未举手');
-            }
-
-            zRem($key, $touid);
-
-            /* 上麦后修改列表顺序 */
-            $key2 = 'user_' . $stream;
-            zAdd($key2, '1', $touid);
-
-        }
-
-        $this->success('操作成功');
-
-    }
-
-
-    /* 踢人 */
-    public function kick()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
-
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $touid    = isset($data['touid']) ? checkNull($data['touid']) : '0';
-
-        if ($courseid < 1 || $touid < 1) {
-            $this->error('信息错误');
-        }
-        $where1     = ['id' => $courseid];
-        $courseinfo = Db::name('course')->where($where1)->find();
-        if (!$courseinfo) {
-            $this->error('信息错误');
-        }
-
-        if ($courseinfo['uid'] != $uid && $courseinfo['tutoruid'] != $uid) {
-            $this->error('无权操作');
-        }
-
-        $liveuid = $courseinfo['uid'];
-
-        $where  = [
-            'uid'      => $touid,
-            'liveuid'  => $liveuid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-        ];
-        $iskick = Db::name('live_kick')->where($where)->find();
-        if ($iskick) {
-            $this->error('对方已被踢出');
-        }
-
-
-        $insert = [
-            'uid'        => $touid,
-            'liveuid'    => $liveuid,
-            'courseid'   => $courseid,
-            'lessonid'   => $lessonid,
-            'operateuid' => $uid,
-            'addtime'    => time(),
-        ];
-
-        $isok = Db::name('live_kick')->insert($insert);
-
-        if (!$isok) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-
-
-    }
-
-
+    /*
+     * 是否被禁言
+     * @param $where
+     * @return int
+     */
     protected function isShutup($where)
     {
         $isshut = Db::name('live_shutup')->where($where)->find();
@@ -1513,73 +810,25 @@ class LiveingController extends StudentBaseController
             }
         }
 
-
         return 0;
     }
 
-    /* 更新白板文档uuid */
-    public function upfileuuid()
-    {
-        $data = $this->request->param();
-        $uid  = session('student.id');
 
-        if ($uid < 1) {
-            $this->error('您的登陆状态失效，请重新登陆！');
-        }
-
-        $courseid  = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid  = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $file_uuid = isset($data['file_uuid']) ? checkNull($data['file_uuid']) : '';
-
-        if ($courseid < 1 || $lessonid < 1) {
-            $this->error('信息错误');
-        }
-
-        $where = [
-            'uid'      => $uid,
-            'courseid' => $courseid,
-            'id'       => $lessonid,
-        ];
-
-        $data_up = [
-            'file_uuid' => $file_uuid,
-        ];
-
-        $isok = Db::name('course_lesson')->where($where)->update($data_up);
-        if ($isok === false) {
-            $this->error('操作失败，请重试');
-        }
-
-        $this->success('操作成功');
-    }
-
-    /* 连麦检测 */
-    public function getLinkInfo()
-    {
-
-        $data = $this->request->param();
-
-        $uid = isset($data['id']) ? checkNull($data['id']) : '0';
-
-        $userinfo = getUserInfo($uid);
-
-        $this->success('操作成功', '', $userinfo);
-    }
-
-    /* 更新课程模式 */
+    /*
+     * 更新课程模式
+     */
     public function upMode()
     {
 
         $data = $this->request->param();
-
         $uid = session('student.id');
 
         if ($uid < 1) {
             $this->error('您的登陆状态失效，请重新登陆！');
         }
 
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $livemode = isset($data['livemode']) ? checkNull($data['livemode']) : '0';
+        $courseid = $data['courseid'] ?? '0';
+        $livemode = $data['livemode'] ?? '0';
 
         if ($courseid < 1) {
             $this->error('信息错误');
@@ -1591,11 +840,17 @@ class LiveingController extends StudentBaseController
         }
         $update = ['livemode' => $livemode];
         $isok   = Db::name('course')->where(['uid' => $uid, 'id' => $courseid])->update($update);
+        if ($isok) {
+            $this->success('操作成功');
+        }
 
-        $this->success('操作成功');
+        $this->error('操作失败');
     }
 
-    /* 更新课程PPT页码 */
+
+    /*
+     * 更新课程PPT页码
+     */
     public function upPPTindex()
     {
 
@@ -1607,9 +862,9 @@ class LiveingController extends StudentBaseController
             $this->error('您的登陆状态失效，请重新登陆！');
         }
 
-        $courseid    = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid    = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
-        $activeIndex = isset($data['activeIndex']) ? checkNull($data['activeIndex']) : '0';
+        $courseid    = $data['courseid'] ?? '0';
+        $lessonid    = $data['lessonid'] ?? '0';
+        $activeIndex = $data['activeIndex'] ?? '0';
 
         if ($courseid < 1) {
             $this->error('信息错误');
@@ -1633,7 +888,9 @@ class LiveingController extends StudentBaseController
         $this->success('操作成功');
     }
 
-    /* 声网开始录制 */
+    /*
+     * 声网开始录制
+     */
     public function createRecord()
     {
 
@@ -1644,8 +901,8 @@ class LiveingController extends StudentBaseController
             $this->error('您的登陆状态失效，请重新登陆！');
         }
 
-        $courseid = isset($data['courseid']) ? checkNull($data['courseid']) : '0';
-        $lessonid = isset($data['lessonid']) ? checkNull($data['lessonid']) : '0';
+        $courseid = $data['courseid'] ?? '0';
+        $lessonid = $data['lessonid'] ?? '0';
 
         if ($courseid < 1 || $lessonid < 1) {
             $this->error('信息错误');
@@ -1683,7 +940,6 @@ class LiveingController extends StudentBaseController
         $resourceid = $rs_create['data']['resourceId'];
 
         /* 开始录制 */
-
         $rs_start = agoraStartRe($stream, $uid, $resourceid);
         if ($rs_start['code'] != 0) {
             $this->error($rs_start['msg']);
@@ -1701,12 +957,17 @@ class LiveingController extends StudentBaseController
             $this->error('操作失败，请重试');
         }
 
-
         $this->success('操作成功');
     }
 
 
-    /* 更新进度 */
+    /*
+     * 更新进度
+     * @param $uid
+     * @param $courseid
+     * @param int $lessonid
+     * @return bool
+     */
     function setLesson($uid, $courseid, $lessonid = 0)
     {
         $nowtime = time();
@@ -1738,10 +999,9 @@ class LiveingController extends StudentBaseController
             Db::name('course')->where(["id" => $courseid])->setInc('views', 1);
         }
 
-
         $isexist = Db::name('course_users')->where(['uid' => $uid, 'courseid' => $courseid])->find();
         if (!$isexist) {
-            /*  */
+
             $status  = 0;
             $paytype = $course['paytype'];
             if ($paytype == 0) {
@@ -1777,17 +1037,17 @@ class LiveingController extends StudentBaseController
         }
     }
 
-    /**判断有没有被禁言*/
+    /*
+     * 判断有没有被禁言
+     */
     public function isUserShutup()
     {
-
 
         $data     = $this->request->param();
         $uid      = session('student.id');
         $courseid = $data['courseid'];
         $lessonid = $data['lessonid'];
         $liveuid  = $data['liveuid'];
-
 
         $where = [
             'uid'      => $uid,
@@ -1802,21 +1062,20 @@ class LiveingController extends StudentBaseController
             $this->success('你已被禁言', '', 1);
         }
 
-
         $this->success('', '', 0);
 
     }
 
 
-    /**生成签名*/
+    /*
+     * 生成签名
+     */
     public function getSign()
     {
-
 
         $data  = $this->request->param();
         $uid   = session('student.id');
         $token = session('student.token');
-
 
         $courseid  = $data['courseid'];
         $lessonid  = $data['lessonid'];

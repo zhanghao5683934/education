@@ -14,6 +14,11 @@ use cmf\controller\AdminBaseController;
 use think\Db;
 use app\admin\model\AdminMenuModel;
 
+/*
+ * 后台首页
+ * Class IndexController
+ * @package app\admin\controller
+ */
 class IndexController extends AdminBaseController
 {
 
