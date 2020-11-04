@@ -21,7 +21,10 @@ use think\Db;
  */
 class MineController extends StudentBaseController
 {
-    //我购买的
+    /**
+     * 我购买的
+     * @return mixed
+     */
     public function mybuy()
     {
 
@@ -308,7 +311,10 @@ class MineController extends StudentBaseController
     }
 
 
-    //我的课件
+    /**
+     * 我的课件
+     * @return mixed
+     */
     public function message()
     {
 
@@ -350,14 +356,16 @@ class MineController extends StudentBaseController
     }
 
 
-    //关注的讲师
+    /**
+     * 关注的讲师
+     * @return mixed
+     */
     public function follows()
     {
         //判断有没有登录
         $this->checkMyLogin();
 
         $userinfo = session('student') ?? $_SESSION['student'];
-
 
         $uid   = $userinfo['id'];
         $token = $userinfo['token'];
@@ -374,7 +382,6 @@ class MineController extends StudentBaseController
 
         $followslist = curl_get($url);
         $this->assign('followslist', $followslist['data']['info']);
-
 
         $isMore = 0;
         if (count($followslist['data']['info']) >= 50) {

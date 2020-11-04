@@ -21,12 +21,12 @@ use think\Db;
 class TeachersController extends StudentBaseController
 {
 
-    //首页
+    /**
+     * 首页
+     * @return mixed
+     */
     public function index()
     {
-
-        $userinfo = session('student');
-
         //查找科目
         $kmlist = getSignoryList();
 
@@ -56,7 +56,9 @@ class TeachersController extends StudentBaseController
     }
 
 
-    //切换科目老师
+    /**
+     * 切换科目老师
+     */
     public function chooseTeachers()
     {
         $data = $this->request->param();
@@ -75,7 +77,7 @@ class TeachersController extends StudentBaseController
     }
 
 
-    /**
+    /*
      * 获取教师列表
      * @param $p
      * @param $where
@@ -114,7 +116,10 @@ class TeachersController extends StudentBaseController
     }
 
 
-    //老师详情页面
+    /**
+     * 老师详情页面
+     * @return mixed
+     */
     public function detail()
     {
         $data = $this->request->param();
