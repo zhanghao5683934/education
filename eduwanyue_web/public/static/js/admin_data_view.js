@@ -37,9 +37,8 @@
             data:{range:range},
             success:function(data){
                 var ret = JSON.parse(data);
-                console.log(ret);
 
-                 var settle = ret['settle'];
+                var settle = ret['settle'];
                 /************结算金额*****************/
                 $(".settle-money").text(settle['settle_money']);
 
@@ -129,6 +128,14 @@
                     viWeekIcon.addClass('icon-triangle-bottom');
                 }
 
+
+                /****************** 支付转化率 *********************/
+                if (settle['settle_money'] != 0) {
+                    //结算金额不为0 则转化率100% 没有打折
+                    $(".new-zhuan-ratio").text("100%");
+                    $(".new-zhuan-day-ratio").text("100%");
+                    $(".new-zhuan-week-ratio").text("100%");
+                }
 
 
                 /****************** 客单价 ********************/
@@ -222,7 +229,6 @@
                     }
                     payWeekIcon.addClass('icon-triangle-bottom');
                 }
-
 
 
 
