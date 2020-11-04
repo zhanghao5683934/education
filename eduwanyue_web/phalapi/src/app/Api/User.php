@@ -130,9 +130,7 @@ class User extends Api {
 		$list[]=array('id'=>'6','name'=>\PhalApi\T('设置'),'thumb'=>\App\get_upload_path("/static/app/person/set.png") ,'href'=>'');
 
 		$info['list']=$list;
-        
-        
-        
+
 		$rs['info'][0] = $info;
 
 		return $rs;
@@ -171,7 +169,6 @@ class User extends Api {
 			$rs['msg'] = \PhalApi\T('您的登陆状态失效，请重新登陆！');
 			return $rs;
 		}
-        
 
         unset($fields_a['sex']);
         
@@ -290,35 +287,6 @@ class User extends Api {
 		return $rs;
 	}
 
-    /**
-	 * 个人主页
-	 * @desc 用于个人主页信息
-	 * @return int code 操作码，0表示成功
-	 * @return array info 用户基本信息
-	 * @return string info[].isattent 是否关注，0否1是
-	 * @return string info[].fans 学员数
-	 * @return string msg 提示信息
-	 */
-	// public function getHome() {
-		// $rs = array('code' => 0, 'msg' => '', 'info' => array());
-		
-        // $uid=\App\checkNull($this->uid);
-        // $touid=\App\checkNull($this->touid);
-
-        // if($uid<1 || $touid<1){
-            // $rs['code'] = 1001;
-			// $rs['msg'] = \PhalApi\T('信息错误');
-			// return $rs;
-        // }
-
-        // $domain = new Domain_User();
-		// $info = $domain->getHome($uid,$touid);
-
-        // $rs['info'][0]=$info;
-        
-
-		// return $rs;
-	// }
 
     /**
 	 * 检测关系

@@ -16,7 +16,6 @@ use App\Domain\Ware as Domain_Ware;
 /**
  * 课件
  */
-
 class Ware extends Api {
 
 	public function getRules() {

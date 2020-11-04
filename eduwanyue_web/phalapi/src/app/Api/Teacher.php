@@ -17,7 +17,6 @@ use App\Domain\Teacher as Domain_Teacher;
 /**
  * 讲师
  */
- 
 class Teacher extends Api {
 
 	public function getRules() {

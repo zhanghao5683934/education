@@ -227,50 +227,43 @@ class Live extends Api {
         
         $key2='livemodel_m_'.$stream;
         $key3='livemodel_s_'.$stream;
-		
-		/* $key="getUserLists_".$stream.'_'.$p;
-		$list=getcaches($key);
-		if(!$list){  */
-            $list=array();
 
-            $uidlist=\App\zRevRange('user_'.$stream,$start,$pnum,true);
-            
-            foreach($uidlist as $k=>$v){
-                $userinfo=\App\getUserInfo($k);
-                $ismic='1';
-                $iscamera='1';
-                $islink='0';
-                
-                
-                if($v==1){
-                    $islink='1';
-                }
-                
-                if($islink){
-                    if(\App\hGet($key2,$k)){
-                        $ismic='0';
-                    }
-                    
-                    if(\App\hGet($key3,$k)){
-                        $iscamera='0';
-                    }
-                }
-                
-                if($islink==0){
+        $list=array();
+
+        $uidlist=\App\zRevRange('user_'.$stream,$start,$pnum,true);
+
+        foreach($uidlist as $k=>$v){
+            $userinfo=\App\getUserInfo($k);
+            $ismic='1';
+            $iscamera='1';
+            $islink='0';
+
+
+            if($v==1){
+                $islink='1';
+            }
+
+            if($islink){
+                if(\App\hGet($key2,$k)){
                     $ismic='0';
+                }
+
+                if(\App\hGet($key3,$k)){
                     $iscamera='0';
                 }
-                
-                $userinfo['ismic']=$ismic;
-                $userinfo['iscamera']=$iscamera;
-                $userinfo['islink']=$islink;
-                $list[]=$userinfo;
             }
-            
-        /*     if($list){
-                setcaches($key,$list,30);
+
+            if($islink==0){
+                $ismic='0';
+                $iscamera='0';
             }
-		} */
+
+            $userinfo['ismic']=$ismic;
+            $userinfo['iscamera']=$iscamera;
+            $userinfo['islink']=$islink;
+            $list[]=$userinfo;
+        }
+
         
         if(!$list){
             $list=array();

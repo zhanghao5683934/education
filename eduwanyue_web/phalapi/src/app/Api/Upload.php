@@ -16,7 +16,6 @@ use PhalApi\Api;
 /**
  * 上传
  */
- 
 class Upload extends Api {
 
 	public function getRules() {

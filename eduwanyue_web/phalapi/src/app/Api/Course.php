@@ -143,7 +143,6 @@ class Course extends Api
             'gradeid'       => $gradeid,
         ];
 
-
         $domain = new Domain_Course();
         $list   = $domain->getList($p, $where);
 
@@ -190,7 +189,6 @@ class Course extends Api
             $where['sort'] = $type;
         }
 
-
         $domain = new Domain_Course();
         $list   = $domain->getList($p, $where);
 
@@ -235,7 +233,6 @@ class Course extends Api
             'uid!=?'        => $uid,
             'name like ?'   => '%' . $keyword . '%',
         ];
-
 
         $domain = new Domain_Course();
         $list   = $domain->getList($p, $where);
@@ -453,12 +450,10 @@ class Course extends Api
 
         $nowtime = time();
         $where   = [
-            // 'gradeid'=>$gradeid,
             'status>=?'     => 1,
             'shelvestime<?' => $nowtime,
             'uid'           => $touid,
         ];
-
 
         $domain = new Domain_Course();
         $list   = $domain->getList($p, $where);
@@ -532,7 +527,6 @@ class Course extends Api
             $rs['msg']  = \PhalApi\T('您的登陆状态失效，请重新登陆！');
             return $rs;
         }
-
 
         $domain = new Domain_Course();
         $res    = $domain->setGrade($uid, $gradeid);

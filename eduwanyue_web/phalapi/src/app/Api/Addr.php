@@ -18,7 +18,6 @@ use App\Domain\Addr as Domain_Addr;
 /**
  * 地址
  */
-
 class Addr extends Api {
 
 	public function getRules() {
@@ -83,7 +82,6 @@ class Addr extends Api {
         $where=[
             'uid'=>$uid
         ];
-        
 
         $domain = new Domain_Addr();
 		$list = $domain->getList($where);
@@ -229,8 +227,6 @@ class Addr extends Api {
         if($info){
             $rs['info'][0]=$info;
         }
-		
-        
         
         return $rs;
 	}
