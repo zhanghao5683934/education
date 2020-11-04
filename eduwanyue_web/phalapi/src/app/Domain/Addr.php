@@ -24,8 +24,12 @@ class Addr {
 
 		return $list;
 	}
-    
-    /* 某个信息 */
+
+    /**
+     * 某个信息
+     * @param array $where
+     * @return mixed
+     */
 	public function getInfo($where=[]) {
 
 
@@ -34,8 +38,12 @@ class Addr {
 
 		return $info;
 	}
-    
-    /* 新增 */
+
+    /**
+     * 新增
+     * @param $data
+     * @return array
+     */
 	public function setAddr($data) {
         
         $rs = array('code' => 0, 'msg' => \PhalApi\T('新增成功'), 'info' => array());
@@ -56,8 +64,12 @@ class Addr {
 
 		return $rs;
 	}
-    
-    /* 编辑 */
+
+    /**
+     * 编辑
+     * @param $data
+     * @return array
+     */
 	public function upAddr($data) {
         
         $rs = array('code' => 0, 'msg' => \PhalApi\T('编辑成功'), 'info' => array());
