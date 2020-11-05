@@ -153,7 +153,6 @@ class Live extends NotORM
             ->where($where)
             ->update($data);
 
-
         return $rs;
     }
 
