@@ -2,7 +2,7 @@
 
 
 ### 项目说明（如果对你有用，请给个star！）
-##### [项目文档](https://www.baidu.com/) |  [部署文档](http://doc.sdwanyue.com/wanyue_open_web/2006714)  |  [常见问题](http://doc.sdwanyue.com/wanyue_open_web/2006714)
+##### [项目文档](http://doc.sdwanyue.com/wanyue_open_web/2006714) |  [部署文档](http://doc.sdwanyue.com/wanyue_open_web/2006716)  |  [常见问题](http://doc.sdwanyue.com/wanyue_open_web/2006714)
 
 ---
 
