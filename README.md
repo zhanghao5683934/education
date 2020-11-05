@@ -2,7 +2,7 @@
 
 
 ### 项目说明（如果对你有用，请给个star！）
-##### [项目文档](https://www.baidu.com/) |  [部署文档](https://www.baidu.com)  |  [常见问题](https://www.baidu.com)
+##### [项目文档](https://www.baidu.com/) |  [部署文档](http://doc.sdwanyue.com/wanyue_open_web/2006714)  |  [常见问题](http://doc.sdwanyue.com/wanyue_open_web/2006714)
 
 ---
 
@@ -11,7 +11,7 @@
 * 所有使用到的框架或者组件都是基于开源项目，代码保证100%开源。
 * 系统功能通用，无论是个人还是企业都可以利用该系统快速搭建一个属于自己的在线教育平台。
 
-系统采用TP5.1+Jquery+Bootstrap+Mysql核心技术，系统功能介绍[查看](https://www.baidu.com/)，专业售后技术团队，让您二开无忧。
+系统采用TP5.1+Jquery+Bootstrap+Mysql核心技术，系统功能介绍[查看](http://doc.sdwanyue.com/wanyue_open_web/2006714)，专业售后技术团队，让您二开无忧。
 
 ### 技术亮点
 ```
