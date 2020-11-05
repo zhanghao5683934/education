@@ -912,7 +912,6 @@ class LiveingController extends TeacherBaseController
             $userinfo['type']    = $type;
             $userinfo['iswrite'] = $iswrite;
 
-
             $where              = [
                 'uid'      => $k,
                 'liveuid'  => $uid,

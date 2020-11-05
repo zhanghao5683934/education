@@ -4,8 +4,15 @@ namespace App\Model;
 use PhalApi\Model\NotORMModel as NotORM;
 
 class Teacher extends NotORM {
-    
-	/* 教师列表 */
+
+    /**
+     * 教师列表
+     * @param $p
+     * @param $where
+     * @param $order
+     * @param $nums
+     * @return mixed
+     */
 	public function getTeachers($p,$where,$order,$nums) {
         
         if($p<1){
@@ -27,8 +34,12 @@ class Teacher extends NotORM {
 
 		return $list;
 	}
-    
-    /* 讲师信息 */
+
+    /**
+     * 讲师信息
+     * @param $uid
+     * @return mixed
+     */
 	public function getInfo($uid) {
 		$info=\PhalApi\DI()->notorm->users
 				->select("id,user_nickname,avatar,avatar_thumb,sex,signature,birthday,type,signoryid,identity,school,experience,feature")
