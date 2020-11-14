@@ -160,7 +160,6 @@ class LiveingController extends TeacherBaseController
             'liveuid'       => $liveuid,
             'chatserver'    => $configpri['chatserver'],
             'sound_appid'   => $configpri['sound_appid'],
-            'netless_appid' => $configpri['netless_appid'],
             'pull'          => $pull,
             'stream'        => $stream,
             'livetype'      => $type,
