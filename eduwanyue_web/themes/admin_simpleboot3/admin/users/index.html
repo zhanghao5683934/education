@@ -71,7 +71,7 @@
                     <td>{$vo.id}</td>
                     <td>{$vo['user_login']?$vo['user_login']:($vo['mobile']?$vo['mobile']:lang('THIRD_PARTY_USER'))}
                     </td>
-                    <td>{$vo['user_nickname']?$vo['user_nickname']:lang('NOT_FILLED')}</td>
+                    <td>{$vo['user_nickname'] ? $vo['user_nickname']:'未定义'}</td>
                     <td><img src="{$vo['avatar']}"/></td>
                     <td>{$vo.mobile}</td>
                     <td>{$vo.coin}</td>
