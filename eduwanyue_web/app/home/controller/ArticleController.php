@@ -50,7 +50,6 @@ class ArticleController extends HomebaseController{
         
         $this->assign('page', $article);
 
-
         return $this->fetch();
 	}	
 	

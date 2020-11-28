@@ -2,22 +2,159 @@
 <html>
 <head>
     <title>{$site_info.site_name|default=''}</title>
-    <meta name="keywords" content="{$site_info.site_seo_keywords|default=''}"/>
-    <meta name="description" content="{$site_info.site_seo_description|default=''}">
     <include file="public@head"/>
-    <link rel="stylesheet" type="text/css" href="__STATIC__/index/css/index.css?t=1587343942">
+    <include file="student/public@head"/>
+    <link href="__STATIC__/student/css/index.css" rel="stylesheet" type="text/css">
 </head>
-<body class="body-white">
-    <div class="content pr">
-        <img src="__STATIC__/index/images/logo.png" class="logo">
-        <img src="__STATIC__/index/images/shouji.png" class="shouji">
-        <img src="__STATIC__/index/images/text.png" class="text">
-        <a href="{$site_info['ipa_url']}" class="ios"><img src="__STATIC__/index/images/appstore.png" class="c-2 ios"></a>
-        <a href="{$site_info['apk_url']}" class="android"><img src="__STATIC__/index/images/android.png" class="c-2"></a>
-        <div class="c-text">
-            <img src="{:cmf_get_image_preview_url($site_info.qr_url)}" class="c-5"/>
+<body>
+<include file="student/public@header"/>
+<include file="student/public@grade"/>
+<include file="student/public@login"/>
+
+<!--banner-->
+<div class="banner">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <volist name="$index_info['silide']" id="item">
+                <div class="swiper-slide"><a href="{$item['url']}"><img class="img" src="{$item['image']}"></a></div>
+            </volist>
         </div>
-        <p class="footer-copy">{:nl2br($site_info['copyright'])}</p>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
     </div>
+</div>
+
+<div class="body kaiyuan_body">
+
+    <div class="less_top kaiyuan_less_top" <if condition ="$keywords neq ''">style="display:none;"</if>>
+        <div class="middle">
+            <div class="ul" style="position: relative;top: 20px;margin-top: 0;">
+                <div class="left">学段</div>
+                <div id="xd" class="right">
+                    <volist name="$xdlist" id="item">
+                        <div class="li <if condition='$key eq 0'>active</if>" data-id="{$item.id}">{$item.name}</div>
+                    </volist>
+                </div>
+            </div>
+            <div class="ul" style="margin-top: 30px;">
+                <div class="left">年级</div>
+                <div id="nj" class="right">
+                    <volist name="$njlist" id="item">
+                        <div class="li <if condition='$key eq 0'>active</if>" data-id="{$item.id}">{$item.name}</div>
+                    </volist>
+
+                </div>
+            </div>
+
+            <div class="ul">
+                <div class="left">类别</div>
+                <div id="lb" class="right">
+                    <div class="li active" data-id="3">直播</div>
+                    <div class="li" data-id="4">内容</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="less_list kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
+        <div class="tips">
+            <span>直播课堂</span>
+            <div style="display: inline-block; width: 92%; text-align: right;">
+                <a style="color:#9e9a9a" href="javacript:void(0);">更多></a>
+            </div>
+        </div>
+        <ul>
+            <volist name="$lesslist" id="item">
+                <li>
+                    <a href="/student/detail/class?id={$item.id}">
+                        <div class="content">
+                            <div class="top" style="background: url({$item.thumb}) no-repeat;background-size: cover;">
+                                <div class="tip">课程</div>
+                            </div>
+                            <div class="title">{$item.name}</div>
+                            <div class="information">
+                                <text class="text1">{$item.lesson}</text>
+                                <if condition="$item.ismaterial eq 1">
+                                    <img src="__STATIC__/student/images/index/book.png"><text class="text2">含教材</text>
+                                </if>
+
+                            </div>
+                            <div class="bottom">
+                                <img class="img1" src="{$item.avatar}">
+                                <text class="name">{$item.user_nickname}</text>
+                                <if condition="$item.paytype eq 0">
+                                    <text class="mian">免费</text>
+                                </if>
+                                <if condition="$item.paytype eq 1">
+                                    <text class="money">￥{$item.payval}</text>
+                                </if>
+                                <if condition="$item.paytype eq 2">
+                                    <text class="mi">密码</text>
+                                </if>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </volist>
+        </ul>
+
+    </div>
+
+    <div class="less_list kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
+    <div class="tips">精选内容</div>
+    <ul>
+        <volist name="$lesslist" id="item">
+            <li>
+                <a href="/student/detail/class?id={$item.id}">
+                    <div class="content">
+                        <div class="top" style="background: url({$item.thumb}) no-repeat;background-size: cover;">
+                            <div class="tip">课程</div>
+                        </div>
+                        <div class="title">{$item.name}</div>
+                        <div class="information">
+                            <text class="text1">{$item.lesson}</text>
+                            <if condition="$item.ismaterial eq 1">
+                                <img src="__STATIC__/student/images/index/book.png"><text class="text2">含教材</text>
+                            </if>
+
+                        </div>
+                        <div class="bottom">
+                            <img class="img1" src="{$item.avatar}">
+                            <text class="name">{$item.user_nickname}</text>
+                            <if condition="$item.paytype eq 0">
+                                <text class="mian">免费</text>
+                            </if>
+                            <if condition="$item.paytype eq 1">
+                                <text class="money">￥{$item.payval}</text>
+                            </if>
+                            <if condition="$item.paytype eq 2">
+                                <text class="mi">密码</text>
+                            </if>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </volist>
+    </ul>
+    <if condition="$isMore eq 1">
+        <div class="look_more"><a style="color:#9e9a9a" href="javacript:void(0);">查看更多...</a></div>
+    </if>
+    </div>
+
+
+</div>
+
+<include file="student/public@footer"/>
+<include file="student/public@scripts"/>
+<script>
+    var isBackLog = '{$isBackLog}';
+    var xdid = "{$xdid}"; //学段id
+    var njid = "{$njid}"; //年级id
+    var kmid = '0'; //科目id
+    var lbid = '1'; //类别id
+    var page = 1; //页码
+</script>
+<script src="__STATIC__/student/js/index.js"></script>
+<script src="__STATIC__/student/js/lessionlist.js"></script>
 </body>
 </html>

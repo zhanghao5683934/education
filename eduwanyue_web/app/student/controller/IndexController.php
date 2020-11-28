@@ -28,7 +28,7 @@ class IndexController extends StudentBaseController
         parent::initialize();
     }
 
-    /**
+    /*
      * 首页
      * @return mixed
      */
