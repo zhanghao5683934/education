@@ -468,7 +468,9 @@ body{
 
 .kaiyuan_body {
     width: 100%;
+    min-height: 1921px;
     margin-top: 0;
+    position: relative;
 }
 
 .kaiyuan_less_top {
@@ -488,4 +490,79 @@ body{
     float: left;
     margin-top: 20px;
 }
+
+.right-nav {
+    width: 50px;
+    height: 180px;
+    background-color: #FFFFFF;
+    position: fixed;
+    transition: bottom ease .9s;
+    z-index: 3;
+    right: 322px;
+    bottom: 10px;
+}
+
+
+.right-nav a {
+    display: flex;
+    width: 100%;
+    height: 29.33%;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-nav a:hover {
+    background-color: #38DAA6;
+}
+
+
+.right-nav a .right-img {
+    width: 24px;
+    height: 24px;
+}
+
+
+.weixin-wrap {
+    position: relative;
+}
+
+.weixin-img {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    left: -126px;
+    top: -30px;
+    text-align: center;
+    background-color: #FFFFFF;
+    display: none;
+}
+
+.weixin-img span {
+    width: 100%;
+    text-align: left;
+    font-size: 14px;
+}
+
+.weixin-img img {
+    width: 80%;
+    height: 88px;
+}
+
+
+.weixin-img:after{
+    content: "";
+    position: absolute;
+    left: 123px;
+    top:48px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-left: 10px solid #FFFFFF;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+}
+
+
+
+
 

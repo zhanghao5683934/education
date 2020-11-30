@@ -76,6 +76,7 @@ class IndexController extends StudentBaseController
         }
 
         $nowtime = time();
+        $neirong = [];
         if (isset($data['keywords'])) {
             $keywords = $data['keywords'];
 
@@ -94,7 +95,7 @@ class IndexController extends StudentBaseController
 
             //." and name like '%".$keywords."%'"
             $where = "gradeid=" . $gradeid . " and status>=1 and shelvestime<" . $nowtime;
-            $list  = CourseModel::where($where)->order('list_order asc,id desc')->select()->toArray();
+            $list  = CourseModel::where($where)->order('list_order asc,id desc')->limit(8)->select()->toArray();
 
             foreach ($list as $k => $v) {
 
@@ -114,6 +115,10 @@ class IndexController extends StudentBaseController
                 $v['avatar']        = $userinfo['avatar'];
 
                 $list[$k] = $v;
+
+                if ($v['sort'] == 0) {
+                    $neirong[$k] = $v;
+                }
             }
 
             $list = array_values($list);
@@ -121,12 +126,10 @@ class IndexController extends StudentBaseController
             $isMore = 0;
         } else {
             $keywords = '';
-
             $list = CourseModel::where('sort = 1 and gradeid = ' . $njid . ' and status >= 1 and shelvestime <' . $nowtime)
                 ->order('list_order asc,id desc')
-                ->limit(0, 20)
+                ->limit(8)
                 ->select();
-
             foreach ($list as $k => $v) {
                 $v = handelInfo($v);
 
@@ -135,6 +138,9 @@ class IndexController extends StudentBaseController
                 $v['avatar']        = $userinfo['avatar'];
 
                 $list[$k] = $v;
+                if ($v['sort'] == 0) {
+                    $neirong[$k] = $v;
+                }
             }
 
             $isMore = 0;
@@ -152,7 +158,8 @@ class IndexController extends StudentBaseController
             'lesslist' => $list,
             'isMore'   => $isMore,
             'navid'    => 1,
-            'keywords' => $keywords
+            'keywords' => $keywords,
+            'neirong'  => $neirong
         ]);
 
 
