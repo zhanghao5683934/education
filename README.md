@@ -147,7 +147,14 @@
   ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
   
   #### 功能对比
-  ![展示图](/readme/images/table.png "展示图.png")
+  ![展示图](/readme/images/table1.png "展示图.png")
+  
+
+### 商业合作
+* 如果你想使用功能更完善的教育系统，请联系QQ客服2415408120获取专业版
+* 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
+* 其他合作模式不限，欢迎来撩！
+* 官网地址：[http://www.sdwanyue.com](http://www.sdwanyue.com)  
   
 ### 官方QQ群（加群免费获取sql脚本）
 
@@ -155,10 +162,6 @@
 
 > QQ群：995910672
 
-### 商业合作
-* 如果您想使用功能更完善的教育系统，我们有 万岳教育系统商业版！
-* 如果您想基于教育系统进行定制开发，我们提供有偿定制服务支持！
-* 其他合作模式不限，欢迎来撩！
-* 官网地址：[http://www.sdwanyue.com](http://www.sdwanyue.com)
+
 
 
