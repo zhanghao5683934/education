@@ -498,7 +498,7 @@ body{
     position: fixed;
     transition: bottom ease .9s;
     z-index: 3;
-    right: 322px;
+    right: 9%;
     bottom: 10px;
 }
 
