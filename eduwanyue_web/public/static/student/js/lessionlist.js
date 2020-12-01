@@ -1,6 +1,16 @@
 $(function(){
 
-    chooselb(3); //默认显示直播分类
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    var urlArr = currentUrl.split('.com');
+    console.log(urlArr);
+    if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
+        chooselb(3); //选课中心默认显示直播分类
+    } else {
+        // 首页显示所有分类
+        chooselb(99);
+    }
+
 
     //切换学段
     $('.less_top #xd').on('click','.li',function(){
@@ -188,17 +198,32 @@ $(function(){
         lbid = id;
         page = 1;
 
+        if(id == 99) {
+            //首页 显示全部
+        }
+
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
             data:{njid:njid,kmid:kmid,lbid:lbid},
-            //dataType:'json',
             error:function(e){
                 layer.msg('网路错误');
             },
             success:function(data){
+                console.log(data);
+                // var dabanData = new Array();
+                // var neiData = new Array();
+                // for (index in data) {
+                //     if (data[index].sort != 0) {
+                //         //大班课
+                //         dabanData.push(data[index]);
+                //     } else {
+                //         neiData.push(data[index]);
+                //     }
+                // }
                 var lesshtml = replaceHtml(data);
                 $('.less_list ul').html(lesshtml);
+
                 layer.close(index);
             }
         });
@@ -211,35 +236,6 @@ $(function(){
     function replaceHtml(data){
         var lesshtml = '';
         for(var i=0;i<data.data.lesslist.length;i++){
-            if(data.data.lesslist[i].sort == -1){ //是套餐
-
-                var isB = '';
-                if(data.data.lesslist[i].ismaterial == 1){
-                    isB = '<img src="../../static/student/images/index/book.png"><text class="text2">含教材</text>';
-                }
-
-                var teacherhtml = '';
-                for(var y=0;y<data.data.lesslist[i].teacher.length;y++){
-                    teacherhtml+='<img class="img1" src="'+data.data.lesslist[i].teacher[y].avatar+'">';
-                    
-                }
-
-                lesshtml+='<li>\
-                            <a href="/student/detail/index?id='+data.data.lesslist[i].id+'">\
-                                <div class="content">\
-                                    <div class="top" style="background: url('+data.data.lesslist[i].thumb+') no-repeat;background-size: cover;">\
-                                        <div class="tip">套餐</div>\
-                                    </div>\
-                                    <div class="title">'+data.data.lesslist[i].name+'</div>\
-                                    <div class="information">\
-                                        <text class="text1">'+data.data.lesslist[i].nums+'课程</text>'+isB+'</div>\
-                                    <div class="bottom">'+teacherhtml+'<text class="text">￥'+data.data.lesslist[i].price+'</text>\
-                                    </div>\
-                                </div>\
-                            </a>\
-                        </li>';
-            }else{
-
 
                 var isB = '';
                 if(data.data.lesslist[i].ismaterial == 1){
@@ -261,7 +257,6 @@ $(function(){
                 
                 }
 
-                
 
                 var rt = '';
                 var ahref = '';
@@ -298,7 +293,6 @@ $(function(){
                                     </div>\
                                 </a>\
                             </li>';
-            }
         }
 
 

@@ -192,7 +192,7 @@ class LessionlistController extends StudentBaseController
 
         $njid = $data['njid'] ?? 0; //学级id
         $kmid = $data['kmid'] ?? 0; //科目id
-        $lbid = $data['lbid'] ?? 0; //类别id
+        $lbid = $data['lbid'] ?? 0; //类别id  默认是直播 3
 
         $info    = array();
         $gradeid = $njid;
@@ -285,6 +285,9 @@ class LessionlistController extends StudentBaseController
                     break;
                 case 3:
                     $where .= 'sort >= 2';
+                    break;
+                case 99:
+                    $where .= 'sort != 1'; //全部(内容和大班课)
                     break;
             }
 

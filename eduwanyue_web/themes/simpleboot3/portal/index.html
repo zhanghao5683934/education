@@ -100,7 +100,7 @@
 
     </div>
 
-    <div class="less_list kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
+    <div class="less_list_nei kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
     <div class="tips">
         <span>精选内容</span>
         <div style="display: inline-block; width: 92%; text-align: right;">
@@ -188,10 +188,8 @@
     //2.页面滚动事件
     document.addEventListener('scroll', function () {
 
-        console.log(window.pageYOffset);
-        console.log((footerTop));
-        //3.当页面被卷去的头部大于等于一开始footer距离页面最上方的高度时，侧边栏改为固定方位
-        // 1834
+
+        //当页面被卷去的头部大于等于一开始footer距离页面最上方的高度时，侧边栏改为固定方位
         if (window.pageYOffset >= (footerTop * 0.6)) {
             sliderbar.css("position", "absolute");
             sliderbar.css("bottom", "170px");
