@@ -1,9 +1,7 @@
  $(function(){
 
     var currentUrl = window.location.href;
-    console.log(currentUrl);
     var urlArr = currentUrl.split('.com');
-    console.log(urlArr);
     if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
         chooselb(3); //选课中心默认显示直播分类
     } else {
@@ -192,6 +190,18 @@
     }
 
     function chooselb(id){
+        if (id == 3) {
+            $(".less_list_nei").hide();
+            $(".less_list").show();
+        } else if(id == 4) {
+            $(".less_list").hide();
+            $(".less_list_nei").show();
+        } else if(id == 99) {
+            $(".less_list").show();
+            $(".less_list_nei").show();
+        }
+
+
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
         });
