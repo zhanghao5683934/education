@@ -2,11 +2,29 @@
 
     var currentUrl = window.location.href;
     var urlArr = currentUrl.split('.com');
-    if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
+
+    var flag = 0;
+    var location = '';
+     for (let idx in urlArr) {
+         if (urlArr[idx].indexOf("neirong") != '-1')  {
+             flag++;
+         }
+     }
+     if (flag > 0) {
+         console.log(44444);
+         $('.zhibo-info').removeClass('active');
+         $('.zhibo-info').find('a').removeClass('white');
+         $('.neirong-info').addClass('active');
+         $('.neirong-info').find('a').addClass('white');
+         chooselb(4);
+     } else if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
         chooselb(3); //选课中心默认显示直播分类
+         console.log(3333333);
     } else {
         // 首页显示所有分类
         chooselb(99);
+        console.log(9999999);
+        location = 'index';
     }
 
 
@@ -69,7 +87,6 @@
             $('.less_top #lb .li').find('a').removeClass('white');
             that.addClass('active');
             that.find('a').addClass('white');
-
             chooselb(id);
         }
     })
@@ -190,17 +207,20 @@
     }
 
     function chooselb(id){
-        if (id == 3) {
-            $(".less_list_nei").hide();
-            $(".less_list").show();
-        } else if(id == 4) {
-            $(".less_list").hide();
-            $(".less_list_nei").show();
-        } else if(id == 99) {
-            $(".less_list").show();
-            $(".less_list_nei").show();
-        }
 
+         //只在首页隐藏显示
+        if (location == 'index') {
+            if (id == 3) {
+                $(".less_list_nei").hide();
+                $(".less_list").show();
+            } else if(id == 4) {
+                $(".less_list").hide();
+                $(".less_list_nei").show();
+            } else if(id == 99) {
+                $(".less_list").show();
+                $(".less_list_nei").show();
+            }
+        }
 
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
@@ -241,7 +261,11 @@
                 $('.less_list ul').html(lesshtml);
 
                 var lessListHtml = replaceHtml(neiData);
-                $(".less_list_nei ul").html(lessListHtml);
+                if (flag > 0) {
+                    $(".less_list ul").html(lessListHtml);
+                } else {
+                    $(".less_list_nei ul").html(lessListHtml);
+                }
 
                 layer.close(index);
             }

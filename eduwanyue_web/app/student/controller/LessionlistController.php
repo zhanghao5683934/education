@@ -197,6 +197,10 @@ class LessionlistController extends StudentBaseController
         $info    = array();
         $gradeid = $njid;
 
+        if ($lbid == 98) {
+            $lbid = 4;
+        }
+
         if ($lbid == 2) { //套餐
             $list = array();
 
