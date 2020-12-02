@@ -1,9 +1,7 @@
-$(function(){
+ $(function(){
 
     var currentUrl = window.location.href;
-    console.log(currentUrl);
     var urlArr = currentUrl.split('.com');
-    console.log(urlArr);
     if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
         chooselb(3); //选课中心默认显示直播分类
     } else {
@@ -192,15 +190,23 @@ $(function(){
     }
 
     function chooselb(id){
+        if (id == 3) {
+            $(".less_list_nei").hide();
+            $(".less_list").show();
+        } else if(id == 4) {
+            $(".less_list").hide();
+            $(".less_list_nei").show();
+        } else if(id == 99) {
+            $(".less_list").show();
+            $(".less_list_nei").show();
+        }
+
+
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
         });
         lbid = id;
         page = 1;
-
-        if(id == 99) {
-            //首页 显示全部
-        }
 
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
@@ -211,18 +217,31 @@ $(function(){
             },
             success:function(data){
                 console.log(data);
-                // var dabanData = new Array();
-                // var neiData = new Array();
-                // for (index in data) {
-                //     if (data[index].sort != 0) {
-                //         //大班课
-                //         dabanData.push(data[index]);
-                //     } else {
-                //         neiData.push(data[index]);
-                //     }
-                // }
-                var lesshtml = replaceHtml(data);
+                var dabanData = {
+                    'data': {
+                        'lesslist':[]
+                    }
+                };
+                var neiData = {
+                    'data': {
+                        'lesslist': []
+                    }
+                };
+                var less = data.data.lesslist;
+                for (let index in less) {
+                    if (less[index].sort != 0) {
+                        //大班课
+                        dabanData.data.lesslist.push(less[index]);
+                    } else {
+                        neiData.data.lesslist.push(less[index]);
+                    }
+                }
+                console.log(neiData);
+                var lesshtml = replaceHtml(dabanData);
                 $('.less_list ul').html(lesshtml);
+
+                var lessListHtml = replaceHtml(neiData);
+                $(".less_list_nei ul").html(lessListHtml);
 
                 layer.close(index);
             }
@@ -251,10 +270,10 @@ $(function(){
                         isL = '<text class="text1" style="border: 1px solid #969696;padding: 0 2px 0 2px;">'+data.data.lesslist[i].lesson+'</text>';
                     }else{
                         isL = '<text class="text1">'+data.data.lesslist[i].lesson+'</text>';
-                        
+
                     }
-                    
-                
+
+
                 }
 
 
