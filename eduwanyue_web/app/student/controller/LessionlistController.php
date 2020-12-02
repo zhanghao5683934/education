@@ -162,6 +162,9 @@ class LessionlistController extends StudentBaseController
             case 3:
                 $where .= 'sort >= 2';
                 break;
+            case 99:
+                $where .= 'sort != 1';
+                break;
         }
 
         $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
