@@ -256,7 +256,11 @@
                         neiData.data.lesslist.push(less[index]);
                     }
                 }
-                console.log(neiData);
+
+                if (location == 'index') {
+                    dabanData.data.lesslist = dabanData.data.lesslist.slice(0, 8);
+                    neiData.data.lesslist = neiData.data.lesslist.slice(0, 8);
+                }
                 var lesshtml = replaceHtml(dabanData);
                 $('.less_list ul').html(lesshtml);
 
