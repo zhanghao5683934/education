@@ -88,7 +88,7 @@
             chooselb(id);
         }
     })
-    
+
 
     //点击查看更多
     $('.less_list').on('click','.look_more',function(){

@@ -138,7 +138,7 @@ $(function(){
                 layer.msg(data.msg);
                 if(data.code == 1){
                     setTimeout(function(){
-                        location.href="/student"
+                        location.href="/"
                     },1500)
                 } 
             }

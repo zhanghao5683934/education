@@ -63,11 +63,9 @@ class StudentBaseController extends HomeBaseController
             $isLog = 1;
 
             $userinfo_s = session('student') ?? [];
-//            $userinfo['token'] = $_SESSION['student']['token'] ?? '';
 
             $userinfo   = array_merge($userinfo_s, $userinfo);
             $userinfo   = handleUser($userinfo);
-
 
             unset($userinfo['create_time']);
             unset($userinfo['last_login_time']);
@@ -146,12 +144,12 @@ class StudentBaseController extends HomeBaseController
 
         $userinfo = session('student') ?? '';
         if (!$userinfo) {
-            $this->redirect(cmf_url("student/index/index?isBackLog=" . time()));
+            $this->redirect(cmf_url("/?isBackLog=" . time()));
         }
 
         $isToken = checkToken($userinfo['id'], $userinfo['token']);
         if ($isToken != 0) {
-            $this->redirect(cmf_url("student/index/index?isBackLog=" . time()));
+            $this->redirect(cmf_url("/?isBackLog=" . time()));
         }
     }
 
@@ -163,12 +161,12 @@ class StudentBaseController extends HomeBaseController
         //检测登录
         $userinfo = session('student') ?? '';
         if (!$userinfo) {
-            $this->redirect(cmf_url("student/index/index?isBackLog=" . time()));
+            $this->redirect(cmf_url("/?isBackLog=" . time()));
         }
 
         $isToken = checkToken($userinfo['id'], $userinfo['token']);
         if ($isToken != 0) {
-            $this->redirect(cmf_url("student/index/index?isBackLog=" . time()));
+            $this->redirect(cmf_url("/?isBackLog=" . time()));
         }
 
         $courseinfo = CourseModel::field('uid,paytype,mode')->where(['id' => $courseid])->find();
