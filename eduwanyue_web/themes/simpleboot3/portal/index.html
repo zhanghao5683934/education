@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="less_list less_list_daban kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
+    <div class="less_list less_list_daban kaiyuan_less_list list kaiyuan_info_list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
         <div class="tips">
             <span>直播课堂</span>
             <div style="display: inline-block; width: 92%; text-align: right;">
@@ -101,7 +101,7 @@
 
     </div>
 
-    <div class="less_list_nei kaiyuan_less_list list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
+    <div class="less_list_nei kaiyuan_less_list list kaiyuan_info_list" <if condition ="$keywords neq ''">style="margin-top:80px;"</if>>
     <div class="tips">
         <span>精选内容</span>
         <div style="display: inline-block; width: 92%; text-align: right;">
@@ -146,23 +146,10 @@
     </div>
 
     <div class="right-nav">
-        <a href="">
-            <img class="right-img" src="__STATIC__/images/mobile_1.png" alt="">
-        </a>
-        <a class="weixin-wrap" href="">
-            <img class="right-img" src="__STATIC__/images/gongzhonghao.png" alt="">
-            <div class="weixin-img">
-                <span>官方微信号</span>
-                <img style="" src="{$site_info['wx_url']}">
-            </div>
-
-        </a>
-        <a class="gotop" href="javascript:;">
-            <img class="right-img" src="__STATIC__/images/back_top.png" alt="">
-        </a>
-
+        <img class="right-img" src="__STATIC__/images/qq_qun.png" alt="">
+        <p>加入QQ群</p>
+        <p>学习更轻松</p>
     </div>
-
 
 </div>
 
@@ -181,23 +168,21 @@
 <script type="text/javascript">
 
 
-    var sliderbar = $(".right-nav");
-    var sliderbarTop = sliderbar.offset().top;
-    var footer = $('.common_footer');
-    var footerTop = footer.offset().top;
-
-    //2.页面滚动事件
-    document.addEventListener('scroll', function () {
-
-
-        //当页面被卷去的头部大于等于一开始footer距离页面最上方的高度时，侧边栏改为固定方位
-        if (window.pageYOffset >= (footerTop * 0.6)) {
-            sliderbar.css("position", "absolute");
-            sliderbar.css("bottom", "170px");
-        } else {
-            sliderbar.css("position", "fixed");
-        }
-    })
+    // var sliderbar = $(".right-nav");
+    // var sliderbarTop = sliderbar.offset().top;
+    // var footer = $('.common_footer');
+    // var footerTop = footer.offset().top;
+    //
+    // //2.页面滚动事件
+    // document.addEventListener('scroll', function () {
+    //     //当页面被卷去的头部大于等于一开始footer距离页面最上方的高度时，侧边栏改为固定方位
+    //     if (window.pageYOffset >= (footerTop * 0.6)) {
+    //         sliderbar.css("position", "absolute");
+    //         sliderbar.css("bottom", "170px");
+    //     } else {
+    //         sliderbar.css("position", "fixed");
+    //     }
+    // });
 
 
     $('.gotop').on('click', function (e) {
@@ -209,7 +194,17 @@
         $(".weixin-img").show();
     }).mouseout(function () {
         $(".weixin-img").hide();
-    })
+    });
+
+
+    // 动态绑定
+    $('.kaiyuan_info_list ul').delegate('li','mouseover',function(){
+        $(this).css("position", "relative");
+        $(this).css("top", "-10px");
+    }).delegate('li','mouseout',function(){
+        $(this).css("position", "");
+        $(this).css("top", "");
+    });
     
     
 

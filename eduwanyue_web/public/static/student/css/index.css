@@ -395,7 +395,7 @@ body{
     line-height: 24px;
 }
 .body .list ul li .content .title{
-    font-size: 13px;
+    font-size: 15px;
     letter-spacing: 1px;
     width: 100%;
     margin-top: 5px;
@@ -406,7 +406,7 @@ body{
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
-    height:38px;
+    height:41px;
     font-weight: 600;
 }
 
@@ -482,44 +482,48 @@ body{
     width: 1170px;
 }
 
+.kaiyuan_body .kaiyuan_info_list ul li .top {
+    border-radius: 5px 5px 0 0;
+}
+
+.kaiyuan_body .kaiyuan_info_list ul li:hover {
+    box-shadow: 9px 9px 9px #ddd;
+}
+
 .kaiyuan_body .list ul li {
     width: 22%;
     height: 300px;
     background: #fff;
     box-shadow: 2px 2px 9px #ddd;
+    border-radius: 7px;
     float: left;
     margin-top: 20px;
 }
 
 .right-nav {
-    width: 50px;
+    width: 135px;
     height: 180px;
-    background-color: #FFFFFF;
+    background-color: #38daa6;
     position: fixed;
     transition: bottom ease .9s;
     z-index: 3;
     right: 9%;
     bottom: 10px;
+    text-align: center;
+    border-radius: 5px;
 }
 
-
-.right-nav a {
-    display: flex;
-    width: 100%;
-    height: 29.33%;
-    align-items: center;
-    justify-content: center;
+.right-img {
+    display: inline-block;
+    width: 80%;
+    height: 64%;
+    margin: 11px auto 0;
 }
 
-.right-nav a:hover {
-    background-color: #38DAA6;
+.right-nav p {
+    color: #FFFFFF;
 }
 
-
-.right-nav a .right-img {
-    width: 24px;
-    height: 24px;
-}
 
 
 .weixin-wrap {
@@ -541,6 +545,7 @@ body{
     width: 100%;
     text-align: left;
     font-size: 14px;
+    color: #FFFFFF;
 }
 
 .weixin-img img {

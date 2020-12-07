@@ -129,6 +129,29 @@ class IndexController extends StudentBaseController
         echo json_encode($rs);
         exit;
     }
+
+
+    /**
+     * APP下载中心页面
+     * @return mixed
+     */
+    public function appdownload()
+    {
+        $data      = $this->request->param();
+
+        $isBackLog = 0;
+        if (isset($data['isBackLog'])) {
+            $isBackLog = $data['isBackLog'];
+        }
+
+        $this->assign([
+            'navid'     => 2,
+            'isBackLog' => $isBackLog
+        ]);
+        return $this->fetch('app_download');
+    }
+
+
 }
 
 
