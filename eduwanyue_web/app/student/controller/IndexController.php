@@ -137,7 +137,7 @@ class IndexController extends StudentBaseController
      */
     public function appdownload()
     {
-        $data      = $this->request->param();
+        $data = $this->request->param();
 
         $isBackLog = 0;
         if (isset($data['isBackLog'])) {
@@ -150,6 +150,30 @@ class IndexController extends StudentBaseController
         ]);
         return $this->fetch('app_download');
     }
+
+
+    /**
+     * 了解万岳
+     * @return mixed
+     */
+    public function liaojie()
+    {
+        $data = $this->request->param();
+
+        $isBackLog = 0;
+        if (isset($data['isBackLog'])) {
+            $isBackLog = $data['isBackLog'];
+        }
+
+        $this->assign([
+            'navid'     => 2,
+            'isBackLog' => $isBackLog
+        ]);
+
+        return $this->fetch('liaojie');
+    }
+
+
 
 
 }

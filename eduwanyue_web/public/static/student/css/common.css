@@ -22,6 +22,7 @@ a:hover{
     margin: 0 auto;
     clear: both;
     height: 70px;
+    padding-left: 182px;
 }
 .common_header_nav .content .left{
     width: 20%;
@@ -636,17 +637,33 @@ a:hover{
     height: 100%;
     text-align: center;
     color: #fff;
+    padding-top: 4px;
 }
+
+.right_guanyu_title {
+    font-size: 15px;
+}
+
+.common_footer .content .right a {
+    color: #969696;
+}
+
 .common_footer .content .right img{
     width: 27px;
     margin-top: 19px;
 }
 .common_footer .content .text1{
-    font-size: 17px;
+    font-size: 12px;
     font-weight: 600;
-    margin-top: 11px;
+    margin-top: 7px;
 }
 .common_footer .content .text2{
+    color: #969696;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.common_footer .content .text3{
     color: #969696;
     font-size: 12px;
     margin-top: 7px;
