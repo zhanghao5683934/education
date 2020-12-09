@@ -1,9 +1,47 @@
 
-
-
 .guanyu_banner_wrap {
     background: url("../../images/guanyu_banner.png");
-    height: 460px;
+    height: 362px;
+    padding-top: 91px;
+}
+
+.guan_banner_title {
+    font-size: 45px;
+    color: #FFFFFF;
+    width: 283px;
+    margin: 30px auto 20px;
+}
+
+.guan_banner_title_bottom {
+    width: 307px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+}
+.guan_banner_dian {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    float: left;
+    margin: 0 6px;
+}
+
+
+.guan_banner_title_bottom::after {
+    content:"";
+    height: 0;
+    line-height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;/*将元素隐藏起来*/
+}
+
+.guan_banner_title_bottom div {
+    font-size: 35px;
+    color: #ffffff;
+    float: left;
 }
 
 .liaojie_body {

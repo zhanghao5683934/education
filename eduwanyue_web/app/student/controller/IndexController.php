@@ -166,7 +166,7 @@ class IndexController extends StudentBaseController
         }
 
         $this->assign([
-            'navid'     => 2,
+            'navid'     => 3,
             'isBackLog' => $isBackLog
         ]);
 
