@@ -7,9 +7,9 @@
 ---
 
 ### 系统演示
-- 首页地址 https://demo.sdwanyue.com
-- 学生端地址 https://demo.sdwanyue.com 账号:13800000000 密码:123456
-- 教师端地址 https://demo.sdwanyue.com/teacher 账号:13888888888 密码:123456
+- 首页地址<a target="_blank" href="https://demo.sdwanyue.com">https://demo.sdwanyue.com</a>
+- 学生端地址 <a target="_blank" href="https://demo.sdwanyue.com">https://demo.sdwanyue.com</a> 账号:13800000000 密码:123456
+- 教师端地址 <a target="_blank" href="https://demo.sdwanyue.com/teacher">https://demo.sdwanyue.com/teacher</a> 账号:13888888888 密码:123456
 
 ### 项目介绍
 万岳在线教育经过对教育市场的长期调研，综合当下各大线上教培机构对于教育平台的功能需求，着重于用户体验，自主研发了一套集知识付费、直播授课、网校建设等功能为一体的万岳在线教育系统，满足用户对于公开课、大班课、小班课、职业培训等多种线上教学活动的场景需求。
