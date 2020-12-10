@@ -7,7 +7,7 @@
 ---
 
 ### 系统演示
-- 首页地址<a target="_blank" href="https://demo.sdwanyue.com">https://demo.sdwanyue.com</a>
+- 首页地址: <a target="_blank" href="https://demo.sdwanyue.com">https://demo.sdwanyue.com</a>
 - 学生端地址 <a target="_blank" href="https://demo.sdwanyue.com">https://demo.sdwanyue.com</a> 账号:13800000000 密码:123456
 - 教师端地址 <a target="_blank" href="https://demo.sdwanyue.com/teacher">https://demo.sdwanyue.com/teacher</a> 账号:13888888888 密码:123456
 
