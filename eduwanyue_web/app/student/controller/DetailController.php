@@ -372,6 +372,10 @@ class DetailController extends StudentBaseController
         $configpub = getConfigPub();
         if ($payid == 1) { //支付宝
 
+            if ($configpri['aliapp_partner'] == "" || $configpri['aliapp_seller_id'] == "" || $configpri['aliapp_key'] == "") {
+                $this->error('支付宝支付未配置');
+            }
+
             //合作身份者id，以2088开头的16位纯数字
             $alipay_config['partner'] = $configpri['aliapp_partner'];
             //安全检验码，以数字和字母组成的32位字符

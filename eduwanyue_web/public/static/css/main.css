@@ -5,10 +5,11 @@ body {
 
 .wrap {
     height: 100%;
+    padding: 20px 0px 0 !important;
 }
 
 .statistics {
-    width: 1681px;
+    min-width: 1713px;
     height: 100%;
     margin: 0 auto;
     padding: 60px 30px 40px;
