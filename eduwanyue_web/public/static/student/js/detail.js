@@ -225,7 +225,7 @@ $(function(){
                             $.ajax({
                                 url:__SITEURL__+'/api/?s=Course.CheckPass',
                                 type:'POST',
-                                data:{uid:userinfoj.id,token:userinfoj.data.token,courseid:courseid,pass:pass},
+                                data:{uid:userinfoj.id,token:userinfoj.token,courseid:courseid,pass:pass},
                                 //dataType:'json',
                                 error:function(e){
                                     layer.msg('网路错误');

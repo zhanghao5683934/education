@@ -52,6 +52,8 @@ $(function(){
     //点击唤出登录界面
     $('.common_header_nav .log_or_reg').click(function(){
         $('.common_login').removeClass('none');
+        $(".input1").val("13800000000");
+        $(".input2").val("123456");
     })
 
     //点击关闭登录界面
