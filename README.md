@@ -133,9 +133,7 @@
   
   ### 页面展示
   
-  ![展示图](/readme/images/function_1.png "展示图.png")
-  ![展示图](/readme/images/function_2.png "展示图.png")
-  ![展示图](/readme/images/function_3.png "展示图.png")
+  ![展示图](/readme/images/function_all1.png "展示图.png")
   
   #### 统计页面
   ![展示图](/readme/images/user_anal.png "展示图.png")
