@@ -162,7 +162,7 @@
 ### 联系我们（加客服经理微信或QQ，免费获取sql脚本）
 
 <div style='height: 130px'>
-    <img class="kefu_weixin" style="float:left;" src="/readme/images/weixinlianxi.png" width="520" height="120"/>
+    <img class="kefu_weixin" style="float:left;" src="/readme/images/weixinlianxi.png" width="602" height="123"/>
     <div style="float:left;">
         <p>QQ：2415408120</p>
         <p>QQ群：995910672</p>
