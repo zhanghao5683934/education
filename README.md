@@ -161,7 +161,7 @@
   
 ### 联系我们（加客服经理微信或QQ，免费获取sql脚本）
 <div style="height:130px;">
-    <img style="float:left;" src="/readme/images/weixin.png" width="120" height="120"/>
+    <img float=left src="/readme/images/weixin.png" width="120" height="120"/>
     <div style="float:left;">
         <p>微信：wanyuekeji666</p>
         <p>QQ：2415408120</p>
