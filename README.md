@@ -159,8 +159,15 @@
 * 官网地址：[http://www.sdwanyue.com](http://www.sdwanyue.com)
                 
   
-### 官方QQ群（加群免费获取sql脚本）
-
+### 联系我们（加客服经理微信或QQ，免费获取sql脚本）
+<div style="height:130px;">
+    <img style="float:left;" src="/readme/images/weixin.png" width="120" height="120"/>
+    <div style="float:left;">
+        <p>微信：wanyuekeji666</p>
+        <p>QQ：2415408120</p>
+        <p>QQ群：995910672</p>
+    </div>
+</div>
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=JShAyXeoKqg2lWFEUSElxELImhjeMG4y&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="万岳在线教育讨论群" title="万岳在线教育讨论群"></a> 可加
 
 > QQ群：995910672
