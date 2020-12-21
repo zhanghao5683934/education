@@ -168,14 +168,3 @@
 
 ![展示图](/readme/images/公众号.png "展示图.png")
 
-<script src="readme/jquery.js" type="text/javascript">
-   
-</script> 
-
-<script>
-     $("a").each(function(){
-        if($(this).attr("target")!="_blank"){
-            $(this).attr('target','_blank');
-            }
-        });
-</script>
