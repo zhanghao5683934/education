@@ -149,7 +149,7 @@
   ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
   
   #### 功能对比
-  ![展示图](/readme/images/gongneng_list1.png "展示图.png")
+  ![展示图](/readme/images/gongneng_list2.png "展示图.png")
   
 
 ### 商业合作
