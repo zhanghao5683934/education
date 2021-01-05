@@ -40,7 +40,7 @@
     12.无需安装, clone下来即可直接使用, 完全100%真开源；
 ```
 ### 功能展示
- ![展示图](/readme/images/function_all.png "展示图.png")
+ ![展示图](/readme/images/function_all2.png "展示图.png")
  
 
 ### 前台主要功能介绍
