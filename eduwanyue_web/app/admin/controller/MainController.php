@@ -926,8 +926,6 @@ class MainController extends AdminBaseController
             $this->todayPayAddNum[22]++;
         } elseif ($h >= 22 && $h < 23) {
             $this->todayPayAddNum[23]++;
-        } elseif ($h >= 23 && $h < 24) {
-            $this->todayPayAddNum[24]++;
         }
 
     }
@@ -986,8 +984,6 @@ class MainController extends AdminBaseController
             $this->yePayAddNum[22]++;
         } elseif ($h >= 22 && $h < 23) {
             $this->yePayAddNum[23]++;
-        } elseif ($h >= 23 && $h < 24) {
-            $this->todayPayAddNum[24]++;
         }
 
     }
