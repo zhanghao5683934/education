@@ -725,10 +725,18 @@ class MainController extends AdminBaseController
         $unitPriceDayFlag = ($unitPrice > $yeUnitPrice) ? 'big' : 'small';
 
         /*客单价上周同一天 上周同一天总结算金额 / 上周同一天所有支付数量*/
-        $preWeekUnitPrice = round(($preWeekDaySettleMoney / $preWeekUnitPayCount), 2);
+        if ($preWeekUnitPayCount != 0) {
+            $preWeekUnitPrice = round(($preWeekDaySettleMoney / $preWeekUnitPayCount), 2);
+        } else {
+            $preWeekUnitPrice = 0;
+        }
 
         /*客单价周环比 本周-上周 / 上周 */
-        $settleRatioUnitPriceWeek = round((abs($unitPrice - $preWeekUnitPrice) / $preWeekUnitPrice), 2);
+        if ($preWeekUnitPrice != 0) {
+            $settleRatioUnitPriceWeek = round((abs($unitPrice - $preWeekUnitPrice) / $preWeekUnitPrice), 2);
+        } else {
+            $settleRatioUnitPriceWeek = 0;
+        }
 
         $unitPriceWeekFlag = ($unitPrice > $preWeekUnitPrice) ? 'big' : 'small';
 
@@ -765,7 +773,11 @@ class MainController extends AdminBaseController
         $preWeekPayUserNum = count($payGroupByUidPreWeek);
 
         //付费用户数周环比
-        $settleRatioPayUserWeek = round((abs($todayPayUserNum - $preWeekPayUserNum) / $preWeekPayUserNum), 2);
+        if ($preWeekPayUserNum != 0) {
+            $settleRatioPayUserWeek = round((abs($todayPayUserNum - $preWeekPayUserNum) / $preWeekPayUserNum), 2);
+        } else {
+            $settleRatioPayUserWeek = $todayPayUserNum;
+        }
 
         $payUserWeekFlag = ($todayPayUserNum > $preWeekPayUserNum) ? 'big' : 'small';
 
@@ -932,7 +944,7 @@ class MainController extends AdminBaseController
 
 
     /**
-     * 获取用户今天增加的数量
+     * 获取用户昨天增加的数量
      * @param $h
      */
     private function getUserPayYeAddNum($h)
