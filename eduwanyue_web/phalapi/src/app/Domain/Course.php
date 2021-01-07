@@ -1,10 +1,12 @@
 <?php
 namespace App\Domain;
 
+use App\Model\Course as Model_Course;
 use App\Domain\Teacher as Domain_Teacher;
 use App\Domain\User as Domain_User;
-use App\Model\Course as Model_Course;
 use App\Model\User as Model_User;
+use App\Domain\Package as Domain_Package;
+use App\Domain\Cart as Domain_Cart;
 
 class Course {
 

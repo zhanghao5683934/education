@@ -14,6 +14,8 @@ namespace App\Api;
 use PhalApi\Api;
 use App\Domain\Course as Domain_Course;
 
+header("Access-Control-Allow-Origin: *");
+
 /**
  * 课程
  */

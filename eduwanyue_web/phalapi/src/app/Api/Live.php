@@ -13,6 +13,9 @@ namespace App\Api;
 
 use PhalApi\Api;
 use App\Domain\Live as Domain_Live;
+
+header("Access-Control-Allow-Origin: *");
+
 /**
  * 直播
  */
@@ -328,7 +331,6 @@ class Live extends Api {
             'url'=>$url,
         );
         // file_put_contents('./zhifu.txt',date('Y-m-d H:i:s').' 提交参数信息 checkdata:'.json_encode($checkdata)."\r\n",FILE_APPEND);
-        
         $issign=\App\checkSign($checkdata,$sign);
         if(!$issign){
             $rs['code']=1001;

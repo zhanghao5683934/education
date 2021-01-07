@@ -5,6 +5,8 @@ namespace App\Api;
 use PhalApi\Api;
 use App\Domain\Login as Domain_Login;
 
+header("Access-Control-Allow-Origin: *");
+
 /**
  * 注册、登录
  */
@@ -625,6 +627,7 @@ class Login extends Api
         $sign     = \App\checkNull($this->sign);
         $pushid   = \App\checkNull($this->pushid);
 
+        file_put_contents('a.txt', $openid);
         if ($openid == '' || $type == '' || $sign == '') {
             $rs['code'] = 1001;
             $rs['msg']  = \PhalApi\T('信息错误');

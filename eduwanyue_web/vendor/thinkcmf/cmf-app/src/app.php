@@ -16,7 +16,7 @@ return [
     // 应用地址
     'app_host'               => '',
     // 应用调试模式
-    'app_debug'              => APP_DEBUG,
+    'app_debug'              => TRUE,
     // 应用Trace
     'app_trace'              => FALSE,
     // 应用模式状态

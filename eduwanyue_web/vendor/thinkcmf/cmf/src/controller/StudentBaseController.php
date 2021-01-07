@@ -63,9 +63,11 @@ class StudentBaseController extends HomeBaseController
             $isLog = 1;
 
             $userinfo_s = session('student') ?? [];
+//            $userinfo['token'] = $_SESSION['student']['token'] ?? '';
 
             $userinfo   = array_merge($userinfo_s, $userinfo);
             $userinfo   = handleUser($userinfo);
+
 
             unset($userinfo['create_time']);
             unset($userinfo['last_login_time']);

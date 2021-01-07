@@ -71,7 +71,7 @@
                     <td>{$vo.id}</td>
                     <td>{$vo['user_login']?$vo['user_login']:($vo['mobile']?$vo['mobile']:lang('THIRD_PARTY_USER'))}
                     </td>
-                    <td>{$vo['user_nickname'] ? $vo['user_nickname']:'未定义'}</td>
+                    <td>{$vo['user_nickname'] ? $vo['user_nickname'] : '暂无'}</td>
                     <td><img src="{$vo['avatar']}"/></td>
                     <td>{$vo.mobile}</td>
                     <td>{$vo.coin}</td>
@@ -87,27 +87,28 @@
                         
                     </td>
                     <td>
-                        <if condition="$vo.user_status eq 0">
-                            <a class="btn btn-xs btn-success js-ajax-dialog-btn"
-                                   href="{:url('users/cancelban',array('id'=>$vo['id']))}"
-                                   data-msg="{:lang('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:lang('ACTIVATE_USER')}</a>
-                        <else/>
-                            
-                            <a class="btn btn-xs btn-warning js-ajax-dialog-btn"
-                                   href="{:url('users/ban',array('id'=>$vo['id']))}"
-                                   data-msg="{:lang('BLOCK_USER_CONFIRM_MESSAGE')}">禁用</a>
+                        <if condition="($vo.id != 27) && ($vo.id != 1)">
+                            <if condition="$vo.user_status eq 0">
+                                <a class="btn btn-xs btn-success js-ajax-dialog-btn"
+                                       href="{:url('users/cancelban',array('id'=>$vo['id']))}"
+                                       data-msg="{:lang('ACTIVATE_USER_CONFIRM_MESSAGE')}">{:lang('ACTIVATE_USER')}</a>
+                            <else/>
+                                
+                                <a class="btn btn-xs btn-warning js-ajax-dialog-btn"
+                                       href="{:url('users/ban',array('id'=>$vo['id']))}"
+                                       data-msg="{:lang('BLOCK_USER_CONFIRM_MESSAGE')}">禁用</a>
+                            </if>
+                            <input type="hidden" name="id" id="id" value="{$vo.id}" />
+                            <if condition="$vo.type eq 1">
+                                <a class="btn btn-xs btn-warning js-ajax-dialog-btn" href="{:url('users/cancelTeacher',array('id'=>$vo['id']))}">取消讲师</a>
+                                
+                            <else/>
+                                <a class="btn btn-xs btn-info js-ajax-dialog-btn" href="{:url('admin/users/setSignory', ['id' => $vo['id']])}">设置为讲师</a>
+                            </if>
+    
+                            <a class="btn btn-xs btn-primary" href='{:url("users/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+                            <a class="btn btn-xs btn-danger js-ajax-delete" href="{:url('users/del',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
                         </if>
-                        <input type="hidden" name="id" id="id" value="{$vo.id}" />
-                        <if condition="$vo.type eq 1">
-                            <a class="btn btn-xs btn-warning js-ajax-dialog-btn" href="{:url('users/cancelTeacher',array('id'=>$vo['id']))}">取消讲师</a>
-                            
-                        <else/>
-                            <a class="btn btn-xs btn-info js-ajax-dialog-btn" href="{:url('admin/users/setSignory', ['id' => $vo['id']])}">设置为讲师</a>
-                        </if>
-
-                        <a class="btn btn-xs btn-primary" href='{:url("users/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
-                        <a class="btn btn-xs btn-danger js-ajax-delete" href="{:url('users/del',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
-                        
                     </td>
                 </tr>
             </foreach>
