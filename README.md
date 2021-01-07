@@ -24,7 +24,7 @@
 
 系统采用TP5.1+Jquery+Bootstrap+Mysql核心技术，系统功能介绍[查看](http://doc.sdwanyue.com/wanyue_open_web/2006714)，专业售后技术团队，让您二开无忧。
 
-### 技术亮点 
+### 技术亮点
 ```
     1.后台应用ThinkCMF快速生成现代化表单；
     2.PHPExcel数据导出,导出表格更加美观,可视；
