@@ -29,7 +29,7 @@
 			<div class="layui-card">
 				<form method="post" class="layui-card-body js-ajax-form" action="{:url('courseclass/listOrder')}">
 					<div class="table-actions">
-						<button class="btn btn-primary btn-sm js-ajax-submit" type="submit">{:lang('SORT')}</button>
+						<button class="layui-btn js-ajax-submit" type="submit">{:lang('SORT')}</button>
 					</div>
 					<table class="layui-table treeTable" lay-even lay-skin="nob" lay-size="lg">
 						<thead>
@@ -51,8 +51,8 @@
 								<td>{$vo['name']}</td>
 								<td><if condition="$vo['thumb']"><img class="imgtip" src="{$vo['thumb']}" style="max-width:30px;"></if></td>
 								<td>
-									<a class="btn btn-xs btn-primary" href='{:url("courseclass/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
-									<a class="btn btn-xs btn-danger js-ajax-delete" href="{:url('courseclass/del',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
+									<a class="layui-bo layui-bo-small layui-bo-checked" href='{:url("courseclass/edit",array("id"=>$vo["id"]))}'>{:lang('EDIT')}</a>
+									<a class="layui-bo layui-bo-small layui-bo-close js-ajax-delete" href="{:url('courseclass/del',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
 								</td>
 							</tr>
 						</foreach>
