@@ -36,10 +36,7 @@ class TeachersController extends StudentBaseController
         }
 
         //查看对应的老师
-    //    $where       = 'signoryid = ' . $classid;
-		$where = [
-			['signoryid','=',$classid],
-		];
+        $where       = 'signoryid = ' . $classid;
         $techerslist = $this->GetTeachers(1, $where);
 
         $isMore = 0;
@@ -73,10 +70,7 @@ class TeachersController extends StudentBaseController
         }
         $classid = $data['id'] ?? 0;
 
-    //    $where       = 'signoryid = ' . $classid;
-		$where = [
-			['signoryid','=',$classid],
-		];
+        $where       = 'signoryid = ' . $classid;
         $techerslist = $this->GetTeachers($p, $where);
 
         $this->success('', '', $techerslist);

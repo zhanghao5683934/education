@@ -67,13 +67,7 @@ class LessionlistController extends StudentBaseController
 
 
             //." and name like '%".$keywords."%'"
-        //    $where = "gradeid=" . $gradeid . " and status>=1 and shelvestime<" . $nowtime;
-			$where = [
-				['gradeid','=',$gradeid],
-				['status','>=',1],
-				['shelvestime','<',$nowtime],
-			];
-			
+            $where = "gradeid=" . $gradeid . " and status>=1 and shelvestime<" . $nowtime;
             $list  = CourseModel::where($where)->order('list_order asc,id desc')->select()->toArray();
 
             foreach ($list as $k => $v) {
@@ -102,13 +96,7 @@ class LessionlistController extends StudentBaseController
         } else {
             $keywords = '';
 
-        //    $list = CourseModel::where('sort = 1 and gradeid = ' . $njid . ' and status >= 1 and shelvestime <' . $nowtime)
-            $list = CourseModel::where([
-				['sort','=',1],
-				['gradeid','=',$njid],
-				['status','>=',1],
-				['shelvestime','<',$nowtime],
-			])
+            $list = CourseModel::where('sort = 1 and gradeid = ' . $njid . ' and status >= 1 and shelvestime <' . $nowtime)
                 ->order('list_order asc,id desc')
                 ->limit(0, 20)
                 ->select();
@@ -164,30 +152,22 @@ class LessionlistController extends StudentBaseController
 
         $nowtime = time();
         $where = '';
-        $where = [];
         switch ($lbid) {
             case 4:
-            //    $where .= 'sort = 0';
-                $where[] = ['sort','=',0];
+                $where .= 'sort = 0';
                 break;
             case 1:
-             //   $where .= 'sort = 1';
-			 $where[] = ['sort','=',1];
+                $where .= 'sort = 1';
                 break;
             case 3:
-            //    $where .= 'sort >= 2';
-			$where[] = ['sort','>=',2];
+                $where .= 'sort >= 2';
                 break;
             case 99:
-                //$where .= 'sort != 1';
-				$where[] = ['sort','<>',1];
+                $where .= 'sort != 1';
                 break;
         }
 
-    //    $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
-		$where[]=['gradeid','=',$gradeid];
-		$where[]=['status','>=',1];
-		$where[]=['shelvestime','<',$nowtime];
+        $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
         $list  = CourseModel::where($where)->order('list_order asc,id desc')->limit(0, 20)->select();
 
         foreach ($list as $k => $v) {
@@ -231,8 +211,7 @@ class LessionlistController extends StudentBaseController
 
             $list = Db::name('course_package')
                 ->field('id,name,thumb,price,courseids,nums,des')
-            //    ->where('gradeid =' . $gradeid)
-				->where(['gradeid'=>$gradeid])
+                ->where('gradeid =' . $gradeid)
                 ->order('list_order asc,id desc')
                 ->select()
                 ->toArray();
@@ -243,11 +222,9 @@ class LessionlistController extends StudentBaseController
                 $isT        = false;
                 foreach ($courseid_a as $ks => $vs) {
 
-                    //$where = 'id = ' . $vs;
-					$where[]=['id','=',$vs];
+                    $where = 'id = ' . $vs;
                     if ($kmid != 0) {
-                     //   $where .= ' and classid =' . $kmid;
-						$where[]=['classid','=',$kmid];
+                        $where .= ' and classid =' . $kmid;
                     }
 
                     $lkd = CourseModel::field('id')->where($where)->find();
@@ -305,34 +282,26 @@ class LessionlistController extends StudentBaseController
 
             $nowtime = time();
 
-            $where = [];
+            $where = '';
             switch ($lbid) {
                 case 4:
-                //    $where .= 'sort = 0';
-					$where[]=['sort','=',0];
+                    $where .= 'sort = 0';
                     break;
                 case 1:
-                //    $where .= 'sort = 1';
-					$where[]=['sort','=',1];
+                    $where .= 'sort = 1';
                     break;
                 case 3:
-                //    $where .= 'sort >= 2';
-					$where[]=['sort','=',2];
+                    $where .= 'sort >= 2';
                     break;
                 case 99:
-                //    $where .= 'sort != 1'; //全部(内容和大班课)
-					$where[]=['sort','<>',1];
+                    $where .= 'sort != 1'; //全部(内容和大班课)
                     break;
             }
 
             if ($kmid != 0) {
-                //$where .= ' and classid =' . $kmid;
-				$where[]=['classid','=',$kmid];
+                $where .= ' and classid =' . $kmid;
             }
-            //$where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
-			$where[]=['gradeid','=',$gradeid];
-			$where[]=['status','>=',1];
-			$where[]=['shelvestime','<',$nowtime];
+            $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
             $list  = CourseModel::where($where)
                 ->order('list_order asc,id desc')
                 ->limit(0, 20)
@@ -380,12 +349,10 @@ class LessionlistController extends StudentBaseController
 
             $list = Db::name('course_package')
                 ->field('id,name,thumb,price,courseids,nums,des')
-                ->where('gradeid',$gradeid)
+                ->where('gradeid =' . $gradeid)
                 ->order('list_order asc,id desc')
                 ->select()
                 ->toArray();
-
-
 
             foreach ($list as $k => $v) {
 
@@ -393,15 +360,9 @@ class LessionlistController extends StudentBaseController
                 $isT        = false;
                 foreach ($courseid_a as $ks => $vs) {
 
-                //    $where = 'id = ' . $vs;
-					$where[]=[
-						'id','=',$vs
-					];
+                    $where = 'id = ' . $vs;
                     if ($kmid != 0) {
-                        //$where .= ' and classid =' . $kmid;
-						$where[]=[
-							'classid','=',$kmid
-						];		
+                        $where .= ' and classid =' . $kmid;
                     }
 
                     $lkd = CourseModel::field('id')->where($where)->find();
@@ -459,31 +420,23 @@ class LessionlistController extends StudentBaseController
 
             $nowtime = time();
 
-            //$where = '';
-			$where = [];
+            $where = '';
             switch ($lbid) {
                 case 4:
-                    //$where .= 'sort = 0';
-					$where[]=['sort','=','0'];
+                    $where .= 'sort = 0';
                     break;
                 case 1:
-                    //$where .= 'sort = 1';
-					$where[]=['sort','=','1'];
+                    $where .= 'sort = 1';
                     break;
                 case 3:
-                    //$where .= 'sort >= 2';
-					$where[]=['sort','>=','2'];
+                    $where .= 'sort >= 2';
                     break;
             }
 
             if ($kmid != 0) {
-                //$where .= ' and classid =' . $kmid;
-				$where[]=['classid','=',$kmid];
+                $where .= ' and classid =' . $kmid;
             }
-            //$where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
-			$where[]=['gradeid','=',$gradeid];
-			$where[]=['status','>=',1];
-			$where[]=['shelvestime','<',$nowtime];
+            $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
             $list  = CourseModel::where($where)->order('list_order asc,id desc')
                 ->limit($start, $nums)
                 ->select();
@@ -516,10 +469,8 @@ class LessionlistController extends StudentBaseController
         }
 
         $courseid_s = implode(',', $courseid_a);
-        //$where      = "id in ($courseid_s)";
-		$where=[
-			['id','in',$courseid_s]
-		];
+        $where      = "id in ($courseid_s)";
+
         $nowtime = time();
 
         $list = CourseModel::where($where)->order('list_order asc,id desc')->select();
