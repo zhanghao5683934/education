@@ -58,7 +58,7 @@ io.on('connection', function(socket) {
             if(error){
                 return;
             }else if(res==null){
-                console.log("[获取token失败]"+data.uid);
+                //console.log("[获取token失败]"+data.uid);
             }else{
                 if(res != null){
 
