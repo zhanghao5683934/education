@@ -177,10 +177,12 @@
 <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=JShAyXeoKqg2lWFEUSElxELImhjeMG4y&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="万岳在线教育讨论群" title="万岳在线教育讨论群"></a> 可加
 
 > QQ群：995910672
-QQ群入群需验证
 
-问题：万岳教育后台语言？
-答案：（提示：java  or php）
+<div style="float:left;">
+<p>QQ群入群需验证</p>
+<p>问题：万岳教育后台语言？</p>
+<p>答案：（提示：java  or php）</p>
+</div>
 
 ![展示图](/readme/images/公众号.png "展示图.png")
 
