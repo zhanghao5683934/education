@@ -155,7 +155,7 @@
   ![展示图](/readme/images/live_yuyin_student.png "展示图.png")
   
   #### 功能对比
-  ![展示图](/readme/images/gongneng_list3.png "展示图.png")
+  ![展示图](/readme/images/gongneng_list4.png "展示图.png")
   
    ### 开源版使用须知
     
