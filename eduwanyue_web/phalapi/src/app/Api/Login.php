@@ -185,7 +185,6 @@ class Login extends Api
 
         /* 发送验证码 */
         $result = \App\sendCode($account, $code);
-
         $currentTime = time();
 
         if ($result['code'] == 0) {
