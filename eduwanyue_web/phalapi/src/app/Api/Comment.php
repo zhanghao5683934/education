@@ -41,7 +41,6 @@ class Comment extends Api {
         $courseid = \App\checkNull($this->courseid);
         $star = \App\checkNull($this->star);
         $content = \App\checkNull($this->content);
-        
         $checkToken=\App\checkToken($uid,$token);
 		if($checkToken==700){
 			$rs['code'] = $checkToken;
