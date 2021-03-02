@@ -19,6 +19,7 @@ class Comment extends Api {
                 'star' => array('name' => 'star', 'type' => 'int', 'desc' => '星级'),
                 'content' => array('name' => 'content', 'type' => 'string', 'desc' => '内容'),
             ),
+
             'getList' => array(
                 'courseid' => array('name' => 'courseid', 'type' => 'int', 'desc' => '课程ID'),
                 'p' => array('name' => 'p', 'type' => 'int', 'desc' => '页码'),
