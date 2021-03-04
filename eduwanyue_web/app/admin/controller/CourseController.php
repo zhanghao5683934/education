@@ -70,6 +70,8 @@ class CourseController extends AdminBaseController
     {
         $type = [
             '1' => '图文',
+            '2' => '视频',
+            '3' => '音频',
         ];
         if ($k === '') {
             return $type;
