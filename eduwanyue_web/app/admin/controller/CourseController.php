@@ -431,7 +431,7 @@ class CourseController extends AdminBaseController
             $data = $this->request->param();
 
             $sort = $data['sort'];
-            $uid  = $data['uid'];
+            $uid  = $data['uid'] ?? '';
             if ($uid == '') {
                 $this->error('请填写主讲老师ID');
             }
@@ -444,7 +444,7 @@ class CourseController extends AdminBaseController
             }
 
             if ($sort >= 1) {
-                $tutoruid = $data['tutoruid'];
+                $tutoruid = $data['tutoruid'] ?? 0;
                 if ($tutoruid > 0) {
                     if ($tutoruid == $uid) {
                         $this->error('主讲老师和辅导老师不能是同一个人');
