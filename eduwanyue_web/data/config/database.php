@@ -9,7 +9,7 @@ return [
     // 服务器地址
     'hostname' => '127.0.0.1',
     // 数据库名
-    'database' => 'demo_sdwanyue_co',
+    'database' => 'uni_web',
     // 用户名
     'username' => 'root',
     // 密码
@@ -25,6 +25,6 @@ return [
 	
 	/* redis */
 	'REDIS_HOST' => "127.0.0.1",
-	'REDIS_AUTH' => "redis",
+	'REDIS_AUTH' => "123456",
 	'REDIS_PORT' => "6379",
 ];
