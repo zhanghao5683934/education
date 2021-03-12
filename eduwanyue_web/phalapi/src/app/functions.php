@@ -1402,9 +1402,26 @@ namespace App;
 
     }
 
-    
-    
-    
+
+    /**
+     * 补全富文本中的图片路径或添加居中样式(本地上传时不带域名前缀)
+     * @param string $style 图片样式
+     * @param string $content 富文本内容
+     * @return 拼上图片url前缀后的富文本内容
+     */
+    function replaceImgFromUeditor($style, $content) {
+        $editor_url = "https://" . $_SERVER['SERVER_NAME'];
+
+        //服务器上的图片补全路径地址(src属性为/upload开头的图片)
+        $pregRule = "/<[img|IMG].*?src=[\'|\"](\/upload.*?(?:[\.jpg|\.jpeg|\.png|\.gif|\.bmp]))[\'|\"].*?[\/]?>/";
+        $wholeContent = preg_replace($pregRule, '<img src="' . $editor_url . '${1}" style="'. $style . '">', $content);
+
+        //添加样式
+        $pregRule = "/<[img|IMG].*?src=[\'|\"](.*?(?:[\.jpg|\.jpeg|\.png|\.gif|\.bmp]))[\'|\"].*?[\/]?>/";
+        $wholeContent = preg_replace($pregRule, '<img src="' . '${1}" style="'. $style . '">', $wholeContent);
+
+        return $wholeContent;
+    }
     
     
     
