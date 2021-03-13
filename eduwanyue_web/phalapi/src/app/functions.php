@@ -1385,7 +1385,7 @@ namespace App;
      * @param $new_path 新图路径 不带后缀名
      * @return 切圆后的图片资源
      */
-    function zoomImg($im, $new_path=''){
+    function zoomImg($im){
 
         $w = imagesx($im);
         $h = imagesy($im);
@@ -1399,7 +1399,6 @@ namespace App;
         imagecolortransparent($im, $c);
 
         return $im;
-
     }
 
 
