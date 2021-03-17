@@ -2,7 +2,7 @@
 
 
 ### 项目说明（如果对你有用，请给个star！）
-##### <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006714">项目文档</a> |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006716">部署文档</a>  |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2107615">常见问题</a>
+##### <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006714">项目文档</a> |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006716">部署文档</a>  |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2107615">常见问题</a> | <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_uniapp/2199269">升级日志</a>
 
 ---
 
@@ -182,10 +182,5 @@
 
 > QQ群：995910672
 
-<div style="float:left;">
-<p>QQ群入群需验证</p>
-<p>问题：万岳教育后台语言？</p>
-<p>答案：（提示：java  or php）</p>
-</div>
 
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100511_29ed24e9_8543696.png "公众号.png")
