@@ -54,7 +54,7 @@ class Course extends NotORM
         }
 
         if ($nums == 0) {
-            $nums = 20;
+            $nums = 40;
         }
         $start = ($p - 1) * $nums;
 
