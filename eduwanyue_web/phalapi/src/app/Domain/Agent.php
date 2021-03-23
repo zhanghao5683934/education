@@ -214,9 +214,6 @@ class Agent
         if ($type == 0) {
             $info['ispop'] = '0';
         }
-        /*if($configpri['agent_must']==1){
-            $info['ismust']='1';
-        }*/
 
         if ($info['ismust'] == 1 && $info['ispop'] == 0) {
             $info['ispop'] = '1';
