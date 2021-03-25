@@ -50,7 +50,6 @@ class DetailController extends StudentBaseController
 
         db("student_log")->insert($data);
 
-
         return !0;
     }
 
@@ -343,7 +342,7 @@ class DetailController extends StudentBaseController
 
         $uid        = $userinfo['id'];
         $token      = $userinfo['token'];
-        $method     = isset($data['method']) ? $data['method'] : '0';
+        $method     = $data['method'] ?? '0';
         $ismaterial = $data['ismaterial'];
         $payid      = $data['payid'];
         $courseid   = $data['courseid'];
