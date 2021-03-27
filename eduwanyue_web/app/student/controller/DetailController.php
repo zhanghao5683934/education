@@ -364,6 +364,7 @@ class DetailController extends StudentBaseController
         $url2 = $this->siteUrl . '/api/?s=Cart.Buy&uid=' . $uid . '&token=' . $token . '&payid=' . $payid . '&addrid=' . $addrid . '&method=' . $method . '&goods=' . json_encode($goods) . '&source=PC';
         $pay  = curl_get($url2);
 
+
         if (($pay['data']['code'] ?? 0) != 0) {
             $this->error($pay['data']['msg']);
         }
