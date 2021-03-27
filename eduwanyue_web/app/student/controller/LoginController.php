@@ -97,9 +97,9 @@ class LoginController extends HomebaseController {
     public function reg(){
 
         $data = $this->request->param();
-        $name=isset($data['name']) ? $data['name']: '';
-        $pass=isset($data['pass']) ? $data['pass']: '';
-        $code=isset($data['code']) ? $data['code']: '';
+        $name= $data['name'] ?? '';
+        $pass= $data['pass'] ?? '';
+        $code= $data['code'] ?? '';
         $name=checkNull($name);
         $pass=checkNull($pass);
         $code=checkNull($code);
