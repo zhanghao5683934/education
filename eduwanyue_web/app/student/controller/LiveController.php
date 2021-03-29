@@ -83,7 +83,6 @@ class LiveController extends TeacherBaseController
             if ($v['pid'] != 0) {
                 $name      = $list[$v['pid']]['name'] . ' - ' . $v['name'];
                 $v['name'] = $name;
-
                 $list2[$k] = $v;
             }
         }

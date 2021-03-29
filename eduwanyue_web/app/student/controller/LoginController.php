@@ -297,7 +297,6 @@ class LoginController extends HomebaseController {
     public function logout(){
 
         session('student',null);
-
         $this->success('退出成功');
     }
 

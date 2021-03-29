@@ -184,7 +184,6 @@ class LiveingController extends StudentBaseController
 
         $this->assign('teacherinfoj', json_encode($teacherinfo));
 
-
         $select_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'];
         $pan_list    = ['错', '对'];
         $type_list   = ['判断题', '单选题', '定项多选题', '简答题', '填空题', '不定项多选题'];
