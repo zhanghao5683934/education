@@ -65,9 +65,6 @@ class LessionlistController extends StudentBaseController
                 $gradeid = $info['gardeid'];
             }
 
-
-            //." and name like '%".$keywords."%'"
-        //    $where = "gradeid=" . $gradeid . " and status>=1 and shelvestime<" . $nowtime;
 			$where = [
 				['gradeid','=',$gradeid],
 				['status','>=',1],
@@ -102,7 +99,6 @@ class LessionlistController extends StudentBaseController
         } else {
             $keywords = '';
 
-        //    $list = CourseModel::where('sort = 1 and gradeid = ' . $njid . ' and status >= 1 and shelvestime <' . $nowtime)
             $list = CourseModel::where([
 				['sort','=',1],
 				['gradeid','=',$njid],
@@ -149,9 +145,9 @@ class LessionlistController extends StudentBaseController
     {
         $data = $this->request->param();
 
-        $xdid = $data['xdid'] ?? 0; //学段id
-        $kmid = $data['kmid'] ?? 0; //科目id
-        $lbid = $data['lbid'] ?? 0; //类别id
+        $xdid = sql_check($data['xdid']) ?? 0; //学段id
+        $kmid = sql_check($data['kmid']) ?? 0; //科目id
+        $lbid = sql_check($data['lbid']) ?? 0; //类别id
 
         $info      = array();
         $gradeinfo = Db::name('course_grade')->field('id,name')->where(['pid' => $xdid])->order('list_order asc')->select()->toArray();
@@ -167,24 +163,19 @@ class LessionlistController extends StudentBaseController
         $where = [];
         switch ($lbid) {
             case 4:
-            //    $where .= 'sort = 0';
                 $where[] = ['sort','=',0];
                 break;
             case 1:
-             //   $where .= 'sort = 1';
 			 $where[] = ['sort','=',1];
                 break;
             case 3:
-            //    $where .= 'sort >= 2';
 			$where[] = ['sort','>=',2];
                 break;
             case 99:
-                //$where .= 'sort != 1';
 				$where[] = ['sort','<>',1];
                 break;
         }
 
-    //    $where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
 		$where[]=['gradeid','=',$gradeid];
 		$where[]=['status','>=',1];
 		$where[]=['shelvestime','<',$nowtime];
@@ -213,9 +204,9 @@ class LessionlistController extends StudentBaseController
     {
         $data = $this->request->param();
 
-        $njid = $data['njid'] ?? 0; //学级id
-        $kmid = $data['kmid'] ?? 0; //科目id
-        $lbid = $data['lbid'] ?? 0; //类别id  默认是直播 3
+        $njid = sql_check($data['njid']) ?? 0; //学级id
+        $kmid = sql_check($data['kmid']) ?? 0; //科目id
+        $lbid = sql_check($data['lbid']) ?? 0; //类别id  默认是直播 3
 
         $info    = array();
         $gradeid = $njid;
@@ -225,13 +216,9 @@ class LessionlistController extends StudentBaseController
         }
 
         if ($lbid == 2) { //套餐
-            $list = array();
-
-            $nowtime = time();
 
             $list = Db::name('course_package')
                 ->field('id,name,thumb,price,courseids,nums,des')
-            //    ->where('gradeid =' . $gradeid)
 				->where(['gradeid'=>$gradeid])
                 ->order('list_order asc,id desc')
                 ->select()
@@ -243,10 +230,8 @@ class LessionlistController extends StudentBaseController
                 $isT        = false;
                 foreach ($courseid_a as $ks => $vs) {
 
-                    //$where = 'id = ' . $vs;
 					$where[]=['id','=',$vs];
                     if ($kmid != 0) {
-                     //   $where .= ' and classid =' . $kmid;
 						$where[]=['classid','=',$kmid];
                     }
 
@@ -308,28 +293,22 @@ class LessionlistController extends StudentBaseController
             $where = [];
             switch ($lbid) {
                 case 4:
-                //    $where .= 'sort = 0';
 					$where[]=['sort','=',0];
                     break;
                 case 1:
-                //    $where .= 'sort = 1';
 					$where[]=['sort','=',1];
                     break;
                 case 3:
-                //    $where .= 'sort >= 2';
 					$where[]=['sort','=',2];
                     break;
                 case 99:
-                //    $where .= 'sort != 1'; //全部(内容和大班课)
 					$where[]=['sort','<>',1];
                     break;
             }
 
             if ($kmid != 0) {
-                //$where .= ' and classid =' . $kmid;
 				$where[]=['classid','=',$kmid];
             }
-            //$where .= ' and gradeid=' . $gradeid . ' and status>=1 and shelvestime<' . $nowtime;
 			$where[]=['gradeid','=',$gradeid];
 			$where[]=['status','>=',1];
 			$where[]=['shelvestime','<',$nowtime];
@@ -361,9 +340,9 @@ class LessionlistController extends StudentBaseController
     {
         $data = $this->request->param();
 
-        $njid = $data['njid'] ?? 0; //学级id
-        $kmid = $data['kmid'] ?? 0; //科目id
-        $lbid = $data['lbid'] ?? 0; //类别id
+        $njid = sql_check($data['njid']) ?? 0; //学级id
+        $kmid = sql_check($data['kmid']) ?? 0; //科目id
+        $lbid = sql_check($data['lbid']) ?? 0; //类别id
 
         $p = $data['p']; //类别id
 
