@@ -85,10 +85,10 @@ class Course {
                 $lesson=\App\handelsvctm($v['starttime']);
             }
             if($v['islive']==1){
-                $lesson='点播视频';
+                $lesson='正在直播';
             }
             if($v['islive']==2){
-                $lesson='点播视频';
+                $lesson='直播结束';
             }
         }
 
