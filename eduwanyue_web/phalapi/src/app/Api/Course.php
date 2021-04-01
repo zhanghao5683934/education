@@ -284,11 +284,13 @@ class Course extends Api
         $token    = \App\checkNull($this->token);
         $courseid = \App\checkNull($this->courseid);
 
-        $checkToken = \App\checkToken($uid, $token);
-        if ($checkToken == 700) {
-            $rs['code'] = $checkToken;
-            $rs['msg']  = \PhalApi\T('您的登陆状态失效，请重新登陆！');
-            return $rs;
+        if($uid>0){
+            $checkToken=\App\checkToken($uid,$token);
+            if($checkToken==700){
+                $rs['code'] = $checkToken;
+                $rs['msg'] = \PhalApi\T('您的登陆状态失效，请重新登陆！');
+                return $rs;
+            }
         }
 
         if ($courseid < 1) {

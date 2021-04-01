@@ -480,7 +480,6 @@ class LoginController extends HomebaseController {
         $userinfo['gradename'] = $gradename;
         session('student',$userinfo);
 
-
     }
     /* 更新token 登陆信息 */
     protected function updateToken($uid,$token) {
