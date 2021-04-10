@@ -143,10 +143,10 @@
   ### 页面展示
 ![页面展示](https://images.gitee.com/uploads/images/2021/0410/144604_dbc1116f_8162876.png "web详情图2.png")
   #### 统计页面
-![展示图](https://images.gitee.com/uploads/images/2021/0317/100022_f1d1018a_8543696.png "user_anal.png")
-![展示图](https://images.gitee.com/uploads/images/2021/0317/100038_94b99a3a_8543696.png "商品分析.png")
-![展示图](https://images.gitee.com/uploads/images/2021/0317/100058_ec97a2f8_8543696.png "deal_anal.png")
-![展示图](https://images.gitee.com/uploads/images/2021/0317/100112_1ab47756_8543696.png "data_view.png")
+![统计页面](https://images.gitee.com/uploads/images/2021/0410/152726_aba91433_8162876.png "1.png")
+![统计页面](https://images.gitee.com/uploads/images/2021/0410/152741_f4ea0543_8162876.png "2.png")
+![统计页面](https://images.gitee.com/uploads/images/2021/0410/152754_67e056be_8162876.png "3.png")
+![统计页面](https://images.gitee.com/uploads/images/2021/0410/152804_24f0012d_8162876.png "4.png")
     
   #### 直播课页面
 
