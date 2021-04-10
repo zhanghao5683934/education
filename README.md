@@ -40,7 +40,7 @@
     12.无需安装, clone下来即可直接使用, 完全100%真开源；
 ```
 ### 功能展示
- ![展示图](https://images.gitee.com/uploads/images/2021/0317/095814_33e79b76_8543696.png "展示图.png")
+ ![展示图](https://images.gitee.com/uploads/images/2021/0410/144209_cf74cc99_8162876.png "展示图.png")
 
 ### 前台主要功能介绍
 #### 讲师PC端
