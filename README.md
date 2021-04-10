@@ -156,7 +156,7 @@
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100203_29192e47_8543696.png "live_student.png")
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100218_871f0135_8543696.png "live_yuyin_student.png")
   #### 功能对比
-  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0410/143121_7783db55_8162876.png "功能对比4(1).png") 
+  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0410/143936_7235ec5f_8162876.png "功能对比4(1).png") 
   
    ### 开源版使用须知
     
