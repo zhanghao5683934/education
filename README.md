@@ -141,10 +141,7 @@
   
   
   ### 页面展示
-
-![展示图](https://images.gitee.com/uploads/images/2021/0317/095911_3639d435_8543696.png "function1111.png")  
-![展示图](https://images.gitee.com/uploads/images/2021/0317/095929_e19c2483_8543696.png "function2222.png")
-![展示图](https://images.gitee.com/uploads/images/2021/0317/095940_44e208a1_8543696.png "function3333.png")
+![页面展示](https://images.gitee.com/uploads/images/2021/0410/144604_dbc1116f_8162876.png "web详情图2.png")
   #### 统计页面
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100022_f1d1018a_8543696.png "user_anal.png")
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100038_94b99a3a_8543696.png "商品分析.png")
