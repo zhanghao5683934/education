@@ -8,9 +8,6 @@ use App\Domain\Course as Domain_Course;
 class Login {
 
     public function loginByCode($user_login,$source) {
-        
-        $rs = array('code' => 0, 'msg' => '', 'info' => array());
-        
 
         $where=[
             'user_login = ?'=>$user_login,
