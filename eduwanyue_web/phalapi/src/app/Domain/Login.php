@@ -53,8 +53,7 @@ class Login {
             $rs['msg']=\PhalApi\T('账号或密码错误');
 			return $rs;
 		}
-        
-        
+
         $info=$this->handleInfo($info);
   
         return $info;
