@@ -94,7 +94,6 @@ class Course {
 
         $paytype=$v['paytype'];
         if($paytype==1){
-            //$payval=number_format($v['payval'],2);
             $payval=$v['payval'];
         }
 
@@ -172,14 +171,6 @@ class Course {
             if($ispay){
                 $ifbuy='1';
             }
-        }
-
-        if($paytype==1){
-
-        }
-
-        if($paytype==2){
-
         }
 
         $info['isbuy']=$ifbuy;
@@ -772,7 +763,6 @@ class Course {
         ];
 
         $list=$this->getGradeList();
-
         $list=$this->handelGrade($list);
 
         $isset=0;

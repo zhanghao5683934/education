@@ -21,12 +21,10 @@ class User {
         $info = $model->getBaseInfo($uid);
         
         if($info){
-            //$birthday=$info['birthday'];
             $info=\App\handleUser($info);
             $info['follows']=\App\getFollowNum($uid);
             $info['fans']=\App\getFansNum($uid);
-            //$info['birthday']=date('Y-m-d',$birthday);
-            
+
             if($info['school']==''){
                 $info['school']='';
             }
@@ -65,8 +63,6 @@ class User {
                 $avatar=$avatar_q;
                 $avatar_thumb=$avatar_q;
             }
-            
-
 
             $data['avatar']=$avatar;
             $data['avatar_thumb']=$avatar_thumb;
@@ -75,8 +71,7 @@ class User {
             $info['avatar_thumb']=\App\get_upload_path($avatar_thumb);
             
         }
-        
-        
+
         /* 昵称 */
         if( isset($fields['user_nickname']) && $fields['user_nickname']!=''  ){
             $name=$fields['user_nickname'];
