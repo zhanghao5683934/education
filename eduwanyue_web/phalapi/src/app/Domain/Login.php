@@ -188,7 +188,6 @@ class Login {
 
 		$info=\App\handleUser($info);
 
-        
         \App\delcache('userinfo_'.$info['id']);
         
         $model = new Model_Login();
