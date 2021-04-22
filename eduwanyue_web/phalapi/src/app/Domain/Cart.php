@@ -46,7 +46,6 @@ class Cart {
                 if($info && isset($info[0]) ){
                     $pinfo=$info[0];
 
-
                     $pinfo['carttype']='0';
                     $pinfo['isselect']=$v['isselect'];
                     $pinfo['cartid']=$v['id'];
