@@ -186,7 +186,6 @@ class Login extends Api {
         $account = \App\checkNull($this->account);
         $type    = \App\checkNull($this->type);
         $sign    = \App\checkNull($this->sign);
-        $env     = \App\checkNull($this->env);
 
         if ($account == '') {
             $rs['code'] = 995;
@@ -221,9 +220,6 @@ class Login extends Api {
                 $rs['msg']  = \PhalApi\T('该手机号尚未注册，请先注册');
                 return $rs;
             }
-            $s_a = 'login_account';
-            $s_c = 'login_code';
-            $s_e = 'login_expiretime';
 
         }
 
@@ -235,9 +231,6 @@ class Login extends Api {
                 return $rs;
             }
 
-            $s_a = 'reg_account';
-            $s_c = 'reg_code';
-            $s_e = 'reg_expiretime';
         }
 
         if ($type == 2) {
@@ -248,9 +241,6 @@ class Login extends Api {
                 return $rs;
             }
 
-            $s_a = 'forget_account';
-            $s_c = 'forget_code';
-            $s_e = 'forget_expiretime';
         }
 
         //取redis验证码
