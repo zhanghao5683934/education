@@ -21,38 +21,38 @@ class Login extends Api {
                 'agentcode' => array('name' => 'agentcode', 'type' => 'string', 'desc' => '邀请码'),
                 'env'      => array('name' => 'env', 'type' => 'string', 'desc' => '环境'),
             ),
-
-            'getCode' => array(
-                'account' => array('name' => 'account', 'type' => 'string', 'desc' => '手机号码'),
-                'type' => array('name' => 'type', 'type' => 'int', 'desc' => '类型，0登录1注册2忘记密码'),
+			
+			'getCode' => array(
+				'account' => array('name' => 'account', 'type' => 'string', 'desc' => '手机号码'),
+				'type' => array('name' => 'type', 'type' => 'int', 'desc' => '类型，0登录1注册2忘记密码'),
                 'sign' => array('name' => 'sign', 'type' => 'string',  'default'=>'', 'desc' => '签名'),
                 'env'      => array('name' => 'env', 'type' => 'string', 'desc' => '环境'),
-            ),
-
-            'login' => array(
+			),
+			
+			'login' => array(
                 'username' => array('name' => 'username', 'type' => 'string', 'desc' => '用户名'),
                 'pass' => array('name' => 'pass', 'type' => 'string', 'desc' => '密码'),
                 'pushid' => array('name' => 'pushid', 'type' => 'string', 'desc' => '极光推送ID'),
             ),
-
-            'reg' => array(
+			
+			'reg' => array(
                 'username' => array('name' => 'username', 'type' => 'string', 'desc' => '用户名'),
                 'code' => array('name' => 'code', 'type' => 'string', 'desc' => '验证码'),
-                'pass' => array('name' => 'pass', 'type' => 'string', 'desc' => '密码'),
+				'pass' => array('name' => 'pass', 'type' => 'string', 'desc' => '密码'),
                 'source' => array('name' => 'source', 'type' => 'int',  'default'=>'0', 'desc' => '来源设备,0web，1android，2ios，3小程序'),
                 'pushid' => array('name' => 'pushid', 'type' => 'string', 'desc' => '极光推送ID'),
                 'agentcode' => array('name' => 'agentcode', 'type' => 'string', 'desc' => '邀请码'),
                 'env'      => array('name' => 'env', 'type' => 'string', 'desc' => '环境'),
             ),
-
-
-            'forget' => array(
+			
+			
+			'forget' => array(
                 'username' => array('name' => 'username', 'type' => 'string', 'desc' => '用户名'),
                 'pass' => array('name' => 'pass', 'type' => 'string', 'desc' => '密码'),
                 'code' => array('name' => 'code', 'type' => 'string', 'desc' => '验证码'),
                 'env'      => array('name' => 'env', 'type' => 'string', 'desc' => '环境'),
-            ),
-
+            ),	
+            
             'loginByThird' => array(
                 'openid' => array('name' => 'openid', 'type' => 'string', 'desc' => '第三方openid'),
                 'type' => array('name' => 'type', 'type' => 'int', 'default'=>'0', 'desc' => '第三方标识,0PC，1QQ，2微信，3新浪，4facebook，5twitter'),
@@ -72,13 +72,13 @@ class Login extends Api {
 
         );
     }
-
-
+    
+    
     /**
      * 登录方式开关信息
      * @desc 用于获取登录方式开关信息
      * @return int code 操作码，0表示成功
-     * @return array info
+     * @return array info 
      * @return string info[][0] 登录方式标识
      * @return string msg 提示信息
      */
@@ -90,7 +90,7 @@ class Login extends Api {
 
         return $rs;
     }
-
+    
     /**
      * 验证码登录
      * @desc 用于用户通过验证码登录
@@ -110,7 +110,7 @@ class Login extends Api {
      */
     public function loginByCode() {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-
+        
         $username = \App\checkNull($this->username);
         $code = \App\checkNull($this->code);
         $source = \App\checkNull($this->source);
@@ -123,7 +123,7 @@ class Login extends Api {
             $rs['msg'] = \PhalApi\T('请输入手机号');
             return $rs;
         }
-
+        
         if($code==''){
             $rs['code'] = 996;
             $rs['msg'] = \PhalApi\T('请输入验证码');
@@ -160,7 +160,7 @@ class Login extends Api {
 
         $domain = new Domain_Login();
         $info = $domain->loginByCode($username,$source);
-
+        
         if($info['code']==0){
             $domain->upUserPush($info['info'][0]['id'],$pushid);
 
@@ -169,18 +169,18 @@ class Login extends Api {
                 $Domain_Agent->setAgent($info['info'][0]['id'],$agentcode);
             }
         }
-
+        
         return $info;
     }
-
-    /**
-     * 获取注册验证码
-     * @desc 用于注册获取验证码
-     * @return int code 操作码，0表示成功,2发送失败
-     * @return array info
-     * @return string msg 提示信息
-     */
-    public function getCode() {
+    
+	/**
+	 * 获取注册验证码
+	 * @desc 用于注册获取验证码
+	 * @return int code 操作码，0表示成功,2发送失败
+	 * @return array info 
+	 * @return string msg 提示信息
+	 */
+	public function getCode() {
         $rs = array('code' => 0, 'msg' => \PhalApi\T('发送成功，请注意查收'), 'info' => array());
 
         $account = \App\checkNull($this->account);
@@ -262,7 +262,7 @@ class Login extends Api {
         $sms_key = 'sms_' . $account;
         $sms_code = '';
         if ($result['code'] == 0) {
-            $sms_code = $code;
+              $sms_code = $code;
 
         } else if ($result['code'] == 667) {
             $sms_code = $result['msg'];
@@ -285,8 +285,8 @@ class Login extends Api {
 
         return $rs;
 
-    }
-
+	}
+	
     /**
      * 密码登录
      * @desc 用于用户通过密码登录
@@ -306,32 +306,32 @@ class Login extends Api {
      */
     public function login() {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-
+        
         $username = \App\checkNull($this->username);
         $pass = \App\checkNull($this->pass);
         $pushid = \App\checkNull($this->pushid);
-
+        
         if($username==''){
             $rs['code'] = 995;
             $rs['msg'] = \PhalApi\T('请输入手机号');
             return $rs;
         }
-
+        
         if($pass==''){
             $rs['code'] = 997;
             $rs['msg'] = \PhalApi\T('请输入密码');
             return $rs;
         }
-
+        
         $domain = new Domain_Login();
         $info = $domain->login($username,$pass);
-
+        
         if($info['code']==0){
             $domain->upUserPush($info['info'][0]['id'],$pushid);
         }
         return $info;
     }
-
+	
     /**
      * 手机号注册
      * @desc 用于用户通过手机号注册
@@ -351,7 +351,7 @@ class Login extends Api {
      */
     public function reg() {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-
+        
         $username = \App\checkNull($this->username);
         $pass = \App\checkNull($this->pass);
         $code = \App\checkNull($this->code);
@@ -364,28 +364,28 @@ class Login extends Api {
             $rs['msg'] = \PhalApi\T('请输入手机号');
             return $rs;
         }
-
+        
         if($code==''){
             $rs['code'] = 996;
             $rs['msg'] = \PhalApi\T('请输入验证码');
             return $rs;
         }
-
-        if($pass==''){
+		
+		if($pass==''){
             $rs['code'] = 997;
             $rs['msg'] = \PhalApi\T('请输入密码');
             return $rs;
         }
-
-        if(!\App\checkPass($pass)){
-            $rs['code'] = 997;
+        
+		if(!\App\checkPass($pass)){
+			$rs['code'] = 997;
             $rs['msg'] = \PhalApi\T('密码为6-20位字母数字组合');
             return $rs;
-        }
+		}
 
-        //取redis验证码
+		//取redis验证码
         $sms_key = 'sms_' . $username;
-        $sms_account = \App\getcaches($sms_key);
+		$sms_account = \App\getcaches($sms_key);
 
         if (!$sms_account) {
             $rs['code'] = 996;
@@ -414,16 +414,16 @@ class Login extends Api {
 
         $where=['user_login=?'=>$username];
         $isexist=\App\checkUser($where);
-        if($isexist){
+		if($isexist){
             $rs['code']=1004;
             $rs['msg']=\PhalApi\T('该手机号已注册，请登录');
             return $rs;
-
-        }
-
+		
+		}
+        
         $domain = new Domain_Login();
         $info = $domain->reg($username,$pass,$source);
-
+        
         if($info['code']==0){
             $domain->upUserPush($info['info'][0]['id'],$pushid);
 
@@ -432,10 +432,10 @@ class Login extends Api {
                 $Domain_Agent->setAgent($info['info'][0]['id'],$agentcode);
             }
         }
-
+        
         return $info;
     }
-
+	
     /**
      * 忘记密码
      * @desc 用于用户忘记密码操作
@@ -445,7 +445,7 @@ class Login extends Api {
      */
     public function forget() {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-
+        
         $username = \App\checkNull($this->username);
         $pass = \App\checkNull($this->pass);
         $code = \App\checkNull($this->code);
@@ -457,24 +457,24 @@ class Login extends Api {
             $rs['msg'] = \PhalApi\T('请输入手机号');
             return $rs;
         }
-
+        
         if($code==''){
             $rs['code'] = 996;
             $rs['msg'] = \PhalApi\T('请输入验证码');
             return $rs;
         }
-
-        if($pass==''){
+		
+		if($pass==''){
             $rs['code'] = 997;
             $rs['msg'] = \PhalApi\T('请输入密码');
             return $rs;
         }
-
-        if(!\App\checkPass($pass)){
-            $rs['code'] = 997;
+        
+		if(!\App\checkPass($pass)){
+			$rs['code'] = 997;
             $rs['msg'] = \PhalApi\T('密码为6-20位字母数字组合');
             return $rs;
-        }
+		}
 
         $sms_key = 'sms_' . $username;
         $sms_account = \App\getcaches($sms_key);
@@ -503,14 +503,14 @@ class Login extends Api {
             return $rs;
         }
 
-
+        
         $domain = new Domain_Login();
         $info = $domain->forget($username,$pass);
 
         return $info;
     }
-
-
+	
+    
     /**
      * 三方登录
      * @desc 用于用户三方登录
@@ -532,36 +532,36 @@ class Login extends Api {
      */
     public function loginByThird() {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-
-        $openid=\App\checkNull($this->openid);
-        $type=\App\checkNull($this->type);
-        $nicename=\App\checkNull($this->nicename);
-        $avatar=\App\checkNull($this->avatar);
-        $source=\App\checkNull($this->source);
-        $sign=\App\checkNull($this->sign);
-        $pushid=\App\checkNull($this->pushid);
+        
+		$openid=\App\checkNull($this->openid);
+		$type=\App\checkNull($this->type);
+		$nicename=\App\checkNull($this->nicename);
+		$avatar=\App\checkNull($this->avatar);
+		$source=\App\checkNull($this->source);
+		$sign=\App\checkNull($this->sign);
+		$pushid=\App\checkNull($this->pushid);
         $agentcode=\App\checkNull($this->agentcode);
         if($openid=='' || $type=='' || $sign==''){
             $rs['code'] = 1001;
             $rs['msg'] = \PhalApi\T('信息错误');
-            return $rs;
+            return $rs;	
         }
-
+        
         $checkdata=array(
             'type'=>$type,
             'openid'=>$openid
         );
-
+        
         $issign=\App\checkSign($checkdata,$sign);
         if(!$issign){
             $rs['code']=1001;
-            $rs['msg']=\PhalApi\T('签名错误');
-            return $rs;
+			$rs['msg']=\PhalApi\T('签名错误');
+			return $rs;	
         }
 
         $domain = new Domain_Login();
         $info = $domain->userLoginByThird($openid,$type,$nicename,$avatar,$source);
-
+        
         if($info['code']==0){
             $domain->upUserPush($info['info'][0]['id'],$pushid);
             if($info['info'][0]['isreg']==1 && $agentcode!=''){
@@ -569,7 +569,7 @@ class Login extends Api {
                 $Domain_Agent->setAgent($info['info'][0]['id'],$agentcode);
             }
         }
-
+		
         return $info;
     }
 
@@ -610,4 +610,4 @@ class Login extends Api {
 
 
 
-}
+} 
