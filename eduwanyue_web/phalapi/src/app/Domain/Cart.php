@@ -251,8 +251,8 @@ class Cart {
         }
         
         foreach($goods_a as $k=>$v){
-            $type=isset($v['type'])?$v['type']:0;
-            $typeid=isset($v['typeid'])?$v['typeid']:0;
+            $type = $v['type'] ?? 0;
+            $typeid= $v['typeid'] ?? 0;
 
             $data_good=[
                 'uid'=>$uid,
