@@ -519,7 +519,7 @@ function addVotesRecord($insert)
 /* 字符串加密 */
 function encryption($code)
 {
-    $str  = '1ecxXyLRB.COdrAi:q09Z62ash-QGn8VFNIlb=fM/D74WjS_EUzYuw?HmTPvkJ3otK5gp';
+    $str  = '1ecxXyLRB.COdrAi:q09Z62ash-QGn8VFNIlb=fM/D74WjS_EUzYuw?HmTPvkJ3otK5gp&';
     $strl = strlen($str);
 
     $len = strlen($code);
@@ -542,7 +542,7 @@ function encryption($code)
 /* 字符串解密 */
 function decrypt($code)
 {
-    $str  = '1ecxXyLRB.COdrAi:q09Z62ash-QGn8VFNIlb=fM/D74WjS_EUzYuw?HmTPvkJ3otK5gp';
+    $str  = '1ecxXyLRB.COdrAi:q09Z62ash-QGn8VFNIlb=fM/D74WjS_EUzYuw?HmTPvkJ3otK5gp&';
     $strl = strlen($str);
 
     $len = strlen($code);
