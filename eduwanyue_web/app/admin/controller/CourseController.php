@@ -129,7 +129,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $trialtype;
         }
-        return isset($trialtype[$k]) ? $trialtype[$k] : '';
+        return $trialtype[$k] ?? '';
     }
 
     /**
