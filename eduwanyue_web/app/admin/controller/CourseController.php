@@ -240,7 +240,7 @@ class CourseController extends AdminBaseController
             $map[] = ['gradeid', '=', $gradeid];
         }
 
-        $classid=isset($data['classid']) ? $data['classid']: '';
+        $classid = $data['classid'] ?? '';
         if($classid!=''){
             $map[]=['classid','=',$classid];
         }
@@ -593,13 +593,13 @@ class CourseController extends AdminBaseController
                 }
             }
 
-            $info = isset($data['info']) ? $data['info'] : '';
+            $info = $data['info'] ?? '';
             if ($info == '') {
                 $this->error('请编辑介绍');
             }
 
             if ($sort == 0) {
-                $content = isset($data['content']) ? $data['content'] : '';
+                $content = $data['content'] ?? '';
                 if ($content == '') {
                     $this->error('请编辑内容');
                 }
