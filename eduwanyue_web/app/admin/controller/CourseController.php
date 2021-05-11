@@ -733,7 +733,7 @@ class CourseController extends AdminBaseController
             if ($sort == 3) {
                 $data['type'] = 5;
             } else if ($sort != 1) {
-                $trialtype = isset($data['trialtype']) ? $data['trialtype'] : 0;
+                $trialtype = $data['trialtype'] ?? 0;
                 /* 内容类 */
                 $type = $data['type'];
                 if ($type == 1) {
