@@ -40,7 +40,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $status;
         }
-        return isset($status[$k]) ? $status[$k] : '';
+        return $status[$k] ?? '';
     }
 
     /**
@@ -58,7 +58,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $sort;
         }
-        return isset($sort[$k]) ? $sort[$k] : '';
+        return $sort[$k] ?? '';
     }
 
     /**
@@ -76,7 +76,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $type;
         }
-        return isset($type[$k]) ? $type[$k] : '';
+        return $type[$k] ?? '';
     }
 
     /**
@@ -94,7 +94,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $type;
         }
-        return isset($type[$k]) ? $type[$k] : '';
+        return $type[$k] ?? '';
     }
 
     /**
@@ -112,7 +112,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $paytype;
         }
-        return isset($paytype[$k]) ? $paytype[$k] : '';
+        return $paytype[$k] ?? '';
     }
 
     /**
@@ -146,7 +146,7 @@ class CourseController extends AdminBaseController
         if ($k === '') {
             return $mode;
         }
-        return isset($mode[$k]) ? $mode[$k] : '';
+        return $mode[$k] ?? '';
     }
 
     /* 科目分类 */
@@ -826,7 +826,6 @@ class CourseController extends AdminBaseController
                     $this->error('下课时间不能早于上课时间');
                 }
             }
-
 
             $info = $data['info'] ?? '';
             if ($info == '') {
