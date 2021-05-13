@@ -46,7 +46,7 @@ class OrdersController extends AdminbaseController
             return $type;
         }
 
-        return isset($type[$k]) ? $type[$k] : '';
+        return $type[$k] ?? '';
     }
 
     /*
