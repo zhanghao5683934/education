@@ -28,7 +28,7 @@ class OrdersController extends AdminbaseController
             return $status;
         }
 
-        return isset($status[$k]) ? $status[$k] : '';
+        return $status[$k] ?? '';
     }
 
     /*
@@ -124,7 +124,7 @@ class OrdersController extends AdminbaseController
             return $type;
         }
 
-        return isset($type[$k]) ? $type[$k] : '';
+        return $type[$k] ?? '';
     }
 
     /*
