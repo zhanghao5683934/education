@@ -177,9 +177,7 @@ class SlideItemController extends AdminBaseController
         $result = Db::name('slideItem')->delete($id);
         if ($result) {
 			$this->resetcache($slideItem['slide_id']);
-            //删除图片。
-//            if (file_exists("./upload/".$slideItem['image'])){
-//            }
+            //删除图片
             $this->success("删除成功！", url("SlideItem/index", ["slide_id" => $slideItem['slide_id']]));
         } else {
             $this->error('删除失败！');
@@ -274,7 +272,6 @@ class SlideItemController extends AdminBaseController
 			return !1;
 		}
         $key='getSlide_'.$slide_id;
-        //$rs=Db::name("slideItem")->field('id,title,image,url')->where("status='1' and slide_id={$slide_id} ")->order("list_order asc")->select()->toArray();
 		$where=[
 			['status','=','1'],
 			['slide_id','=',$slide_id],

@@ -313,8 +313,8 @@ class SettingController extends AdminBaseController
             $options = $this->request->param('options/a');
             
             
-            $login_type=isset($_POST['login_type']) ? $_POST['login_type'] : '';
-            $share_type=isset($_POST['share_type']) ? $_POST['share_type'] : '';
+            $login_type = $_POST['login_type'] ?? '';
+            $share_type = $_POST['share_type'] ?? '';
             
             $options['login_type']='';
             $options['share_type']='';

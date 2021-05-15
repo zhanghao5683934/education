@@ -23,7 +23,6 @@ class CourseclassController extends AdminBaseController
 		
         $page = $list->render();
         $this->assign("page", $page);
-            
         $this->assign('list', $list);
 
         return $this->fetch();
