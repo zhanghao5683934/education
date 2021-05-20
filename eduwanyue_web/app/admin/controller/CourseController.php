@@ -430,7 +430,7 @@ class CourseController extends AdminBaseController
         if ($this->request->isPost()) {
             $data = $this->request->param();
 
-            $sort = $data['sort'];
+            $sort = $data['sort'] ?? '';
             $uid  = $data['uid'] ?? '';
             if ($uid == '') {
                 $this->error('请填写主讲老师ID');
