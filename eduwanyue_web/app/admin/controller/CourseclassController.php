@@ -16,7 +16,7 @@ class CourseclassController extends AdminBaseController
             ->order("list_order asc")
             ->paginate(20);
         
-		$list->each(function($v,$k){
+		$list->each(function($v){
             $v['thumb']=get_upload_path($v['thumb']);
             return $v;
         });
