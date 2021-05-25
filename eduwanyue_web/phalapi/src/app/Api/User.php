@@ -109,7 +109,6 @@ class User extends Api {
         }
 
 		$configpub=\App\getConfigPub();
-		$configpri=\App\getConfigPri();
 
 		$ios_shelves=$configpub['ios_shelves'];
 		
