@@ -419,7 +419,7 @@ class Course extends Api
 
         $uid   = \App\checkNull($this->uid);
         $token = \App\checkNull($this->token);
-        $sort  = $this->sort;
+        $sort  = \App\checkNull($this->sort);
         $p     = \App\checkNull($this->p);
 
         $checkToken = \App\checkToken($uid, $token);
@@ -570,7 +570,6 @@ class Course extends Api
             $rs['msg'] = \PhalApi\T('您的登陆状态失效，请重新登陆！');
             return $rs;
         }
-
 
         $domain = new Domain_Course();
         $list = $domain->getMyCourse($uid,$type,$keyword,$p);
