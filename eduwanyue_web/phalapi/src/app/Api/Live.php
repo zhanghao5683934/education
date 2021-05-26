@@ -153,7 +153,7 @@ class Live extends Api {
 		$res = $domain->enter($uid,$token,$liveuid,$courseid,$lessonid);
 
 		if($res['code']==0){
-            $res['info'][0]['nums']=$this->getUserNums($liveuid,$res['info'][0]['stream']);
+            $res['info'][0]['nums']=$this->getUserNums($liveuid,$res['info'][0]['stream']) ?? 0;
         }
         return $res;
 	}
