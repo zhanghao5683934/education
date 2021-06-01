@@ -200,8 +200,6 @@ class Live extends Api {
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
         
         $liveuid = \App\checkNull($this->liveuid);
-        $courseid = \App\checkNull($this->courseid);
-        $lessonid = \App\checkNull($this->lessonid);
         $stream = \App\checkNull($this->stream);
         
 		$nums=$this->getUserNums($liveuid,$stream);
