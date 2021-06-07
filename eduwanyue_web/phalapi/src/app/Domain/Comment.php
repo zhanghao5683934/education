@@ -86,7 +86,7 @@ class Comment {
             $v['avatar']=$userinfo['avatar'];
             $v['add_time']=date('Y-m-d',$v['addtime']);
             $des="";
-            if($v['sort']==1){
+            if((int)$v['sort']===1){
                 $des="学习{$v['lessons']}个课时评价";
             }
             $v['des']=$des;
