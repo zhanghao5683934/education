@@ -20,8 +20,7 @@ class Course {
             $list=$model->getClass();
             \App\setcaches($key,$list);
         }
-
-
+        
         foreach($list as $k=>$v){
             $v['thumb']=\App\get_upload_path($v['thumb']);
             unset($v['list_order']);
@@ -438,13 +437,9 @@ class Course {
 
                 $v1['islast']=$islast;
 
-
-
                 $time='';
                 if($v1['type']>=4){
-                    //if($v1['islive']==0){
                     $time=date('m月d日 H:i',$v1['starttime']);
-                    //}
                 }
                 $v1['time_date']=$time;
                 $v1['url']=\App\encryption(\App\get_upload_path($v1['url']));
