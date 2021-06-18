@@ -347,7 +347,6 @@ class Course {
     /* 课时列表 */
     public function getLessonList($uid,$courseid){
 
-        $nowtime=time();
         $model = new Model_Course();
 
         $where2=['id'=>$courseid];
@@ -428,7 +427,6 @@ class Course {
                     $status='4';
                 }
                 $v1['status']=$status;
-
 
                 $islast='0';
                 if($lastid==$v1['id']){
