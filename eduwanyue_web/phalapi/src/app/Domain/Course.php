@@ -335,7 +335,6 @@ class Course {
             }
         }
 
-
         /* 免费 */
         if($paytype==0){
             return '1';
