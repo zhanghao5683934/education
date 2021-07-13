@@ -192,7 +192,7 @@ class DetailController extends StudentBaseController
     }
 
 
-    /**
+    /*
      * 更新课程进度
      * @param $uid
      * @param $courseid
