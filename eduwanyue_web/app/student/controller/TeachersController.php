@@ -72,7 +72,6 @@ class TeachersController extends StudentBaseController
         }
         $classid = $data['id'] ?? 0;
 
-    //    $where       = 'signoryid = ' . $classid;
 		$where = [
 			['signoryid','=',$classid],
 		];
