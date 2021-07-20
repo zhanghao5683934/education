@@ -151,7 +151,7 @@ class LiveingController extends StudentBaseController
             'liveuid'       => $liveuid,
             'chatserver'    => $configpri['chatserver'],
             'sound_appid'   => $configpri['sound_appid'],
-            'pull'          => $pull,
+            'pull'          => $pull ?? '',
             'stream'        => $stream,
             'livetype'      => $type,
             'courseid'      => $courseid,
