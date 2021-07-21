@@ -520,7 +520,6 @@ class LiveingController extends StudentBaseController
             $this->error('信息错误');
         }
 
-
         $url  = $this->siteUrl . '/api/?s=Exam.GetExam&uid=' . $uid . '&token=' . $token . '&liveuid=' . $liveuid . '&courseid=' . $courseid . '&lessonid=' . $lessonid;
         $list = curl_get($url);
         $this->success('', '', $list['data']);
