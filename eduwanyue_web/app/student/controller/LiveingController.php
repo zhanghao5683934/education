@@ -1067,22 +1067,6 @@ class LiveingController extends StudentBaseController
     {
 
         $data  = $this->request->param();
-        $uid   = session('student.id');
-        $token = session('student.token');
-
-        $courseid  = $data['courseid'];
-        $lessonid  = $data['lessonid'];
-        $liveuid   = $data['liveuid'];
-        $result    = $data['result'];
-        $checkdata = array(
-            'uid'      => $uid,
-            'token'    => $token,
-            'liveuid'  => $liveuid,
-            'courseid' => $courseid,
-            'lessonid' => $lessonid,
-            'result'   => $result,
-        );
-
         $key = '400d069a791d51ada8af3e6c2979bcd7';
         $str = '';
         ksort($data);
