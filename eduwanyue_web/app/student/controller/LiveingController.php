@@ -231,7 +231,6 @@ class LiveingController extends StudentBaseController
 
         $uuid      = $liveinfo['uuid'];
         $roomtoken = $liveinfo['roomtoken'];
-        $configpri = getConfigPri();
         $info      = [
             'name'          => $liveinfo['name'],
             'uuid'          => $uuid,
