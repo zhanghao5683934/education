@@ -869,11 +869,11 @@ class LiveingController extends StudentBaseController
 
         if ($lessonid > 0) {
             $update = ['pptindex' => $activeIndex];
-            $isok   = Db::name('course_lesson')->where(['courseid' => $courseid, 'id' => $lessonid])->update($update);
+            Db::name('course_lesson')->where(['courseid' => $courseid, 'id' => $lessonid])->update($update);
         } else {
 
             $update = ['pptindex' => $activeIndex];
-            $isok   = Db::name('course')->where(['uid' => $uid, 'id' => $courseid])->update($update);
+            Db::name('course')->where(['uid' => $uid, 'id' => $courseid])->update($update);
         }
 
 
