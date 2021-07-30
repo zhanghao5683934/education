@@ -181,6 +181,9 @@ class LessionlistController extends StudentBaseController
 		$where[]=['shelvestime','<',$nowtime];
         $list  = CourseModel::where($where)->order('list_order asc,id desc')->limit(0, 20)->select();
 
+        $zhibo = [];
+        $neirong = [];
+
         foreach ($list as $k => $v) {
             $v = handelInfo($v);
 
@@ -188,9 +191,16 @@ class LessionlistController extends StudentBaseController
             $v['user_nickname'] = $userinfo['user_nickname'];
             $v['avatar']        = $userinfo['avatar'];
             $list[$k] = $v;
+            if ($v['sort'] > 0) {
+                $zhibo[] = $list[$k];
+            } else {
+                $neirong[] = $list[$k];
+            }
         }
 
         $info['lesslist'] = $list;
+        $info['zhibo'] = $zhibo;
+        $info['neirong'] = $neirong;
         $info['gradeid']  = $gradeid;
 
         $this->success('', '', $info);
@@ -215,78 +225,10 @@ class LessionlistController extends StudentBaseController
             $lbid = 4;
         }
 
-        if ($lbid == 2) { //套餐
+        $zhibo = [];
+        $neirong = [];
 
-            $list = Db::name('course_package')
-                ->field('id,name,thumb,price,courseids,nums,des')
-				->where(['gradeid'=>$gradeid])
-                ->order('list_order asc,id desc')
-                ->select()
-                ->toArray();
-
-            foreach ($list as $k => $v) {
-
-                $courseid_a = $this->handelCourseids($v['courseids']);
-                $isT        = false;
-                foreach ($courseid_a as $ks => $vs) {
-
-					$where[]=['id','=',$vs];
-                    if ($kmid != 0) {
-						$where[]=['classid','=',$kmid];
-                    }
-
-                    $lkd = CourseModel::field('id')->where($where)->find();
-                    if ($lkd) {
-                        $isT = true;
-                    }
-                }
-
-                if ($isT === false) {
-                    unset($list[$k]);
-                    continue;
-                }
-
-                $v['sort']  = -1;
-                $v['thumb'] = get_upload_path($v['thumb']);
-                $ismaterial = '0';
-                $teacher    = [];
-                $courses    = $this->getCourseids($v['courseids']);
-                foreach ($courses as $k1 => $v1) {
-                    $ishas = 0;
-                    foreach ($teacher as $k2 => $v2) {
-                        if ($v2['id'] == $v1['uid']) {
-                            $ishas = 1;
-                            break;
-                        }
-                    }
-                    if ($ishas == 0) {
-                        $t_a = [
-                            'id'            => $v1['uid'],
-                            'user_nickname' => $v1['user_nickname'],
-                            'avatar'        => $v1['avatar'],
-                        ];
-
-                        $teacher[] = $t_a;
-                    }
-
-                    if ($v1['ismaterial'] == 1) {
-                        $ismaterial = '1';
-                    }
-
-                }
-
-                $v['teacher']    = $teacher;
-                $v['ismaterial'] = $ismaterial;
-
-                unset($v['courseids']);
-
-                $list[$k] = $v;
-            }
-
-            $list = array_values($list);
-            $list = array_slice($list, 0, 20);
-
-        } else {  //除了套餐的其他
+        if ($lbid != 2) {  //除了套餐的其他
 
             $nowtime = time();
 
@@ -299,7 +241,7 @@ class LessionlistController extends StudentBaseController
 					$where[]=['sort','=',1];
                     break;
                 case 3:
-					$where[]=['sort','=',2];
+					$where[]=['sort','>',1];
                     break;
                 case 99:
 					$where[]=['sort','<>',1];
@@ -312,6 +254,7 @@ class LessionlistController extends StudentBaseController
 			$where[]=['gradeid','=',$gradeid];
 			$where[]=['status','>=',1];
 			$where[]=['shelvestime','<',$nowtime];
+            file_put_contents('where1.txt', json_encode($where));
             $list  = CourseModel::where($where)
                 ->order('list_order asc,id desc')
                 ->limit(0, 20)
@@ -325,10 +268,17 @@ class LessionlistController extends StudentBaseController
                 $v['avatar']        = $userinfo['avatar'];
 
                 $list[$k] = $v;
+                if ($v['sort'] > 0) {
+                    $zhibo[] = $list[$k];
+                } else {
+                    $neirong[] = $list[$k];
+                }
             }
         }
 
         $info['lesslist'] = $list;
+        $info['zhibo'] = $zhibo;
+        $info['neirong'] = $neirong;
         $this->success('', '', $info);
     }
 

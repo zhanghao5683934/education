@@ -321,7 +321,7 @@ namespace App;
         }
 
         $key="token_".$uid;
-		$userinfo=hGetAll($key);
+		$userinfo=getcaches($key);
 		if(!$userinfo){
 			$userinfo=\PhalApi\DI()->notorm->users_token
 						->select('token,expire_time')
@@ -329,7 +329,7 @@ namespace App;
 						->fetchOne();
 
             if($userinfo){
-                hMSet($key,$userinfo);
+                setcaches($key,$userinfo);
             }
 		}
 
