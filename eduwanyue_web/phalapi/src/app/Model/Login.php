@@ -101,7 +101,7 @@ class Login extends NotORM {
                 ->insert( $token_info );
         }
 		
-		\App\hMSet("token_".$uid,$token_info);		
+		\App\setcaches("token_".$uid,$token_info);
         
 		return 1;
     }
