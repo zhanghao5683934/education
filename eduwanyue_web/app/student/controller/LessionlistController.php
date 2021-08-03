@@ -22,7 +22,7 @@ use think\Db;
 class LessionlistController extends StudentBaseController
 {
 
-    /**
+    /*
      * 首页
      * @return mixed
      */
@@ -49,92 +49,17 @@ class LessionlistController extends StudentBaseController
             }
         }
 
-        $nowtime = time();
-        if (isset($data['keywords'])) {
-            $keywords = $data['keywords'];
-
-            $userinfo = session('student');
-
-            if ($userinfo) {
-                $gradeid = $userinfo['gradeid'];
-            } else {
-
-                $ip = get_client_ip();
-
-                $info    = IpGardeModel::where(['ip' => $ip])->find();
-                $gradeid = $info['gardeid'];
-            }
-
-			$where = [
-				['gradeid','=',$gradeid],
-				['status','>=',1],
-				['shelvestime','<',$nowtime],
-			];
-			
-            $list  = CourseModel::where($where)->order('list_order asc,id desc')->select()->toArray();
-
-            foreach ($list as $k => $v) {
-
-                $isN     = strpos($v['name'], $keywords);
-                $teacher = getUserInfo($v['uid']);
-                $isT     = strpos($teacher['user_nickname'], $keywords);
-                if ($isN === false && $isT === false) { //不包含
-
-                    unset($list[$k]);
-                    continue;
-                }
-
-                $v = handelInfo($v);
-
-                $userinfo           = getUserInfo($v['uid']);
-                $v['user_nickname'] = $userinfo['user_nickname'];
-                $v['avatar']        = $userinfo['avatar'];
-
-                $list[$k] = $v;
-            }
-
-            $list = array_values($list);
-
-            $isMore = 0;
-        } else {
-            $keywords = '';
-
-            $list = CourseModel::where([
-				['sort','=',1],
-				['gradeid','=',$njid],
-				['status','>=',1],
-				['shelvestime','<',$nowtime],
-			])
-                ->order('list_order asc,id desc')
-                ->limit(0, 20)
-                ->select();
-
-            foreach ($list as $k => $v) {
-                $v = handelInfo($v);
-
-                $userinfo           = getUserInfo($v['uid']);
-                $v['user_nickname'] = $userinfo['user_nickname'];
-                $v['avatar']        = $userinfo['avatar'];
-
-                $list[$k] = $v;
-            }
-
-            $isMore = 0;
-            if (count($list) >= 20) {
-                $isMore = 1;
-            }
-
-        }
-
+        $flag = $data['flag'] ?? '0';
         $this->assign([
             'xdlist'   => $xdlist,
             'xdid'     => $xdid,
             'njlist'   => $njlist,
             'njid'     => $njid,
-            'lesslist' => $list,
-            'isMore'   => $isMore,
+            'lesslist' => [],
+            'is_more'   => 1,
             'navid'    => 1,
-            'keywords' => $keywords
+            'keywords' => '',
+            'flag'     => $flag,
         ]);
 
         return $this->fetch();
@@ -145,9 +70,9 @@ class LessionlistController extends StudentBaseController
     {
         $data = $this->request->param();
 
-        $xdid = sql_check($data['xdid']) ?? 0; //学段id
-        $kmid = sql_check($data['kmid']) ?? 0; //科目id
-        $lbid = sql_check($data['lbid']) ?? 0; //类别id
+        $xdid = sql_check($data['xdid']) ?? '0'; //学段id
+        $kmid = sql_check($data['kmid']) ?? '0'; //科目id
+        $lbid = sql_check($data['lbid']) ?? '0'; //类别id
 
         $info      = array();
         $gradeinfo = Db::name('course_grade')->field('id,name')->where(['pid' => $xdid])->order('list_order asc')->select()->toArray();
@@ -208,7 +133,7 @@ class LessionlistController extends StudentBaseController
 
 
     /**
-     * 选择年级
+     * 选择年级 ajax方法
      */
     public function ChooseNj()
     {
@@ -217,6 +142,7 @@ class LessionlistController extends StudentBaseController
         $njid = sql_check($data['njid']) ?? 0; //学级id
         $kmid = sql_check($data['kmid']) ?? 0; //科目id
         $lbid = sql_check($data['lbid']) ?? 0; //类别id  默认是直播 3
+        $isAll = sql_check($data['is_all']) ?? 0; //是否展示全部直播/内容
 
         $info    = array();
         $gradeid = $njid;
@@ -254,11 +180,13 @@ class LessionlistController extends StudentBaseController
 			$where[]=['gradeid','=',$gradeid];
 			$where[]=['status','>=',1];
 			$where[]=['shelvestime','<',$nowtime];
-            file_put_contents('where1.txt', json_encode($where));
-            $list  = CourseModel::where($where)
-                ->order('list_order asc,id desc')
-                ->limit(0, 20)
-                ->select();
+
+            $list=CourseModel::select(function($query)use($where, $isAll){
+                $query->where($where)->order('list_order asc,id desc');
+                if ($isAll != '1') { //默认展示20个(在首页展示)
+                    $query->limit(0, 20);
+                }
+            });
 
             foreach ($list as $k => $v) {
                 $v = handelInfo($v);
