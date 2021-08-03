@@ -20,11 +20,21 @@
          $('.neirong-info').find('a').addClass('white');
          chooselb(4);
      } else if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
-         console.log(4555);
-        chooselb(99); //选课中心默认显示小学 一年级 全部
-         location = 'index';
+         if ((isMore == 1) && (pageFlag == 3)) {
+             // 当前是student/lessionlist/index更多页面 并且显示全部直播课程
+             chooselb(3,'1');
+             location = 'index';
+         } else if((isMore == 1) && (pageFlag == 4)){
+             // 当前是student/lessionlist/index更多页面 并且显示全部内容
+             chooselb(4,'1');
+             location = 'index';
+         } else {
+             // 当前是首页
+             chooselb(99); //选课中心默认显示小学 一年级 全部
+             location = 'index';
+         }
+
     } else {
-         console.log(4666);
         // 选课中心默认显示小学 一年级 全部
         chooselb(99);
         location = 'index';
@@ -57,7 +67,19 @@
             $('.less_top #nj .li').find('a').removeClass('white');
             that.addClass('active');
             that.find('a').addClass('white');
-            choosenj(id);
+
+            if ((isMore == 1) && (pageFlag == 3)) {
+                // 当前是student/lessionlist/index更多页面 并且显示全部直播课程
+                choosenj(id,'1');
+                location = 'index';
+            } else if((isMore == 1) && (pageFlag == 4)){
+                // 当前是student/lessionlist/index更多页面 并且显示全部内容
+                choosenj(id,'1');
+                location = 'index';
+            } else {
+                choosenj(id);
+            }
+
         }
     })
 
@@ -83,6 +105,8 @@
 
         var isHav = that.hasClass('active');
         var id = that.data('id');
+        pageFlag = id; //改变类别标志
+
         if(isHav == false){
             $('.less_top #lb .li').removeClass('active');
             $('.less_top #lb .li').find('a').removeClass('white');
@@ -153,11 +177,23 @@
                 $('.less_list ul li').remove();
                 $('.less_list_nei ul li').remove();
 
-                //直播
-                $('.less_list ul').html(zhibohtml);
+                if ((id == 3) && (isAll == '1')) { //只显示全部直播
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                } else if((id == 4) && (isAll == '1')) { //只显示全部内容
+                    //内容
+                    $('.less_list ul').html(neironghtml);
+                    $('.zhibo-info').removeClass('active');
+                    $('.zhibo-info').find('a').removeClass('white');
+                    $('.neirong-info').addClass('active');
+                    $('.neirong-info').find('a').addClass('white');
 
-                //内容
-                $('.less_list_nei ul').html(neironghtml);
+                } else {
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                    //内容
+                    $('.less_list_nei ul').html(neironghtml);
+                }
 
                 layer.close(index);
             }
@@ -169,7 +205,8 @@
        * 选择年级
        * @param id
       */
-    function choosenj(id){
+    function choosenj(id, isAll = '0'){
+
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
         });
@@ -178,13 +215,12 @@
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid},
+            data:{njid:njid,kmid:kmid,lbid:lbid, is_all: isAll},
             //dataType:'json',
             error:function(e){
                 layer.msg('网路错误');
             },
             success:function(data){
-                console.log(data);
                 var lesshtml = replaceHtml(data);
                 var zhibohtml = replaceHtmlNew(data.data.zhibo);
                 var neironghtml = replaceHtmlNew(data.data.neirong);
@@ -192,11 +228,25 @@
                 $('.less_list ul li').remove();
                 $('.less_list_nei ul li').remove();
 
-                //直播
-                $('.less_list ul').html(zhibohtml);
+                if ((pageFlag == 3) && (isAll == '1')) { //只显示全部直播
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                    $('.less_list').show();
+                } else if((pageFlag == 4) && (isAll == '1')) { //只显示全部内容
+                    //内容
+                    $('.less_list ul').html(neironghtml);
+                    $('.less_list').show();
+                    $('.zhibo-info').removeClass('active');
+                    $('.zhibo-info').find('a').removeClass('white');
+                    $('.neirong-info').addClass('active');
+                    $('.neirong-info').find('a').addClass('white');
 
-                //内容
-                $('.less_list_nei ul').html(neironghtml);
+                } else {
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                    //内容
+                    $('.less_list_nei ul').html(neironghtml);
+                }
 
                 layer.close(index);
             }
@@ -204,7 +254,7 @@
     }
 
 
-    function choosekm(id){
+    function choosekm(id, isAll = '0'){
 
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
@@ -216,7 +266,7 @@
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid},
+            data:{njid:njid,kmid:kmid,lbid:lbid, is_all:isAll},
             //dataType:'json',
             error:function(e){
                 layer.msg('网路错误');
@@ -231,14 +281,19 @@
 
     }
 
-    function chooselb(id = '0'){
-         console.log(id);
+     /**
+      *
+      * @param id 展示类型
+      * @param isAll 是否显示全部直播/内容
+      */
+    function chooselb(id = '0', isAll = '0'){
+
          //只在首页隐藏显示
         if (location == 'index') {
-            if (id == 3) {
+            if (id == 3) { //只显示直播
                 $(".less_list_nei").hide();
                 $(".less_list").show();
-            } else if(id == 4) {
+            } else if(id == 4) { //只显示内容
                 $(".less_list").hide();
                 $(".less_list_nei").show();
             } else if(id == 99) {
@@ -256,12 +311,11 @@
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid},
+            data:{njid:njid,kmid:kmid,lbid:lbid, is_all:isAll},
             error:function(e){
                 layer.msg('网路错误');
             },
             success:function(data){
-                console.log(data);
 
                 var zhibohtml = replaceHtmlNew(data.data.zhibo);
                 var neironghtml = replaceHtmlNew(data.data.neirong);
@@ -269,11 +323,23 @@
                 $('.less_list ul li').remove();
                 $('.less_list_nei ul li').remove();
 
-                //直播
-                $('.less_list ul').html(zhibohtml);
+                if ((id == 3) && (isAll == '1')) { //只显示全部直播
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                } else if((id == 4) && (isAll == '1')) { //只显示全部内容
+                    //内容
+                    $('.less_list ul').html(neironghtml);
+                    $('.zhibo-info').removeClass('active');
+                    $('.zhibo-info').find('a').removeClass('white');
+                    $('.neirong-info').addClass('active');
+                    $('.neirong-info').find('a').addClass('white');
 
-                //内容
-                $('.less_list_nei ul').html(neironghtml);
+                } else {
+                    //直播
+                    $('.less_list ul').html(zhibohtml);
+                    //内容
+                    $('.less_list_nei ul').html(neironghtml);
+                }
 
                 layer.close(index);
             }
@@ -371,17 +437,13 @@
              if(data[i].lesson == '正在直播'){
                  isL = '<text class="text1" style="color: #38DAA6;">'+data[i].lesson+'</text>';
              }else{
-
                  if(data[i].sort == 0){
                      isL = '<text class="text1" style="border: 1px solid #969696;padding: 0 2px 0 2px;">'+data[i].lesson+'</text>';
                  }else{
                      isL = '<text class="text1">'+data[i].lesson+'</text>';
-
                  }
 
-
              }
-
 
              var rt = '';
              var ahref = '';
