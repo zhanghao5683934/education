@@ -62,7 +62,7 @@
         <div class="tips">
             <span>直播课堂</span>
             <div style="display: inline-block; width: 92%; text-align: right;">
-                <a style="color:#9e9a9a" href="{:url('student/lessionlist/index')}">更多></a>
+                <a style="color:#9e9a9a" href="{:url('student/lessionlist/index',['flag' => '3'])}">更多></a>
             </div>
         </div>
         <ul>
@@ -107,7 +107,7 @@
     <div class="tips">
         <span>精选内容</span>
         <div style="display: inline-block; width: 92%; text-align: right;">
-            <a style="color:#9e9a9a" href="{:url('student/lessionlist/index',['flag' => 'neirong'])}">更多></a>
+            <a style="color:#9e9a9a" href="{:url('student/lessionlist/index',['flag' => '4'])}">更多></a>
         </div>
     </div>
     <ul>
@@ -164,6 +164,9 @@
     var kmid = '0'; //科目id
     var lbid = '1'; //类别id
     var page = 1; //页码
+    var isMore = 0;
+    var pageFlag = 0; //当前页面内没有更多按钮, 此标志置0
+
 </script>
 <script src="__STATIC__/student/js/index.js"></script>
 <script src="__STATIC__/student/js/lessionlist.js"></script>

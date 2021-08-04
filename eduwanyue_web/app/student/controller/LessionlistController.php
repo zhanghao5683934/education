@@ -84,7 +84,6 @@ class LessionlistController extends StudentBaseController
         }
 
         $nowtime = time();
-        $where = '';
         $where = [];
         switch ($lbid) {
             case 4:
