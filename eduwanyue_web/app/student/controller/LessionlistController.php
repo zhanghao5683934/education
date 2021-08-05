@@ -253,7 +253,6 @@ class LessionlistController extends StudentBaseController
 						'id','=',$vs
 					];
                     if ($kmid != 0) {
-                        //$where .= ' and classid =' . $kmid;
 						$where[]=[
 							'classid','=',$kmid
 						];		
