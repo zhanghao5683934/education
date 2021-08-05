@@ -249,12 +249,10 @@ class LessionlistController extends StudentBaseController
                 $isT        = false;
                 foreach ($courseid_a as $ks => $vs) {
 
-                //    $where = 'id = ' . $vs;
 					$where[]=[
 						'id','=',$vs
 					];
                     if ($kmid != 0) {
-                        //$where .= ' and classid =' . $kmid;
 						$where[]=[
 							'classid','=',$kmid
 						];		
