@@ -365,7 +365,6 @@ class LessionlistController extends StudentBaseController
 		$where=[
 			['id','in',$courseid_s]
 		];
-        $nowtime = time();
 
         $list = CourseModel::where($where)->order('list_order asc,id desc')->select();
 
