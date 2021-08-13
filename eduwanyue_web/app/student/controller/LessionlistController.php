@@ -230,9 +230,6 @@ class LessionlistController extends StudentBaseController
         $gradeid = $njid;
 
         if ($lbid == 2) { //套餐
-            $list = array();
-
-            $nowtime = time();
 
             $list = Db::name('course_package')
                 ->field('id,name,thumb,price,courseids,nums,des')
