@@ -1177,7 +1177,6 @@ function agoraStartRe($channel, $uid, $resourceid, $token = null, $mode = 'mix')
 
     $res = curl_post($url, $data, $headers);
 
-    // file_put_contents(CMF_ROOT.'data/log/agoraRecord_'.date('Y-m-d').'.txt',date('Y-m-d H:i:s').' 提交参数信息 start data:'.json_encode($data)."\r\n",FILE_APPEND);
     file_put_contents(CMF_ROOT . 'data/log/agoraRecord_' . date('Y-m-d') . '.txt', date('Y-m-d H:i:s') . ' 提交参数信息 start channel:' . json_encode($channel) . "\r\n", FILE_APPEND);
     file_put_contents(CMF_ROOT . 'data/log/agoraRecord_' . date('Y-m-d') . '.txt', date('Y-m-d H:i:s') . ' 提交参数信息 start uid:' . json_encode($uid) . "\r\n", FILE_APPEND);
     file_put_contents(CMF_ROOT . 'data/log/agoraRecord_' . date('Y-m-d') . '.txt', date('Y-m-d H:i:s') . ' 提交参数信息 start res:' . json_encode($res) . "\r\n", FILE_APPEND);
@@ -1240,11 +1239,7 @@ function agoraStopRe($channel, $uid, $resourceid, $sid, $token = null, $mode = '
 }
 
 /* 下课时发布作业 */
-//function releaseTask($uid, $courseid, $lessonid = 0)
-//{
-//    Db::name('task')->where([['uid', '=', $uid], ['courseid', '=', $courseid], ['lessonid', '=', $lessonid]])->update(['status' => '1']);
-//    return 1;
-//}
+
 
 /* 内容形式 */
 function getTypes($k = '')
@@ -1295,7 +1290,6 @@ function handelInfo($v)
 
     $paytype = $v['paytype'];
     if ($paytype == 1) {
-        //$payval=number_format($v['payval'],2);
         $payval = $v['payval'];
     }
 
