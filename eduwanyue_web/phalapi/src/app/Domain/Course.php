@@ -62,7 +62,6 @@ class Course {
     /* 处理课程信息 */
     protected function handelInfo($v){
         $v['thumb']=\App\get_upload_path($v['thumb']);
-        $nowtime=time();
         $payval='免费';
         $lesson='';
         $sort=$v['sort'];
