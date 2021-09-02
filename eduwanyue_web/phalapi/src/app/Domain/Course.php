@@ -734,7 +734,6 @@ class Course {
             \App\setcaches($key,$list);
         }
 
-
         foreach($list as $k=>$v){
             unset($v['list_order']);
             $list[$k]=$v;
@@ -778,7 +777,6 @@ class Course {
     public function getGrade(){
 
         $list=$this->getGradeList();
-
         $list=$this->handelGrade($list);
 
         return $list;
