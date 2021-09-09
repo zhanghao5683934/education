@@ -39,7 +39,6 @@ class Login {
     public function login($user_login,$pass) {
         
         $rs = array('code' => 0, 'msg' => '', 'info' => array());
-        
 
         $where=[
             'user_login = ?'=>$user_login,
@@ -194,8 +193,7 @@ class Login {
         $token=md5(md5($info['id'].$info['user_nickname'].time()));
 		$info['token']=$token;
 		$model->updateToken($info['id'],$token);
-        
-        
+
         $rs['info'][0]=$info;
         return $rs;
     }
