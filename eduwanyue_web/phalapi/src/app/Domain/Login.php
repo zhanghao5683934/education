@@ -144,7 +144,6 @@ class Login {
     }
     
     public function upUserPush($uid,$pushid) {
-        $rs = array();
 
         $model = new Model_Login();
         $rs = $model->upUserPush($uid,$pushid);
