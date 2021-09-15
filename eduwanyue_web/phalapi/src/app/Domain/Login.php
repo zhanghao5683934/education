@@ -138,7 +138,6 @@ class Login {
         $model = new Model_Login();
         $info = $model->forget($user_login,$data);
 
-  
         return $rs;
         
     }
