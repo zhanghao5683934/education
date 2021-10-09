@@ -93,7 +93,7 @@ class NewsController extends AdminBaseController
                 $this->error('请上传封面');
             }
 
-            $nowtime     = time();}
+            $nowtime = time();
 
             $content = $data['content'] ?? '';
             if ($content == '') {
@@ -108,6 +108,7 @@ class NewsController extends AdminBaseController
             }
 
             $this->success("添加成功！", url("news/index"));
+        }
     }
 
 
