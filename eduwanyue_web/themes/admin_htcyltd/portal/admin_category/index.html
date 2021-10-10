@@ -45,6 +45,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="layui-page-content js-check-wrap">
             <div class="layui-card">
                 <div class="layui-card-body">
@@ -74,7 +76,7 @@
                                 <thead>
                                 <tr>
                                     <th width="16">
-                                            <input lay-skin="primary" type="checkbox" lay-filter="js-check-all" class="js-check-all" data-direction="x" data-checklist="js-check-x">
+                                        <input lay-skin="primary" type="checkbox" lay-filter="js-check-all" class="js-check-all" data-direction="x" data-checklist="js-check-x">
                                     </th>
                                     <th width="50">排序</th>
                                     <th width="50">ID</th>
@@ -91,8 +93,7 @@
                                             <input lay-skin="primary" type="checkbox" lay-filter="js-check-all" class="js-check-all" data-direction="x" data-checklist="js-check-x" name="ids[]" value="{$vo.id}">
                                         </td>
                                         <td>
-                                            <input name="list_orders[{$vo.id}]" type="text" size="3" value="{$vo.list_order}"
-                                                   class="input-order">
+                                            <input name="list_orders[{$vo.id}]" type="text" size="3" value="{$vo.list_order}" class="input-order">
                                         </td>
                                         <td>{$vo.id}</td>
                                         <td>{$vo.name}
@@ -117,6 +118,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 <script src="__STATIC__/js/admin.js"></script>

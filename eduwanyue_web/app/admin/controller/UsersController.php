@@ -73,7 +73,7 @@ class UsersController extends AdminBaseController
         }
 
         $nums = UsersModel::where($map)->count();
-        $list = UsersModel::where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
+        $list = UsersModel::where($map)->order("id desc")->paginate(15, false, ['query' => input()]);
 
         $list->each(function ($v, $k) {
 
