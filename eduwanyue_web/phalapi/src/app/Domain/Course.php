@@ -36,7 +36,6 @@ class Course
     /* 某课程科目分类信息 */
     public function getClassInfo($id)
     {
-
         $info = [];
         $list = $this->getClass();
 
@@ -105,7 +104,6 @@ class Course
             $payval = '密码';
         }
 
-
         $v['payval'] = $payval;
         $v['lesson'] = $lesson;
         unset($v['status']);
@@ -123,7 +121,6 @@ class Course
     /* 课程列表 */
     public function getList($p = 1, $where = '', $order = 'list_order asc,id desc', $nums = 0)
     {
-
         $model = new Model_Course();
         $list  = $model->getList($where, $order, $p, $nums);
 
