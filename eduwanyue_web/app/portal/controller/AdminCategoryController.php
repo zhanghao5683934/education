@@ -166,7 +166,6 @@ class AdminCategoryController extends AdminBaseController
             $portalCategoryModel = new PortalCategoryModel();
             $category            = $portalCategoryModel->get($id)->toArray();
 
-
             $categoriesTree = $portalCategoryModel->adminCategoryTree($category['parent_id'], $id);
 
             $themeModel        = new ThemeModel();

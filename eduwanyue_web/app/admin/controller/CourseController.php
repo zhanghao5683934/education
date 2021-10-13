@@ -150,7 +150,8 @@ class CourseController extends AdminBaseController
     }
 
     /* 科目分类 */
-    protected function getClass(){
+    protected function getClass()
+    {
         $list = Db::name('course_class')
             ->order("list_order asc")
             ->column('*','id');
@@ -265,7 +266,7 @@ class CourseController extends AdminBaseController
             $map[] = ['uid', '=', $uid];
         }
 
-        $list = CourseModel::where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
+        $list = CourseModel::where($map)->order("id desc")->paginate(15, false, ['query' => input()]);
 
         $list->each(function ($v) {
 
