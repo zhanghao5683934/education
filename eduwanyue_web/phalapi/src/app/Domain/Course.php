@@ -377,7 +377,7 @@ class Course
 
         $ispay = 1;
 
-        if ($info['paytype'] != 0) {
+        if ((int)$info['paytype'] !== 0) {
             $where2 = ['uid' => $uid, 'courseid' => $courseid, 'status' => 1];
             $isbuy  = $model->getBuy($where2);
             if (!$isbuy) {
