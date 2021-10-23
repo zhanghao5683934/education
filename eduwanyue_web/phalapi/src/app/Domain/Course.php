@@ -408,7 +408,7 @@ class Course
                 }
 
                 if ($v1['type'] >= 4 && $v1['islive'] == 0) {
-                    /* 未直播  不能进 */
+                    /* 未直播 不能进 */
                     $isenter = '0';
                 }
                 $v1['isenter'] = $isenter;
