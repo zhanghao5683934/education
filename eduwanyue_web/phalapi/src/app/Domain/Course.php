@@ -402,10 +402,7 @@ class Course
                     /* 待解锁 不能进 */
                     $isenter = '0';
                 }
-                if ($v1['istrial'] == 1) {
-                    /* 试学 可进 */
-                    $isenter = '1';
-                }
+                if ($v1['istrial'] == 1) $isenter = '1';
 
                 if ($v1['type'] >= 4 && $v1['islive'] == 0) {
                     /* 未直播 不能进 */
