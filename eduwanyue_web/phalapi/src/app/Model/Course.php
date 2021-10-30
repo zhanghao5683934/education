@@ -40,7 +40,7 @@ class Course extends NotORM {
         $start=($p-1) * $nums;
 
         $list=\PhalApi\DI()->notorm->course
-            ->select('id,uid,sort,type,name,thumb,paytype,payval,status,starttime,lessons,islive,ismaterial,views')
+            ->select('*')
             ->where($where)
             ->order($order)
             ->limit($start,$nums)
