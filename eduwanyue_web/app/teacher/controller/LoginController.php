@@ -138,9 +138,7 @@ class LoginController extends HomebaseController
         if (!$userinfo || $userinfo['user_pass'] != $user_pass) {
             $this->error('账号或密码错误');
         }
-
         $this->handleInfo($userinfo);
-
         $this->success('登陆成功');
 
     }
