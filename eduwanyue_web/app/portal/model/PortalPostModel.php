@@ -268,7 +268,6 @@ class PortalPostModel extends Model
             $id = $data['id']; //获取删除id
 
             $res = $this->where('id', $id)->find();
-
             if ($res) {
                 $res = json_decode(json_encode($res), true); //转换为数组
 
@@ -316,20 +315,12 @@ class PortalPostModel extends Model
                     $recycleData[$key]['create_time'] = time();
                     $recycleData[$key]['table_name']  = 'portal_post';
                     $recycleData[$key]['name']        = $value['post_title'];
-
                 }
 
                 Db::startTrans(); //开启事务
                 $transStatus = false;
                 try {
                     Db::name('portal_post')->where('id', 'in', $ids)->delete();
-                    // Db::name('portal_post')->where('id', 'in', $ids)
-                        // ->update([
-                            // 'delete_time' => time()
-                        // ]);
-
-
-                    //Db::name('recycle_bin')->insertAll($recycleData);
 
                     $transStatus = true;
                     // 提交事务

@@ -587,7 +587,7 @@ class LoginController extends HomebaseController
         );
 
         setcaches("token_" . $uid, $token_info);
-        /* 删除PUSH信息 */
+        //删除PUSH信息
         DB::name("users_pushid")->where("uid",$uid)->delete();
 
         return 1;
