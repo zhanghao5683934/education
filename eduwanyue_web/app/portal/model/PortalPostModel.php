@@ -330,11 +330,8 @@ class PortalPostModel extends Model
 
                     // 回滚事务
                     Db::rollback();
-
-
                 }
                 return $transStatus;
-
 
             } else {
                 return false;

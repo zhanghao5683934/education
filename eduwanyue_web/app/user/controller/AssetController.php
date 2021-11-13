@@ -37,7 +37,6 @@ class AssetController extends AdminBaseController
     public function webuploader()
     {
         if ($this->request->isPost()) {
-
             $uploader = new Upload();
             $result = $uploader->upload();
 
@@ -70,7 +69,6 @@ class AssetController extends AdminBaseController
             } else {
                 $this->error('上传文件类型配置错误！');
             }
-
 
             View::share('filetype', $arrData["filetype"]);
             View::share('extensions', $extensions);
