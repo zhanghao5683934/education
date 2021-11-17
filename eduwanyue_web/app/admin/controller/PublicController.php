@@ -71,10 +71,12 @@ class PublicController extends AdminBaseController
         if (empty($name)) {
             $this->error(lang('USERNAME_OR_EMAIL_EMPTY'));
         }
+
         $pass = $this->request->param("password");
         if (empty($pass)) {
             $this->error(lang('PASSWORD_REQUIRED'));
         }
+
         if (strpos($name, "@") > 0) {//邮箱登陆
             $where['user_email'] = $name;
         } else {
