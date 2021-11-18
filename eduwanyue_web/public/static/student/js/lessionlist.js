@@ -1,44 +1,31 @@
- $(function(){
-
-    lbid = '0'; //类别id重置
+$(function(){
 
     var currentUrl = window.location.href;
     var urlArr = currentUrl.split('.com');
 
     var flag = 0;
     var location = '';
-     for (let idx in urlArr) {
-         if (urlArr[idx].indexOf("neirong") != '-1')  {
-             flag++;
-         }
-     }
-     if (flag > 0) {
-         
-         $('.zhibo-info').removeClass('active');
-         $('.zhibo-info').find('a').removeClass('white');
-         $('.neirong-info').addClass('active');
-         $('.neirong-info').find('a').addClass('white');
-         chooselb(4);
-     } else if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
-         if ((isMore == 1) && (pageFlag == 3)) {
-             // 当前是student/lessionlist/index更多页面 并且显示全部直播课程
-             chooselb(3,'1');
-             location = 'index';
-         } else if((isMore == 1) && (pageFlag == 4)){
-             // 当前是student/lessionlist/index更多页面 并且显示全部内容
-             chooselb(4,'1');
-             location = 'index';
-         } else {
-             // 当前是首页
-             chooselb(99); //选课中心默认显示小学 一年级 全部
-             location = 'index';
-         }
+    for (let idx in urlArr) {
+        if (urlArr[idx].indexOf("neirong") != '-1')  {
+            flag++;
+        }
+    }
+    if (flag > 0) {
+
+        $('.zhibo-info').removeClass('active');
+        $('.zhibo-info').find('a').removeClass('white');
+        $('.neirong-info').addClass('active');
+        $('.neirong-info').find('a').addClass('white');
+        chooselb(4);
+    } else if (urlArr.length > 1 && (urlArr[1] != "/") && (urlArr[1] != "?")) {
+        chooselb(3); //选课中心默认显示直播分类
 
     } else {
-        // 选课中心默认显示小学 一年级 全部
+        // 首页显示所有分类
         chooselb(99);
         location = 'index';
     }
+
 
     //切换学段
     $('.less_top #xd').on('click','.li',function(){
@@ -55,7 +42,7 @@
             choosexd(id);
         }
     })
-    
+
     //切换年级
     $('.less_top #nj').on('click','.li',function(){
         var that = $(this);
@@ -68,18 +55,7 @@
             that.addClass('active');
             that.find('a').addClass('white');
 
-            if ((isMore == 1) && (pageFlag == 3)) {
-                // 当前是student/lessionlist/index更多页面 并且显示全部直播课程
-                choosenj(id,'1');
-                location = 'index';
-            } else if((isMore == 1) && (pageFlag == 4)){
-                // 当前是student/lessionlist/index更多页面 并且显示全部内容
-                choosenj(id,'1');
-                location = 'index';
-            } else {
-                choosenj(id);
-            }
-
+            choosenj(id);
         }
     })
 
@@ -105,8 +81,6 @@
 
         var isHav = that.hasClass('active');
         var id = that.data('id');
-        pageFlag = id; //改变类别标志
-
         if(isHav == false){
             $('.less_top #lb .li').removeClass('active');
             $('.less_top #lb .li').find('a').removeClass('white');
@@ -115,7 +89,7 @@
             chooselb(id);
         }
     })
-    
+
 
     //点击查看更多
     $('.less_list').on('click','.look_more',function(){
@@ -130,7 +104,7 @@
                 layer.msg('网路错误');
             },
             success:function(data){
-            
+
                 var lesshtml = replaceHtml(data);
 
                 $('.less_list ul').append(lesshtml);
@@ -155,7 +129,7 @@
                 layer.msg('网路错误');
             },
             success:function(data){
-            
+
                 $('.less_top .right').eq(1).html('');
                 var njhtml = '';
                 njid = data.data.gradeid;
@@ -171,90 +145,40 @@
                 $('.less_top .right').eq(1).html(njhtml);
 
 
-                var zhibohtml = replaceHtmlNew(data.data.zhibo);
-                var neironghtml = replaceHtmlNew(data.data.neirong);
+                var lesshtml = replaceHtml(data);
 
-                $('.less_list ul li').remove();
-                $('.less_list_nei ul li').remove();
-
-                if ((id == 3) && (isAll == '1')) { //只显示全部直播
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                } else if((id == 4) && (isAll == '1')) { //只显示全部内容
-                    //内容
-                    $('.less_list ul').html(neironghtml);
-                    $('.zhibo-info').removeClass('active');
-                    $('.zhibo-info').find('a').removeClass('white');
-                    $('.neirong-info').addClass('active');
-                    $('.neirong-info').find('a').addClass('white');
-
-                } else {
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                    //内容
-                    $('.less_list_nei ul').html(neironghtml);
-                }
-
+                $('.less_list ul').html(lesshtml);
                 layer.close(index);
             }
         });
     }
 
 
-     /**
-       * 选择年级
-       * @param id
-      */
-    function choosenj(id, isAll = '0'){
-
+    function choosenj(id){
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
         });
         njid = id;
         page = 1;
+
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid, is_all: isAll},
+            data:{njid:njid,kmid:kmid,lbid:lbid},
             //dataType:'json',
             error:function(e){
                 layer.msg('网路错误');
             },
             success:function(data){
                 var lesshtml = replaceHtml(data);
-                var zhibohtml = replaceHtmlNew(data.data.zhibo);
-                var neironghtml = replaceHtmlNew(data.data.neirong);
-
-                $('.less_list ul li').remove();
-                $('.less_list_nei ul li').remove();
-
-                if ((pageFlag == 3) && (isAll == '1')) { //只显示全部直播
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                    $('.less_list').show();
-                } else if((pageFlag == 4) && (isAll == '1')) { //只显示全部内容
-                    //内容
-                    $('.less_list ul').html(neironghtml);
-                    $('.less_list').show();
-                    $('.zhibo-info').removeClass('active');
-                    $('.zhibo-info').find('a').removeClass('white');
-                    $('.neirong-info').addClass('active');
-                    $('.neirong-info').find('a').addClass('white');
-
-                } else {
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                    //内容
-                    $('.less_list_nei ul').html(neironghtml);
-                }
-
+                $('.less_list ul').html(lesshtml);
                 layer.close(index);
             }
         });
     }
 
 
-    function choosekm(id, isAll = '0'){
+    function choosekm(id){
 
         var index = layer.load(1, {
             shade: [0.3,'#000'] //0.1透明度的白色背景
@@ -262,11 +186,10 @@
         kmid = id;
         page = 1;
 
-
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid, is_all:isAll},
+            data:{njid:njid,kmid:kmid,lbid:lbid},
             //dataType:'json',
             error:function(e){
                 layer.msg('网路错误');
@@ -281,19 +204,14 @@
 
     }
 
-     /**
-      *
-      * @param id 展示类型
-      * @param isAll 是否显示全部直播/内容
-      */
-    function chooselb(id = '0', isAll = '0'){
+    function chooselb(id){
 
-         //只在首页隐藏显示
+        //只在首页隐藏显示
         if (location == 'index') {
-            if (id == 3) { //只显示直播
+            if (id == 3) {
                 $(".less_list_nei").hide();
                 $(".less_list").show();
-            } else if(id == 4) { //只显示内容
+            } else if(id == 4) {
                 $(".less_list").hide();
                 $(".less_list_nei").show();
             } else if(id == 99) {
@@ -311,34 +229,47 @@
         $.ajax({
             url:'/student/Lessionlist/ChooseNj',
             type:'POST',
-            data:{njid:njid,kmid:kmid,lbid:lbid, is_all:isAll},
+            data:{njid:njid,kmid:kmid,lbid:lbid},
             error:function(e){
                 layer.msg('网路错误');
             },
             success:function(data){
 
-                var zhibohtml = replaceHtmlNew(data.data.zhibo);
-                var neironghtml = replaceHtmlNew(data.data.neirong);
+                var dabanData = {
+                    'data': {
+                        'lesslist':[]
+                    }
+                };
+                var neiData = {
+                    'data': {
+                        'lesslist': []
+                    }
+                };
+                var less = data.data.lesslist;
+                for (let index in less) {
+                    if (less[index].sort != 0) {
+                        //大班课
+                        dabanData.data.lesslist.push(less[index]);
+                    } else {
+                        neiData.data.lesslist.push(less[index]);
+                    }
+                }
 
-                $('.less_list ul li').remove();
-                $('.less_list_nei ul li').remove();
+                if (location == 'index') {
+                    dabanData.data.lesslist = dabanData.data.lesslist.slice(0, 8);
+                    neiData.data.lesslist = neiData.data.lesslist.slice(0, 8);
+                }
 
-                if ((id == 3) && (isAll == '1')) { //只显示全部直播
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                } else if((id == 4) && (isAll == '1')) { //只显示全部内容
-                    //内容
-                    $('.less_list ul').html(neironghtml);
-                    $('.zhibo-info').removeClass('active');
-                    $('.zhibo-info').find('a').removeClass('white');
-                    $('.neirong-info').addClass('active');
-                    $('.neirong-info').find('a').addClass('white');
-
+                if(lbid == 3) {
+                    var lesshtml = replaceHtml(dabanData);
+                    $('.less_list ul').html(lesshtml);
                 } else {
-                    //直播
-                    $('.less_list ul').html(zhibohtml);
-                    //内容
-                    $('.less_list_nei ul').html(neironghtml);
+                    var lessListHtml = replaceHtml(neiData);
+                    if (flag > 0) {
+                        $(".less_list ul").html(lessListHtml);
+                    } else {
+                        $(".less_list_nei ul").html(lessListHtml);
+                    }
                 }
 
                 layer.close(index);
@@ -354,51 +285,49 @@
         var lesshtml = '';
         for(var i=0;i<data.data.lesslist.length;i++){
 
-                var isB = '';
-                if(data.data.lesslist[i].ismaterial == 1){
-                    isB = '<img src="../../static/student/images/index/book.png"><text class="text2">含教材</text>';
-                }
+            var isB = '';
+            if(data.data.lesslist[i].ismaterial == 1){
+                isB = '<img src="../../static/student/images/index/book.png"><text class="text2">含教材</text>';
+            }
 
-                var isL = '';
-                if(data.data.lesslist[i].lesson == '正在直播'){
-                    isL = '<text class="text1" style="color: #38DAA6;">'+data.data.lesslist[i].lesson+'</text>';
-                }else{
+            var isL = '';
+            if(data.data.lesslist[i].lesson == '正在直播'){
+                isL = '<text class="text1" style="color: #38DAA6;">'+data.data.lesslist[i].lesson+'</text>';
+            }else{
 
-                    if(data.data.lesslist[i].sort == 0){
-                        isL = '<text class="text1" style="border: 1px solid #969696;padding: 0 2px 0 2px;">'+data.data.lesslist[i].lesson+'</text>';
-                    }else{
-                        isL = '<text class="text1">'+data.data.lesslist[i].lesson+'</text>';
-
-                    }
-
-
-                }
-
-
-                var rt = '';
-                var ahref = '';
                 if(data.data.lesslist[i].sort == 0){
-                    rt = '内容';
-                    ahref = '<a href="/student/detail/substance?id='+data.data.lesslist[i].id+'">';
-                }else if(data.data.lesslist[i].sort == 1){
-                    rt = '课程';
-                    ahref = '<a href="/student/detail/class?id='+data.data.lesslist[i].id+'">';
+                    isL = '<text class="text1" style="border: 1px solid #969696;padding: 0 2px 0 2px;">'+data.data.lesslist[i].lesson+'</text>';
                 }else{
-                    rt = '直播';
-                    ahref = '<a href="/student/detail/live?id='+data.data.lesslist[i].id+'">';
+                    isL = '<text class="text1">'+data.data.lesslist[i].lesson+'</text>';
+
                 }
 
-                var payV = '';
-                if(data.data.lesslist[i].paytype == 0){
-                    payV = '<text class="mian">免费</text>';
-                }else if(data.data.lesslist[i].paytype == 1){
-                    payV = '<text class="money">￥'+data.data.lesslist[i].payval+'</text>';
-                }else{
-                    payV = '<text class="mi">密码</text>';
-                }
+            }
+
+            var rt = '';
+            var ahref = '';
+            if(data.data.lesslist[i].sort == 0){
+                rt = '内容';
+                ahref = '<a href="/student/detail/substance?id='+data.data.lesslist[i].id+'">';
+            }else if(data.data.lesslist[i].sort == 1){
+                rt = '课程';
+                ahref = '<a href="/student/detail/class?id='+data.data.lesslist[i].id+'">';
+            }else{
+                rt = '直播';
+                ahref = '<a href="/student/detail/live?id='+data.data.lesslist[i].id+'">';
+            }
+
+            var payV = '';
+            if(data.data.lesslist[i].paytype == 0){
+                payV = '<text class="mian">免费</text>';
+            }else if(data.data.lesslist[i].paytype == 1){
+                payV = '<text class="money">￥'+data.data.lesslist[i].payval+'</text>';
+            }else{
+                payV = '<text class="mi">密码</text>';
+            }
 
 
-                lesshtml+= '<li>'+ahref+'<div class="content">\
+            lesshtml+= '<li>'+ahref+'<div class="content">\
                                         <div class="top" style="background: url('+data.data.lesslist[i].thumb+') no-repeat;background-size: cover;">\
                                             <div class="tip">'+rt+'</div>\
                                         </div>\
@@ -421,76 +350,5 @@
 
         return lesshtml;
     }
-
-
-     //直播/内容数据替换
-     function replaceHtmlNew(data){
-         var lesshtml = '';
-         for(var i=0;i<data.length;i++){
-
-             var isB = '';
-             if(data[i].ismaterial == 1){
-                 isB = '<img src="../../static/student/images/index/book.png"><text class="text2">含教材</text>';
-             }
-
-             var isL = '';
-             if(data[i].lesson == '正在直播'){
-                 isL = '<text class="text1" style="color: #38DAA6;">'+data[i].lesson+'</text>';
-             }else{
-                 if(data[i].sort == 0){
-                     isL = '<text class="text1" style="border: 1px solid #969696;padding: 0 2px 0 2px;">'+data[i].lesson+'</text>';
-                 }else{
-                     isL = '<text class="text1">'+data[i].lesson+'</text>';
-                 }
-
-             }
-
-             var rt = '';
-             var ahref = '';
-             if(data[i].sort == 0){
-                 rt = '内容';
-                 ahref = '<a href="/student/detail/substance?id='+data[i].id+'">';
-             }else if(data[i].sort == 1){
-                 rt = '课程';
-                 ahref = '<a href="/student/detail/class?id='+data[i].id+'">';
-             }else{
-                 rt = '直播';
-                 ahref = '<a href="/student/detail/live?id='+data[i].id+'">';
-             }
-
-             var payV = '';
-             if(data[i].paytype == 0){
-                 payV = '<text class="mian">免费</text>';
-             }else if(data[i].paytype == 1){
-                 payV = '<text class="money">￥'+data[i].payval+'</text>';
-             }else{
-                 payV = '<text class="mi">密码</text>';
-             }
-
-
-             lesshtml+= '<li>'+ahref+'<div class="content">\
-                                        <div class="top" style="background: url('+data[i].thumb+') no-repeat;background-size: cover;">\
-                                            <div class="tip">'+rt+'</div>\
-                                        </div>\
-                                        <div class="title">'+data[i].name+'</div>\
-                                        <div class="information">'+isL+isB+'</div>\
-                                        <div class="bottom">\
-                                            <img class="img1" src="'+data[i].avatar+'">\
-                                            <text class="name">'+data[i].user_nickname+'</text>'+payV+'</div>\
-                                    </div>\
-                                </a>\
-                            </li>';
-         }
-
-
-         $('.look_more').remove();
-         if(data.length >=20){
-             $('.less_list').append('<div class="look_more"><a style="color:#9e9a9a" href="javacript:void(0);">查看更多...</a></div>');
-         }
-
-
-         return lesshtml;
-     }
-
 
 })
