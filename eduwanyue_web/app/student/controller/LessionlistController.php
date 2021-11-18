@@ -141,7 +141,7 @@ class LessionlistController extends StudentBaseController
         $njid = sql_check($data['njid']) ?? 0; //学级id
         $kmid = sql_check($data['kmid']) ?? 0; //科目id
         $lbid = sql_check($data['lbid']) ?? 0; //类别id  默认是直播 3
-        $isAll = sql_check($data['is_all']) ?? 0; //是否展示全部直播/内容
+        $isAll = sql_check($data['is_all'] ?? 0) ?? 0; //是否展示全部直播/内容
 
         $info    = array();
         $gradeid = $njid;
