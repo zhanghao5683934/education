@@ -141,7 +141,6 @@ class LessionlistController extends StudentBaseController
         $njid = sql_check($data['njid']) ?? 0; //学级id
         $kmid = sql_check($data['kmid']) ?? 0; //科目id
         $lbid = sql_check($data['lbid']) ?? 0; //类别id  默认是直播 3
-        $isAll = sql_check($data['is_all'] ?? 0) ?? 0; //是否展示全部直播/内容
 
         $info    = array();
         $gradeid = $njid;
@@ -180,11 +179,9 @@ class LessionlistController extends StudentBaseController
 			$where[]=['status','>=',1];
 			$where[]=['shelvestime','<',$nowtime];
 
-            $list=CourseModel::select(function($query)use($where, $isAll){
+            $list=CourseModel::select(function($query)use($where){
                 $query->where($where)->order('list_order asc,id desc');
-                if ($isAll != '1') { //默认展示20个(在首页展示)
-                    $query->limit(0, 20);
-                }
+                $query->limit(0, 20);
             });
 
             foreach ($list as $k => $v) {
