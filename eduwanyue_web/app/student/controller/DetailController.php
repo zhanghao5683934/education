@@ -50,8 +50,159 @@ class DetailController extends StudentBaseController
 
         db("student_log")->insert($data);
 
+
         return !0;
     }
+
+
+    //课程详情页面
+    public function class()
+    {
+
+        $data = $this->request->param();
+
+
+        //判断有没有登录
+//        $this->checkMyLogin();
+        $userinfo = session('student');
+        $uid = $userinfo['id'] ?? 0;
+        $token = $userinfo['token'] ?? 0;
+
+        $courseid = $data['id'];
+
+        //课程详情
+        $url = $this->siteUrl . '/api/?s=Course.GetDetail&uid=' . $uid . '&token=' . $token . '&courseid=' . $courseid;
+
+        $info = curl_get($url);
+
+        if ($info['data']['code'] != 0) {
+            $this->error($info['data']['msg']);
+        }
+
+        $info = $info['data']['info'][0];
+//        $info['seckill_nums'] = 0;
+        $this->assign('info', $info);
+
+
+
+        //课程课时
+        $url = $this->siteUrl . '/api/?s=Course.GetLessonList&uid=' . $uid . '&token=' . $token . '&courseid=' . $courseid;
+
+        $lessonlist = curl_get($url);
+
+        $lessonlist = $lessonlist['data']['info'];
+        foreach ($lessonlist as $k => $v) {
+            $v['url'] = string_decrypt($v['url']);
+            $lessonlist[$k] = $v;
+        }
+
+        $this->assign('lessonlist', $lessonlist);
+
+        //评价列表
+        $url = $this->siteUrl . '/api/?s=Comment.GetList&uid=' . $uid . '&token=' . $token . '&p=1&courseid=' . $courseid;
+
+        $commentlist = curl_get($url);
+
+        $commentlist = $commentlist['data']['info'][0]['list'] ?? [];
+        $this->assign('commentlist', $commentlist);
+
+
+        $isMore = 0;
+        if (count($commentlist) >= 20) {
+            $isMore = 1;
+        }
+        $this->assign('isMore', $isMore);
+
+        $this->assign('navid', -1);
+
+        $class_hint = '暂无评价';
+        if (($info['comments'] > 0) && !$userinfo) {
+            $class_hint = '请登录后查看';
+        }
+        if (($info['comments'] <= 0) && $userinfo) {
+            $class_hint = '暂无评价';
+        }
+
+        $this->assign('class_hint', $class_hint);
+        return $this->fetch();
+    }
+
+
+
+    //课程学习页面
+    public function classstudy()
+    {
+        $data = $this->request->param();
+
+
+        //判断有没有登录
+        $this->checkMyLogin();
+
+        $userinfo = session('student');
+
+        $uid = $userinfo['id'];
+        $lessonid = $data['lessonid'];
+
+
+        if ($lessonid < 1) {
+            $this->error('信息错误');
+        }
+
+        $lessoninfo = Db::name('course_lesson')->field('*')->where(["id" => $lessonid])->find();
+        if (!$lessoninfo) {
+            $this->error('课时不存在');
+        }
+
+        $courseid = $lessoninfo['courseid'];
+        $courseinfo = Db::name('course')->field('name,sort,type,paytype')->where(["id" => $courseid])->find();
+        if (!$courseinfo) {
+            $this->error('课程不存在');
+
+        }
+
+        $isbuy = '0';
+        $paytype = $courseinfo['paytype'];
+
+        if ($paytype != 0) {
+            if ($lessoninfo['istrial'] == 1) {
+                $isbuy = 1;
+            } else {
+                $ispay = Db::name('course_users')->field('id')->where(["uid" => $uid, "courseid" => $courseid, "status" => 1])->find();
+                if ($ispay) {
+                    $isbuy = 1;
+                }
+            }
+
+        } else {
+            $isbuy = 1;
+
+        }
+
+        if ($isbuy == 0 && $userinfo['vipid'] != 2) {
+            $this->error('您无权观看');
+        }
+
+        if ($isbuy == 1) {
+
+            $this->setLesson($uid, $courseid, $lessonid);
+        }
+
+
+        $lessoninfo['url'] = get_upload_path($lessoninfo['url']);
+
+        $configpri = getConfigPri();
+        $tx_appid = $configpri['tx_trans_appid'];
+//        print_r($configpri);
+        $this->assign([
+            'info'=>$lessoninfo,
+            'tx_appid'=>$tx_appid
+        ]);
+
+
+        $this->assign('navid', -1);
+        return $this->fetch();
+    }
+
 
 
     /**
@@ -171,6 +322,8 @@ class DetailController extends StudentBaseController
         $sort      = $courseinfo['sort'];
         $type      = $courseinfo['type'];
         $paytype   = $courseinfo['paytype'];
+        $trialtype = $courseinfo['trialtype'];
+        $trialval  = $courseinfo['trialval'];
         if ($sort == 0) {
             $isbuy = 0;
             if ($paytype != 0) {
@@ -192,7 +345,7 @@ class DetailController extends StudentBaseController
     }
 
 
-    /*
+    /**
      * 更新课程进度
      * @param $uid
      * @param $courseid
@@ -330,7 +483,6 @@ class DetailController extends StudentBaseController
      */
     public function payment()
     {
-
         $data = $this->request->param();
 
         //判断有没有登录
@@ -340,7 +492,7 @@ class DetailController extends StudentBaseController
 
         $uid        = $userinfo['id'];
         $token      = $userinfo['token'];
-        $method     = $data['method'] ?? '0';
+        $method     = isset($data['method']) ? $data['method'] : '0';
         $ismaterial = $data['ismaterial'];
         $payid      = $data['payid'];
         $courseid   = $data['courseid'];
@@ -362,14 +514,13 @@ class DetailController extends StudentBaseController
         $url2 = $this->siteUrl . '/api/?s=Cart.Buy&uid=' . $uid . '&token=' . $token . '&payid=' . $payid . '&addrid=' . $addrid . '&method=' . $method . '&goods=' . json_encode($goods) . '&source=PC';
         $pay  = curl_get($url2);
 
-
         if (($pay['data']['code'] ?? 0) != 0) {
             $this->error($pay['data']['msg']);
         }
         $configpri = getConfigPri();
         $configpub = getConfigPub();
         if ($payid == 1) { //支付宝
-            
+
             if ($configpri['aliapp_partner'] == "" || $configpri['aliapp_seller_id'] == "" || $configpri['aliapp_key'] == "") {
                 $this->error('支付宝支付未配置,无法支付');
             }
@@ -393,7 +544,7 @@ class DetailController extends StudentBaseController
             //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
             require_once CMF_ROOT . "sdk/alipay/lib/alipay_submit.class.php";
 
-            //支付记录					
+            //支付记录
             /**************************请求参数**************************/
             //支付类型
             $payment_type = "1";
@@ -445,7 +596,6 @@ class DetailController extends StudentBaseController
         } else if ($payid == 2) { //微信
 
             $configpri = getConfigPri();
-
             if ($configpri['pc_wx_appid'] == "" || $configpri['pc_wx_mchid'] == "" || $configpri['pc_wx_key'] == "") {
                 $this->error('微信支付未配置, 无法支付');
             }
@@ -479,8 +629,8 @@ class DetailController extends StudentBaseController
             $paramXml .= "</xml>";
 
             $ch = curl_init();
-            @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查  
-            @curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);  // 从证书中检查SSL加密算法是否存在  
+            @curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+            @curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true);  // 从证书中检查SSL加密算法是否存在
             @curl_setopt($ch, CURLOPT_URL, "https://api.mch.weixin.qq.com/pay/unifiedorder");
             @curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             @curl_setopt($ch, CURLOPT_POST, 1);
