@@ -842,7 +842,7 @@ layui.use(['layer', 'form', 'laydate'], function() {
                     body.find('#js-ajax-submit').click();
                 },
                 btn2: function(index, layero) {
-                    layer.close(index)
+                    layer.close(index)qiniu->getToken();
                     return false;
                 }
             };
