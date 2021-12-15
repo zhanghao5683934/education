@@ -58,7 +58,6 @@ class CoursebuyController extends AdminBaseController
         }
 
         $list = Db::name('course_users')->where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
-
         $list->each(function ($v) {
             $v['userinfo'] = getUserInfo($v['uid']);
             $v['paytime']  = date('Y-m-d H:i:s', $v['paytime']);
