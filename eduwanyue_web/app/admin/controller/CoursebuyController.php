@@ -56,7 +56,6 @@ class CoursebuyController extends AdminBaseController
         if (!$total) {
             $total = 0;
         }
-
         $list = Db::name('course_users')->where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
         $list->each(function ($v) {
             $v['userinfo'] = getUserInfo($v['uid']);
@@ -65,7 +64,6 @@ class CoursebuyController extends AdminBaseController
         });
 
         $page = $list->render();
-
         $this->assign([
             'page'  => $page,
             'list'  => $list,
