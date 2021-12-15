@@ -56,7 +56,7 @@ class CoursebuyController extends AdminBaseController
         if (!$total) {
             $total = 0;
         }
-        $list = Db::name('course_users')->where($map)->order("id desc")->paginate(20, false, ['query' => input()]);
+        $list = Db::name('course_users')->where($map)->order("id desc")->paginate(15, false, ['query' => input()]);
         $list->each(function ($v) {
             $v['userinfo'] = getUserInfo($v['uid']);
             $v['paytime']  = date('Y-m-d H:i:s', $v['paytime']);
