@@ -177,7 +177,7 @@
 ### 联系我们（加客服经理微信或QQ，免费获取sql脚本）
 
 <div style='height: 130px'>
-    <img class="kefu_weixin" style="float:left;" src="https://images.gitee.com/uploads/images/2021/0317/100340_bec42d1f_8543696.png" width="602" height="123"/>
+    <img class="kefu_weixin" style="float:left;" src="https://gitee.com/WanYueKeJi_343188225/wanyue_education_uniapp/raw/newone/readme/images/105917_b29af80c_8543696.png" width="602" height="123"/>
     <div style="float:left;">
         <p>QQ：259603330</p>
         <p>QQ群：995910672</p>
@@ -189,6 +189,7 @@
 
 > QQ群：995910672
  <img class="kefu_weixin" style="float:left;" src="https://images.gitee.com/uploads/images/2021/0524/181101_c6bda503_2242923.jpeg" width="102" height="102"/>
+>
 
 
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100511_29ed24e9_8543696.png "公众号.png")
