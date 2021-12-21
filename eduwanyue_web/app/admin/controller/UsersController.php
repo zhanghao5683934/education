@@ -76,7 +76,6 @@ class UsersController extends AdminBaseController
         $list = UsersModel::where($map)->order("id desc")->paginate(15, false, ['query' => input()]);
 
         $list->each(function ($v, $k) {
-
             $v['user_login'] = m_s($v['user_login']);
             $v['mobile']     = m_s($v['mobile']);
             $v['avatar']     = get_upload_path($v['avatar']);
