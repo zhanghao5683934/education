@@ -179,7 +179,7 @@
 <div style='height: 130px'>
     <img class="kefu_weixin" style="float:left;" src="https://gitee.com/WanYueKeJi/wanyue_education_uniapp/raw/newone/pages/%E5%BC%A0%E7%9A%93%E5%BC%80%E6%BA%90.png" width="602" height="123"/>
     <div style="float:left;">
-        <p>QQ：3505048014</p>
+        <p>QQ：2770722087</p>
         <p>QQ群：995910672</p>
     </div>
 </div>
