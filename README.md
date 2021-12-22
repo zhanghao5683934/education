@@ -158,7 +158,7 @@
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100203_29192e47_8543696.png "live_student.png")
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100218_871f0135_8543696.png "live_yuyin_student.png")
   #### 功能对比
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0825/150239_59050b43_8162876.png "功能1.png")
+![输入图片说明](150239_59050b43_8162876.png)
    ### 开源版使用须知
     
    - 允许用于个人学习、教学案例
@@ -177,7 +177,7 @@
 ### 联系我们（加客服经理微信或QQ，免费获取sql脚本）
 
 <div style='height: 130px'>
-    <img class="kefu_weixin" style="float:left;" src="https://gitee.com/WanYueKeJi_343188225/wanyue_education_uniapp/raw/newone/readme/images/105917_b29af80c_8543696.png" width="602" height="123"/>
+    <img class="kefu_weixin" style="float:left;" src="https://gitee.com/WanYueKeJi/wanyue_education_uniapp/raw/newone/pages/%E5%BC%A0%E7%9A%93%E5%BC%80%E6%BA%90.png" width="602" height="123"/>
     <div style="float:left;">
         <p>QQ：3505048014</p>
         <p>QQ群：995910672</p>
