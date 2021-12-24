@@ -61,19 +61,13 @@ class AssetController extends PluginBaseController
         if ($result !== true) {
             $this->error($validate);
         }
-
         $fileKey = $data['file_key'];
-
         $suffix = cmf_get_file_extension($data['filename']);
-
         $config = $this->getPlugin()->getConfig();
-
         $accessKey = $config['accessKey'];
         $secretKey = $config['secretKey'];
 
         $auth = new Auth($accessKey, $secretKey);
-
-
         $client = new Client();
 
         $encodedEntryURISrc  = \Qiniu\base64_urlSafeEncode($config['bucket'] . ':' . $fileKey);
