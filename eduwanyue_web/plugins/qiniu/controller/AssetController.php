@@ -55,7 +55,6 @@ class AssetController extends PluginBaseController
         ]);
 
         $data = $this->request->param();
-
         $result = $validate->check($data);
 
         if ($result !== true) {
@@ -72,7 +71,6 @@ class AssetController extends PluginBaseController
 
         $encodedEntryURISrc  = \Qiniu\base64_urlSafeEncode($config['bucket'] . ':' . $fileKey);
         $encodedEntryURIDest = \Qiniu\base64_urlSafeEncode($config['bucket'] . ':' . $fileKey . ".{$suffix}");
-
         $signingStr    = "/move/{$encodedEntryURISrc}/{$encodedEntryURIDest}";
         $authorization = $auth->signRequest($signingStr, '');
 
@@ -100,12 +98,9 @@ class AssetController extends PluginBaseController
         }
 
         $fileInfo = $response->json();
-
         $findAsset = Db::name('asset')->where('file_key', $fileKey)->find();
 
-
         if (empty($findAsset)) {
-
             Db::name('asset')->insert([
                 'user_id'     => $userId,
                 'file_size'   => $fileInfo['fsize'],

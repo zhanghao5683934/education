@@ -40,14 +40,11 @@ class UsersController extends AdminBaseController
         if ($type != '') {
             $map[] = ['type', '=', $type];
         }
-
         $start_time = $data['start_time'] ?? '';
         $end_time   = $data['end_time'] ?? '';
-
         if ($start_time != "") {
             $map[] = ['create_time', '>=', strtotime($start_time)];
         }
-
         if ($end_time != "") {
             $map[] = ['create_time', '<=', strtotime($end_time) + 60 * 60 * 24];
         }
