@@ -14,7 +14,7 @@ class CartpayController extends HomebaseController {
 		require_once(CMF_ROOT."sdk/alipay_app/alipay.config.php");
         //合作身份者id，以2088开头的16位纯数字
         $alipay_config['partner']		= $configpri['aliapp_partner'];
-        
+
 		require_once(CMF_ROOT."sdk/alipay_app/lib/alipay_core.function.php");
 		require_once(CMF_ROOT."sdk/alipay_app/lib/alipay_rsa.function.php");
 		require_once(CMF_ROOT."sdk/alipay_app/lib/alipay_notify.class.php");
@@ -30,65 +30,65 @@ class CartpayController extends HomebaseController {
 			$trade_no = $_POST['trade_no'];
 			//交易状态
 			$trade_status = $_POST['trade_status'];
-			
+
 			//交易金额
 			$total_fee = $_POST['total_fee'];
-			
+
 			if($_POST['trade_status'] == 'TRADE_FINISHED') {
 				//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-					
+
 				//注意：
 				//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 				//请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
 
 				//调试用，写文本函数记录程序运行情况是否正常
 				//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-		
+
 			}else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
 				//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-					
+
 				//注意：
 				//付款完成后，支付宝系统发送该交易状态通知
 				//请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
 
 				//调试用，写文本函数记录程序运行情况是否正常
 				//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-                
+
                 $where['orderno']=$out_trade_no;
                 $where['type']=1;
-                
+
                 $data=[
                     'trade_no'=>$trade_no
                 ];
 
-				$this->logali("where:".json_encode($where));	
+				$this->logali("where:".json_encode($where));
                 $res=handelPay($where,$data);
 				if($res==0){
-                    $this->logali("orderno:".$out_trade_no.' 订单信息不存在');	
+                    $this->logali("orderno:".$out_trade_no.' 订单信息不存在');
                     echo "fail";
                     exit;
 				}
-                
+
                 $this->logali("成功");
                 echo "success";		//请不要修改或删除
-                exit;										
+                exit;
 			}
 			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
-			echo "fail";		//请不要修改或删除			
+			echo "fail";		//请不要修改或删除
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		}else {
-			$this->logali("验证失败");		
+			$this->logali("验证失败");
 			//验证失败
 			echo "fail";
 			//调试用，写文本函数记录程序运行情况是否正常
 			//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-		}			
-		
+		}
+
     }
     //支付宝 回调
 	public function notify_pc_ali() {
@@ -96,7 +96,7 @@ class CartpayController extends HomebaseController {
 
 
         //读取后台配置信息
-		$getConfigPri=getConfigPri();	
+		$getConfigPri=getConfigPri();
 		$getConfigPub=getConfigPub();
 		//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		//合作身份者id，以2088开头的16位纯数字
@@ -115,7 +115,7 @@ class CartpayController extends HomebaseController {
 		$alipay_config['cacert']    = CMF_ROOT.'sdk/alipay/cacert.pem';
 		//访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
 		$alipay_config['transport']    = 'http';
-		//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓	
+		//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 		require_once(CMF_ROOT."sdk/alipay/lib/alipay_notify.class.php");
 		//计算得出通知验证结果
 		$alipayNotify = new \AlipayNotify($alipay_config);
@@ -128,74 +128,74 @@ class CartpayController extends HomebaseController {
 			$trade_no = $_POST['trade_no'];
 			//交易状态
 			$trade_status = $_POST['trade_status'];
-			
+
 			//交易金额
 			$total_fee = $_POST['total_fee'];
-			
+
 			if($_POST['trade_status'] == 'TRADE_FINISHED') {
 				//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-					
+
 				//注意：
 				//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
 				//请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
 
 				//调试用，写文本函数记录程序运行情况是否正常
 				//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-		
+
 			}else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
 				//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
-					
+
 				//注意：
 				//付款完成后，支付宝系统发送该交易状态通知
 				//请务必判断请求时的total_fee、seller_id与通知时获取的total_fee、seller_id为一致的
 
 				//调试用，写文本函数记录程序运行情况是否正常
 				//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-                
+
                 $where['orderno']=$out_trade_no;
                 $where['type']=1;
-                
+
                 $data=[
                     'trade_no'=>$trade_no
                 ];
 
-				$this->logali("where:".json_encode($where));	
+				$this->logali("where:".json_encode($where));
                 $res=handelPay($where,$data);
 				if($res==0){
-                    $this->logali("orderno:".$out_trade_no.' 订单信息不存在');	
+                    $this->logali("orderno:".$out_trade_no.' 订单信息不存在');
                     echo "fail";
                     exit;
 				}
-                
+
                 $this->logali("成功");
                 echo "success";		//请不要修改或删除
-                exit;										
+                exit;
 			}
 			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
-			echo "fail";		//请不要修改或删除			
+			echo "fail";		//请不要修改或删除
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		}else {
-			$this->logali("验证失败");		
+			$this->logali("验证失败");
 			//验证失败
 			echo "fail";
 			//调试用，写文本函数记录程序运行情况是否正常
 			//logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-		}			
-		
+		}
+
 	}
 	/* 支付宝支付 */
-	
+
 	/* 微信支付 */
     private $wxDate = null;
 	public function notify_wx(){
 		$configpri=getConfigPri();
 		//$xmlInfo = $GLOBALS['HTTP_RAW_POST_DATA'];
-		$xmlInfo=file_get_contents("php://input"); 
+		$xmlInfo=file_get_contents("php://input");
 
 		//解析xml
 		$arrayInfo = $this -> xmlToArray($xmlInfo);
@@ -230,7 +230,7 @@ class CartpayController extends HomebaseController {
 			echo $this -> returnInfo("FAIL","签名失败");
 			$this -> logwx($arrayInfo['return_code']);//log打印保存
 			exit;
-		}			
+		}
 	}
 
 
@@ -332,7 +332,7 @@ class CartpayController extends HomebaseController {
     public function notify_pc_wx(){
 		$configpri=getConfigPri();
 		//$xmlInfo = $GLOBALS['HTTP_RAW_POST_DATA'];
-		$xmlInfo=file_get_contents("php://input"); 
+		$xmlInfo=file_get_contents("php://input");
 
 		//解析xml
 		$arrayInfo = $this -> xmlToArray($xmlInfo);
@@ -367,23 +367,23 @@ class CartpayController extends HomebaseController {
 			echo $this -> returnInfo("FAIL","签名失败");
 			$this -> logwx($arrayInfo['return_code']);//log打印保存
 			exit;
-		}			
+		}
     }
-    
+
 	private function returnInfo($type,$msg){
 		if($type == "SUCCESS"){
 			return $returnXml = "<xml><return_code><![CDATA[{$type}]]></return_code></xml>";
 		}else{
 			return $returnXml = "<xml><return_code><![CDATA[{$type}]]></return_code><return_msg><![CDATA[{$msg}]]></return_msg></xml>";
 		}
-	}		
-	
+	}
+
 	//签名验证
 	private function checkSign($sign1,$sign2){
 		return trim($sign1) == trim($sign2);
 	}
 	/* 订单查询加值业务处理
-	 * @param orderNum 订单号	   
+	 * @param orderNum 订单号
 	 */
 	private function orderServer($paytype = ''){
 
@@ -402,68 +402,66 @@ class CartpayController extends HomebaseController {
         $where['orderno']=$info['out_trade_no'];
 
         $trade_no=$info['transaction_id'];
-        
+
         $data=[
             'trade_no'=>$trade_no
         ];
-        
-        $this->logwx("where:".json_encode($where));	
+
+        $this->logwx("where:".json_encode($where));
         $res=handelPay($where,$data);
         if($res==0){
             $this->logwx("orderno:".' 订单信息不存在');
             return false;
         }
-        
-        
+
+
         $this->logwx("成功");
         return true;
 
-	}		
+	}
 	/**
 	* sign拼装获取
 	*/
 	private function sign($param,$key){
-		
+
 		$sign = "";
 		foreach($param as $k => $v){
 			$sign .= $k."=".$v."&";
 		}
-	
+
 		$sign .= "key=".$key;
 		$sign = strtoupper(md5($sign));
 		return $sign;
-	
+
 	}
 	/**
 	* xml转为数组
 	*/
 	private function xmlToArray($xmlStr){
-		$msg = array(); 
-		$postStr = $xmlStr; 
-		$msg = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA); 
+		$msg = array();
+		$postStr = $xmlStr;
+		$msg = (array)simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 		return $msg;
 	}
-	
+
 	/* 微信支付 */
-    
     /* public function test(){
         $where=[
             'orderno'=>'48_200530104114164',
             'type'=>'1',
         ];
-        
+
         $data=['trade_no'=>'ceshi123'];
-        
+
         handelPay($where,$data);
     } */
-    
 
-    
+
     /* 打印log */
 	protected function logali($msg){
 		file_put_contents(CMF_ROOT.'data/log/package_logali_'.date('Y-m-d').'.txt',date('Y-m-d H:i:s').'  msg:'.$msg."\r\n",FILE_APPEND);
 	}
-    
+
 	/* 打印log */
 	protected function logwx($msg){
 		file_put_contents(CMF_ROOT.'data/log/package_logwx_'.date('Y-m-d').'.txt',date('Y-m-d H:i:s').'  msg:'.$msg."\r\n",FILE_APPEND);
@@ -479,7 +477,7 @@ class CartpayController extends HomebaseController {
         file_put_contents(CMF_ROOT.'data/log/package_loghfive_'.date('Y-m-d').'.txt',date('Y-m-d H:i:s').'  msg:'.$msg."\r\n",FILE_APPEND);
     }
 
-    
+
 }
 
 
