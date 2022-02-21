@@ -164,8 +164,15 @@ class IndexController extends StudentBaseController
 
         }
 
+        $newslist = Db::name('news')->field('*')->order('list_order asc,id desc')->limit('0','10')->select()->toArray();
+        foreach($newslist as $key => $value){
+            $value['add_time'] = date('Y-m-d',$value['addtime']);
+            $newslist[$key]=$value;
+        }
+     //   print_r($newslist);die;
         $this->assign([
             'xdlist'   => $xdlist,
+            'newsList'=>$newslist,
             'xdid'     => $xdid,
             'njlist'   => $njlist,
             'njid'     => $njid,

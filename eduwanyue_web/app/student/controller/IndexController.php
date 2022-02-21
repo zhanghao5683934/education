@@ -63,8 +63,11 @@ class IndexController extends StudentBaseController
         }
         $index_info['data']['info']['0']['silide'] = $list;
 
+        $newslist = Db::name('news')->field('*')->order('list_order asc,id desc')->limit('0','10')->select()->toArray();
+
         $this->assign([
             'index_info' => $index_info['data']['info']['0'],
+            'newslist' => $newslist,
             'isBackLog'  => $isBackLog,
             'navid'      => 0,
         ]);

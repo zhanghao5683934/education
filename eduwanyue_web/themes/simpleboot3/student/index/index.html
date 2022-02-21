@@ -110,6 +110,53 @@
                 </if>
             </ul>
         </div>
+        <!-- 新闻资讯 -->
+        <div class="list">
+            <div class="tips">新闻资讯</div>
+            <div class="list">
+                <volist name="$newsList" id="value">
+                    <a target="_blank" href="{:url('student/Press/read',['id'=>$value.id])}">
+                        <div class="item">
+                            <div class="top">
+                                <div class="img"
+                                     style="background-image: url({$value.thumb});"></div>
+
+                            </div>
+                            <div class="middle">
+                                <div class="name">
+                                    {$value.title}
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="left">
+                                    {$value.add_time}
+                                </div>
+                                <div class="right" style="display: none;">
+                                <span>
+                                    <img style="width: auto;height: auto;" src="/static/student/images/common/hits.png" alt="">
+                                    <span class="count">0</span>
+                                </span>
+                                    <span>
+                                    <img style="width: auto;height: auto;" src="/static/student/images/common/zan.png" alt="">
+                                    <span class="count">0</span>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </volist>
+
+            </div>
+
+            <if condition="!$newsList">
+                <div class="empty_data" style="text-align: center;margin: 50px auto;height: 100px;">
+                    <img src="/static/student/images/empty_data.png" alt="">
+                    <div style="color: #D7D7D7;">
+                        暂无内容
+                    </div>
+                </div>
+            </if>
+        </div>        
     </div>
     
     <include file="student/public@footer"/>
