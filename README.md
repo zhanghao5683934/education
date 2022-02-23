@@ -1,5 +1,8 @@
 <div align=center><img src="https://images.gitee.com/uploads/images/2021/0317/095645_f0b60e43_8543696.png" width="590" height="212"/></div>
 
+### 更新说明【更新时间2022年2月21日】
+* 新增新闻资讯功能，后台可以添加图文资讯，前端滚动显示新闻标题，点击后查看资讯
+* 新增名师名课功能，前端可以展示入驻的讲师简介，点击可以关注以及查看对应讲师的详细介绍和所属课程
 
 ### 项目说明（如果对你有用，请给个star！）
 ##### <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006714">项目文档</a> |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2006716">部署文档</a>  |  <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_web/2107615">常见问题</a> | <a target="_blank" href="http://doc.sdwanyue.com/wanyue_open_uniapp/2199269">升级日志</a>
