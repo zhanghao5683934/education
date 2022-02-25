@@ -148,7 +148,7 @@
   
   
   ### 页面展示
-![页面展示](https://images.gitee.com/uploads/images/2021/0410/144604_dbc1116f_8162876.png "web详情图2.png")
+![输入图片说明](%E4%B8%87%E5%B2%B3%E5%9C%A8%E7%BA%BF%E6%95%99%E8%82%B2web%E7%AB%AF(1).jpg)
   #### 统计页面
 ![统计页面](https://images.gitee.com/uploads/images/2021/0410/152726_aba91433_8162876.png "1.png")
 ![统计页面](https://images.gitee.com/uploads/images/2021/0410/152741_f4ea0543_8162876.png "2.png")
