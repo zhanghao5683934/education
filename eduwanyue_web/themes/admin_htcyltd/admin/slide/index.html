@@ -18,9 +18,10 @@
 							<li class="layui-this layui-nav-item" >
 								<a href="{:url('slide/index')}">幻灯片列表</a>
 							</li>
+                            <!--
 							<li class="layui-nav-item">
 								<a href="javascript:admin.openIframeLayer('{:url('slide/add')}','添加幻灯片',{btn: ['保存','关闭'],area:['640px','50%'],end:function(){}});">添加幻灯片</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -51,11 +52,12 @@
 								</td>
 								<td>
 									<a class="layui-bo layui-bo-small layui-bo-succes" href="javascript:admin.openIframeLayer('{:url('slideItem/index',array('slide_id'=>$vo['id']))}','管理 {$vo.name} 页面',{area:['80%','70%'],end:function(){location.reload();}});">管理页面</a>
-									<div class="new-divider new-divider-vertical"></div>
+									<!--<div class="new-divider new-divider-vertical"></div>
 									<a class="layui-bo layui-bo-small layui-bo-checked" href="javascript:admin.openIframeLayer('{:url('slide/edit',array('id'=>$vo['id']))}','编辑幻灯片',{btn: ['保存','关闭'],area:['640px','50%'],end:function(){location.reload();}});">{:lang('EDIT')}</a>
 									<div class="new-divider new-divider-vertical"></div>
 									<a class="layui-bo layui-bo-small layui-bo-close js-ajax-delete" href="{:url('slide/delete',array('id'=>$vo['id']))}">{:lang('DELETE')}</a>
-								</td>
+                                    -->
+                                </td>
 							</tr>
 						</foreach>
 						</tbody>
