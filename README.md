@@ -160,6 +160,38 @@
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100203_29192e47_8543696.png "live_student.png")
 ![展示图](https://images.gitee.com/uploads/images/2021/0317/100218_871f0135_8543696.png "live_yuyin_student.png")
 
+
+
+### 开发结构
+```  
+├─app       		// 应用目录
+├─data             	// 数据目录
+├─node          	// socket配置以及使用的三方
+├─phalapi               // 云存储和数据库配置
+├─plugins               // 七牛云相关配置
+├─public                // WEB 部署目录（对外访问目录）
+├─sdk      			
+│	├─alipay		// 支付宝接口
+│	├─alipay_app		// 支付宝app配置
+│	├─jpush				
+│	├─PHPExecl			
+│	├─phpqrcode		// 二维码扩展
+│	├─qqApi			// qq三方登录
+│	├─ronglianyun		// 容联云
+│	├─tencentcloud		// 腾讯云sdk
+│	└─txim			// 腾讯IM
+│
+├─themes            	// 静态资源
+├─update
+├─vendor		// 第三方类库目录
+├─.htaccess		
+├─composer.json		// thinkcmf插件
+├─index.html		
+├─logo.png		
+├─think			// 命令行入口文件
+└─version	
+```	
+
    ### 开源版使用须知
     
    - 允许用于个人学习、教学案例
@@ -192,5 +224,3 @@
  <img class="kefu_weixin" style="float:left;" src="https://images.gitee.com/uploads/images/2021/0524/181101_c6bda503_2242923.jpeg" width="102" height="102"/>
 >
 
-
-![展示图](https://images.gitee.com/uploads/images/2021/0317/100511_29ed24e9_8543696.png "公众号.png")
